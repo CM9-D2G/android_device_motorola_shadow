@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE=shadow
+DEVICE=droid2
 
 mkdir -p ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/app/PhoneConfig.apk ../../../vendor/motorola/$DEVICE/proprietary
@@ -119,7 +119,7 @@ adb pull /system/lib/egl/libGLESv2_POWERVR_SGX530_125.so ../../../vendor/motorol
 adb pull /system/lib/egl/libeglinfo.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/egl/libgles1_texture_stream.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/egl/libgles2_texture_stream.so ../../../vendor/motorola/$DEVICE/proprietary
-adb pull /system/lib/hw/gestures.shadow.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/hw/gestures.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/hw/gralloc.omap3.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libFMRadio.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libHPImgApi.so ../../../vendor/motorola/$DEVICE/proprietary
@@ -213,8 +213,8 @@ adb pull /system/tts/lang_pico/en-US_lh0_sg.bin ../../../vendor/motorola/$DEVICE
 adb pull /system/tts/lang_pico/en-US_ta.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/tts/lang_pico/es-ES_ta.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/tts/lang_pico/es-ES_zl0_sg.bin ../../../vendor/motorola/$DEVICE/proprietary
-adb pull /system/usr/keychars/cdma_shadow-keypad.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
-adb pull /system/usr/keylayout/cdma_shadow-keypad.kl ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/usr/keychars/cdma_droid2-keypad.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/usr/keylayout/cdma_droid2-keypad.kl ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/keylayout/cpcap-key.kl ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/xbin/backup ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/xbin/drm1_func_test ../../../vendor/motorola/$DEVICE/proprietary
@@ -263,7 +263,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/ProgramMenu.apk:/system/app/ProgramMenu.apk \\
     vendor/motorola/__DEVICE__/proprietary/ProgramMenuSystem.apk:/system/app/ProgramMenuSystem.apk \\
 
-# All the blobs necessary for shadow
+# All the blobs necessary for d2
 PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/Hostapd:/system/bin/Hostapd \\
     vendor/motorola/__DEVICE__/proprietary/SaveBPVer:/system/bin/SaveBPVer \\
@@ -364,7 +364,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libeglinfo.so:/system/lib/egl/libeglinfo.so \\
     vendor/motorola/__DEVICE__/proprietary/libgles1_texture_stream.so:/system/lib/egl/libgles1_texture_stream.so \\
     vendor/motorola/__DEVICE__/proprietary/libgles2_texture_stream.so:/system/lib/egl/libgles2_texture_stream.so \\
-    vendor/motorola/__DEVICE__/proprietary/gestures.shadow.so:/system/lib/hw/gestures.shadow.so \\
+    vendor/motorola/__DEVICE__/proprietary/gestures.droid2.so:/system/lib/hw/gestures.droid2.so \\
     vendor/motorola/__DEVICE__/proprietary/gralloc.omap3.so:/system/lib/hw/gralloc.omap3.so \\
     vendor/motorola/__DEVICE__/proprietary/libFMRadio.so:/system/lib/libFMRadio.so \\
     vendor/motorola/__DEVICE__/proprietary/libHPImgApi.so:/system/lib/libHPImgApi.so \\
@@ -458,8 +458,8 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/en-US_ta.bin:/system/tts/lang_pico/en-US_ta.bin \\
     vendor/motorola/__DEVICE__/proprietary/es-ES_ta.bin:/system/tts/lang_pico/es-ES_ta.bin \\
     vendor/motorola/__DEVICE__/proprietary/es-ES_zl0_sg.bin:/system/tts/lang_pico/es-ES_zl0_sg.bin \\
-    vendor/motorola/__DEVICE__/proprietary/cdma_shadow-keypad.kcm.bin:/system/usr/keychars/cdma_shadow-keypad.kcm.bin \\
-    vendor/motorola/__DEVICE__/proprietary/cdma_shadow-keypad.kl:/system/usr/keylayout/cdma_shadow-keypad.kl \\
+    vendor/motorola/__DEVICE__/proprietary/cdma_droid2-keypad.kcm.bin:/system/usr/keychars/cdma_droid2-keypad.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/cdma_droid2-keypad.kl:/system/usr/keylayout/cdma_droid2-keypad.kl \\
     vendor/motorola/__DEVICE__/proprietary/cpcap-key.kl:/system/usr/keylayout/cpcap-key.kl \\
     vendor/motorola/__DEVICE__/proprietary/backup:/system/xbin/backup \\
     vendor/motorola/__DEVICE__/proprietary/drm1_func_test:/system/xbin/drm1_func_test \\

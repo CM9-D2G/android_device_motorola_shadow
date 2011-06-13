@@ -1,6 +1,6 @@
 
 ifneq ($(BUILD_TINY_ANDROID),true)
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),shadow)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
 
 LOCAL_PATH := $(call my-dir)
 
@@ -60,6 +60,6 @@ include $(BUILD_SHARED_LIBRARY)
 #
 #include $(BUILD_SHARED_LIBRARY)
 
-endif # TARGET_BOOTLOADER_BOARD_NAME == shadow
+endif # TARGET_BOOTLOADER_BOARD_NAME == droid2
 endif # not BUILD_TINY_ANDROID
 

@@ -27,26 +27,27 @@ USE_CAMERA_STUB := false
 #BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 
 # inherit from the proprietary version
--include vendor/motorola/shadow/BoardConfigVendor.mk
+-include vendor/motorola/droid2/BoardConfigVendor.mk
 
 # use pre-kernel.35 vold usb mounting
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_USE_FROYO_LIBCAMERA := true
 
 TARGET_BOARD_PLATFORM := omap3
-
+d
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
 
-# this is so that we build the Shadow-specific hardware shit
-BOARD_GLOBAL_CFLAGS += -DSHADOW_HARDWARE
-SHADOW_HARDWARE := true
+#left in to start debuging for droid2
+# this is so that we build the DROID2-specific hardware shit
+BOARD_GLOBAL_CFLAGS += -DDROID2_HARDWARE
+DROID2_HARDWARE := true
 
 TARGET_NO_BOOTLOADER := false
-TARGET_BOOTLOADER_BOARD_NAME := shadow
+TARGET_BOOTLOADER_BOARD_NAME := droid2
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
@@ -69,7 +70,7 @@ BOARD_KERNEL_BASE := 0x10000000
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
-BOARD_EGL_CFG := device/motorola/shadow/egl.cfg
+BOARD_EGL_CFG := device/motorola/droid2/egl.cfg
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x003fffff
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x004fffff
@@ -79,22 +80,22 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_HAS_SMALL_RECOVERY := true
 
-#TARGET_RECOVERY_UI_LIB := librecovery_ui_shadow librecovery_ui_generic
+#TARGET_RECOVERY_UI_LIB := librecovery_ui_DROID2 librecovery_ui_generic
 
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
 
-TARGET_PREBUILT_KERNEL := device/motorola/shadow/kernel
+TARGET_PREBUILT_KERNEL := device/motorola/droid2/kernel
 
 #TARGET_NO_RECOVERY := true
-TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/shadow/kernel
+TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/droid2/kernel
 
 HARDWARE_OMX := true
 BOARD_USES_GPSSHIM := true
 
-ifndef SHADOW_DEV_PHONE
+ifndef DROID2_DEV_PHONE
 TARGET_PROVIDES_RELEASETOOLS := true
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/shadow/releasetools/shadow_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/shadow/releasetools/shadow_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/droid2/releasetools/droid2_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2/releasetools/droid2_img_from_target_files
 
 BOARD_HIJACK_ENABLE := true
 #BOARD_HIJACK_LOG_ENABLE := true

@@ -15,7 +15,7 @@
 import os
 import re
 
-import shadow_common as common
+import droid2_common as common
 
 class EdifyGenerator(object):
   """Class to generate scripts in the 'edify' recovery script language

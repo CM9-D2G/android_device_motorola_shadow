@@ -25,11 +25,11 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 
 PRODUCT_COPY_FILES += \
-    device/motorola/shadow/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
-    device/motorola/shadow/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
+    device/motorola/droid2/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
+    device/motorola/droid2/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 ## (2) Also get non-open-source GSM-specific aspects if available
-$(call inherit-product-if-exists, vendor/motorola/shadow/shadow-vendor.mk)
+$(call inherit-product-if-exists, vendor/motorola/droid2/droid2-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -93,7 +93,7 @@ PRODUCT_COPY_FILES += \
 
 # media config xml file
 PRODUCT_COPY_FILES += \
-    device/motorola/shadow/media_profiles.xml:system/etc/media_profiles.xml
+    device/motorola/droid2/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_PACKAGES += \
     librs_jni \
@@ -116,9 +116,9 @@ PRODUCT_PACKAGES += \
     libOMX.TI.Video.Decoder \
     libOMX.TI.Video.encoder \
     libVendor_ti_omx \
-    gps.shadow \
-    sensors.shadow \
-    lights.shadow \
+    gps.droid2 \
+    sensors.droid2 \
+    lights.droid2 \
     libaudiopolicy \
     Usb
 
@@ -129,25 +129,25 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
-    device/motorola/shadow/DroidXBootstrap.cfg:system/etc/DroidXBootstrap.cfg \
-    device/motorola/shadow/Droid2Bootstrap.cfg:system/etc/Droid2Bootstrap.cfg \
-    device/motorola/shadow/vold.fstab:system/etc/vold.fstab \
-    device/motorola/shadow/apns-conf.xml:system/etc/apns-conf.xml \
-    device/motorola/shadow/mount_ext3.sh:system/bin/mount_ext3.sh
+    device/motorola/droid2/DroidXBootstrap.cfg:system/etc/DroidXBootstrap.cfg \
+    device/motorola/droid2/Droid2Bootstrap.cfg:system/etc/Droid2Bootstrap.cfg \
+    device/motorola/droid2/vold.fstab:system/etc/vold.fstab \
+    device/motorola/droid2/apns-conf.xml:system/etc/apns-conf.xml \
+    device/motorola/droid2/mount_ext3.sh:system/bin/mount_ext3.sh
 
 # these need to be here for the installer, just put them here for now
 PRODUCT_COPY_FILES += \
-    device/motorola/shadow/utilities/mke2fs:system/bin/mke2fs \
-    device/motorola/shadow/utilities/tune2fs:system/bin/tune2fs
+    device/motorola/droid2/utilities/mke2fs:system/bin/mke2fs \
+    device/motorola/droid2/utilities/tune2fs:system/bin/tune2fs
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
-    find device/motorola/shadow/modules -name '*.ko' \
+    find device/motorola/droid2/modules -name '*.ko' \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/motorola/shadow/kernel
+LOCAL_KERNEL := device/motorola/droid2/kernel
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -155,10 +155,10 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-$(call inherit-product-if-exists, vendor/motorola/shadow/shadow-vendor.mk)
+$(call inherit-product-if-exists, vendor/motorola/droid2/droid2-vendor.mk)
 
 # media profiles and capabilities spec
-# $(call inherit-product, device/motorola/shadow/media_a1026.mk)
+# $(call inherit-product, device/motorola/droid2/media_a1026.mk)
 
 # stuff common to all HTC phones
 #$(call inherit-product, device/htc/common/common.mk)
@@ -166,5 +166,5 @@ $(call inherit-product-if-exists, vendor/motorola/shadow/shadow-vendor.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
 
-PRODUCT_NAME := generic_shadow
-PRODUCT_DEVICE := shadow
+PRODUCT_NAME := generic_droidroid2
+PRODUCT_DEVICE := droid2

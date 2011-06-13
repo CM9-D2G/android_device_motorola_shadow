@@ -69,8 +69,8 @@ import tempfile
 import time
 import zipfile
 
-import shadow_common as common
-import shadow_edify_generator as edify_generator
+import droid2_common as common
+import droid2_edify_generator as edify_generator
 
 OPTIONS = common.OPTIONS
 OPTIONS.package_key = "build/target/product/security/testkey"
@@ -243,9 +243,9 @@ class Item:
     recurse(self, (-1, -1, -1, -1))
 
 
-def CopySystemFiles(input_zip, output_zip=None,
+def CopyNewBootFiles(input_zip, output_zip=None,
                     substitute=None):
-  """Copies files underneath system/ in the input zip to the output
+  """Copies files underneath newboot/ in the input zip to the output
   zip.  Populates the Item class with their metadata, and returns a
   list of symlinks.  output_zip may be None, in which case the copy is
   skipped (but the other side effects still happen).  substitute is an
@@ -256,14 +256,14 @@ def CopySystemFiles(input_zip, output_zip=None,
   symlinks = []
 
   for info in input_zip.infolist():
-    if info.filename.startswith("SYSTEM/"):
-      basefilename = info.filename[7:]
+    if info.filename.startswith("NEWBOOT/"):
+      basefilename = info.filename[8:]
       if IsSymlink(info):
         symlinks.append((input_zip.read(info.filename),
-                         "/system/" + basefilename))
+                         "/newboot/" + basefilename))
       else:
         info2 = copy.copy(info)
-        fn = info2.filename = "system/" + basefilename
+        fn = info2.filename = "newboot/" + basefilename
         if substitute and fn in substitute and substitute[fn] is None:
           continue
         if output_zip is not None:
@@ -281,57 +281,13 @@ def CopySystemFiles(input_zip, output_zip=None,
   return symlinks
 
 
-def CopyUtilityFiles(input_zip, output_zip=None,
-                    substitute=None):
-  """Copies files underneath utilities/ in the input zip to the output
-  zip.  Populates the Item class with their metadata.
-  """
-
-  for info in input_zip.infolist():
-    if info.filename.startswith("UTILITIES/"):
-      basefilename = info.filename[10:]
-      if not IsSymlink(info):
-        info2 = copy.copy(info)
-        fn = info2.filename = "utilities/" + basefilename
-        if substitute and fn in substitute and substitute[fn] is None:
-          continue
-        if output_zip is not None:
-          if substitute and fn in substitute:
-            data = substitute[fn]
-          else:
-            data = input_zip.read(info.filename)
-          output_zip.writestr(info2, data)
-        if fn.endswith("/"):
-          Item.Get(fn[:-1], dir=True)
-        else:
-          Item.Get(fn, dir=False)
-
-def SignOutput(temp_zip_name, output_zip_name):
-  key_passwords = common.GetKeyPasswords([OPTIONS.package_key])
-  pw = key_passwords[OPTIONS.package_key]
-
-  common.SignFile(temp_zip_name, output_zip_name, OPTIONS.package_key, pw,
-                  whole_file=True)
-
-
-def AppendAssertions(script, input_zip):
-  if OPTIONS.override_device == "auto":
-    device = GetBuildProp("ro.product.device", input_zip)
-  else:
-    device = OPTIONS.override_device
-  script.AssertDevice(device)
-
-
 def WriteFullOTAPackage(input_zip, output_zip):
   # TODO: how to determine this?  We don't know what version it will
   # be installed on top of.  For now, we expect the API just won't
   # change very often.
   script = edify_generator.EdifyGenerator(3, OPTIONS.info_dict)
 
-  metadata = {"post-build": GetBuildProp("ro.build.fingerprint", input_zip),
-              "pre-device": GetBuildProp("ro.product.device", input_zip),
-              "post-timestamp": GetBuildProp("ro.build.date.utc", input_zip),
-              }
+  metadata = { }
 
   device_specific = common.DeviceSpecificParams(
       input_zip=input_zip,
@@ -342,260 +298,14 @@ def WriteFullOTAPackage(input_zip, output_zip):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-#  if not OPTIONS.omit_prereq:
-#    ts = GetBuildProp("ro.build.date.utc", input_zip)
-#    script.AssertOlderBuild(ts)
-
-#  AppendAssertions(script, input_zip)
-#  device_specific.FullOTA_Assertions()
-  if OPTIONS.backuptool:
-    script.RunBackup("backup")
-
-  script.ShowProgress(0.5, 0)
-
-  if OPTIONS.wipe_user_data:
-    script.FormatPartition("/data")
-
-  CopyUtilityFiles(input_zip, output_zip)
-
-  script.RunFormatAndTuneSystem()
-  script.Mount("/system")
-  script.UnpackPackageDir("system", "/system")
-
-  symlinks = CopySystemFiles(input_zip, output_zip)
+  script.UnpackPackageDir("newboot", "/newboot")
+  symlinks = CopyNewBootFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
   Item.GetMetadata(input_zip)
-  Item.Get("system").SetPermissions(script)
+  Item.Get("newboot").SetPermissions(script)
 
-  script.ShowProgress(0.2, 0)
-
-  if OPTIONS.backuptool:
-    script.ShowProgress(0.2, 10)
-    script.RunBackup("restore")
-
-  script.RunChkKineto()
-
-  script.RunVerifyCachePartitionSize()
-
-  script.ShowProgress(0.2, 10)
-
-  script.ShowProgress(0.1, 0)
-  device_specific.FullOTA_InstallEnd()
-
-  if OPTIONS.extra_script is not None:
-    script.AppendExtra(OPTIONS.extra_script)
-
-  script.UnmountAll()
   script.AddToZip(input_zip, output_zip)
-  WriteMetadata(metadata, output_zip)
-
-
-def WriteMetadata(metadata, output_zip):
-  common.ZipWriteStr(output_zip, "META-INF/com/android/metadata",
-                     "".join(["%s=%s\n" % kv
-                              for kv in sorted(metadata.iteritems())]))
-
-
-
-
-def LoadSystemFiles(z):
-  """Load all the files from SYSTEM/... in a given target-files
-  ZipFile, and return a dict of {filename: File object}."""
-  out = {}
-  for info in z.infolist():
-    if info.filename.startswith("SYSTEM/") and not IsSymlink(info):
-      fn = "system/" + info.filename[7:]
-      data = z.read(info.filename)
-      out[fn] = common.File(fn, data)
-  return out
-
-
-def GetBuildProp(property, z):
-  """Return the fingerprint of the build of a given target-files
-  ZipFile object."""
-  bp = z.read("SYSTEM/build.prop")
-  if not property:
-    return bp
-  m = re.search(re.escape(property) + r"=(.*)\n", bp)
-  if not m:
-    raise common.ExternalError("couldn't find %s in build.prop" % (property,))
-  return m.group(1).strip()
-
-
-def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
-  source_version = OPTIONS.source_info_dict["recovery_api_version"]
-  target_version = OPTIONS.target_info_dict["recovery_api_version"]
-
-  if source_version == 0:
-    print ("WARNING: generating edify script for a source that "
-           "can't install it.")
-  script = edify_generator.EdifyGenerator(source_version, OPTIONS.info_dict)
-
-  metadata = {"pre-device": GetBuildProp("ro.product.device", source_zip),
-              "post-timestamp": GetBuildProp("ro.build.date.utc", target_zip),
-              }
-
-  device_specific = common.DeviceSpecificParams(
-      source_zip=source_zip,
-      source_version=source_version,
-      target_zip=target_zip,
-      target_version=target_version,
-      output_zip=output_zip,
-      script=script,
-      metadata=metadata,
-      info_dict=OPTIONS.info_dict)
-
-  print "Loading target..."
-  target_data = LoadSystemFiles(target_zip)
-  print "Loading source..."
-  source_data = LoadSystemFiles(source_zip)
-
-  verbatim_targets = []
-  patch_list = []
-  diffs = []
-  largest_source_size = 0
-  for fn in sorted(target_data.keys()):
-    tf = target_data[fn]
-    assert fn == tf.name
-    sf = source_data.get(fn, None)
-
-    if sf is None or fn in OPTIONS.require_verbatim:
-      # This file should be included verbatim
-      if fn in OPTIONS.prohibit_verbatim:
-        raise common.ExternalError("\"%s\" must be sent verbatim" % (fn,))
-      print "send", fn, "verbatim"
-      tf.AddToZip(output_zip)
-      verbatim_targets.append((fn, tf.size))
-    elif tf.sha1 != sf.sha1:
-      # File is different; consider sending as a patch
-      diffs.append(common.Difference(tf, sf))
-    else:
-      # Target file identical to source.
-      pass
-
-  common.ComputeDifferences(diffs)
-
-  for diff in diffs:
-    tf, sf, d = diff.GetPatch()
-    if d is None or len(d) > tf.size * OPTIONS.patch_threshold:
-      # patch is almost as big as the file; don't bother patching
-      tf.AddToZip(output_zip)
-      verbatim_targets.append((tf.name, tf.size))
-    else:
-      common.ZipWriteStr(output_zip, "patch/" + tf.name + ".p", d)
-      patch_list.append((tf.name, tf, sf, tf.size, sha.sha(d).hexdigest()))
-      largest_source_size = max(largest_source_size, sf.size)
-
-  source_fp = GetBuildProp("ro.build.fingerprint", source_zip)
-  target_fp = GetBuildProp("ro.build.fingerprint", target_zip)
-  metadata["pre-build"] = source_fp
-  metadata["post-build"] = target_fp
-
-  script.Mount("/system")
-  script.AssertSomeFingerprint(source_fp, target_fp)
-
-  # Here's how we divide up the progress bar:
-  #  0.1 for verifying the start state (PatchCheck calls)
-  #  0.8 for applying patches (ApplyPatch calls)
-  #  0.1 for unpacking verbatim files, symlinking, and doing the
-  #      device-specific commands.
-
-  AppendAssertions(script, target_zip)
-  device_specific.IncrementalOTA_Assertions()
-
-  script.Print("Verifying current system...")
-
-  script.ShowProgress(0.1, 0)
-  total_verify_size = float(sum([i[2].size for i in patch_list]) + 1)
-  so_far = 0
-
-  for fn, tf, sf, size, patch_sha in patch_list:
-    script.PatchCheck("/"+fn, tf.sha1, sf.sha1)
-    so_far += sf.size
-    script.SetProgress(so_far / total_verify_size)
-
-  if patch_list:
-    script.CacheFreeSpaceCheck(largest_source_size)
-
-  device_specific.IncrementalOTA_VerifyEnd()
-
-  script.Comment("---- start making changes here ----")
-
-  if OPTIONS.wipe_user_data:
-    script.Print("Erasing user data...")
-    script.FormatPartition("/data")
-
-  script.Print("Removing unneeded files...")
-  script.DeleteFiles(["/"+i[0] for i in verbatim_targets] +
-                     ["/"+i for i in sorted(source_data)
-                            if i not in target_data])
-
-  script.ShowProgress(0.8, 0)
-  total_patch_size = float(sum([i[1].size for i in patch_list]) + 1)
-  so_far = 0
-
-  script.Print("Patching system files...")
-  for fn, tf, sf, size, _ in patch_list:
-    script.ApplyPatch("/"+fn, "-", tf.size, tf.sha1, sf.sha1, "patch/"+fn+".p")
-    so_far += tf.size
-    script.SetProgress(so_far / total_patch_size)
-
-  script.ShowProgress(0.1, 10)
-
-  target_symlinks = CopySystemFiles(target_zip, None)
-
-  target_symlinks_d = dict([(i[1], i[0]) for i in target_symlinks])
-  temp_script = script.MakeTemporary()
-  Item.GetMetadata(target_zip)
-  Item.Get("system").SetPermissions(temp_script)
-
-  # Note that this call will mess up the tree of Items, so make sure
-  # we're done with it.
-  source_symlinks = CopySystemFiles(source_zip, None)
-  source_symlinks_d = dict([(i[1], i[0]) for i in source_symlinks])
-
-  # Delete all the symlinks in source that aren't in target.  This
-  # needs to happen before verbatim files are unpacked, in case a
-  # symlink in the source is replaced by a real file in the target.
-  to_delete = []
-  for dest, link in source_symlinks:
-    if link not in target_symlinks_d:
-      to_delete.append(link)
-  script.DeleteFiles(to_delete)
-
-  if verbatim_targets:
-    script.Print("Unpacking new files...")
-    script.UnpackPackageDir("system", "/system")
-
-  script.Print("Symlinks and permissions...")
-
-  # Create all the symlinks that don't already exist, or point to
-  # somewhere different than what we want.  Delete each symlink before
-  # creating it, since the 'symlink' command won't overwrite.
-  to_create = []
-  for dest, link in target_symlinks:
-    if link in source_symlinks_d:
-      if dest != source_symlinks_d[link]:
-        to_create.append((dest, link))
-    else:
-      to_create.append((dest, link))
-  script.DeleteFiles([i[1] for i in to_create])
-  script.MakeSymlinks(to_create)
-
-  # Now that the symlinks are created, we can set all the
-  # permissions.
-  script.AppendScript(temp_script)
-
-  # Do device-specific installation (eg, write radio image).
-  device_specific.IncrementalOTA_InstallEnd()
-
-  if OPTIONS.extra_script is not None:
-    scirpt.AppendExtra(OPTIONS.extra_script)
-
-  script.AddToZip(target_zip, output_zip)
-  WriteMetadata(metadata, output_zip)
-
 
 def main(argv):
 
@@ -658,31 +368,12 @@ def main(argv):
     OPTIONS.device_specific = os.path.normpath(OPTIONS.device_specific)
     print "using device-specific extensions in", OPTIONS.device_specific
 
-  if OPTIONS.package_key:
-    temp_zip_file = tempfile.NamedTemporaryFile()
-    output_zip = zipfile.ZipFile(temp_zip_file, "w",
-                                 compression=zipfile.ZIP_DEFLATED)
-  else:
-    output_zip = zipfile.ZipFile(args[1], "w",
-                                 compression=zipfile.ZIP_DEFLATED)
+  output_zip = zipfile.ZipFile(args[1], "w",
+                               compression=zipfile.ZIP_DEFLATED)
 
-  if OPTIONS.incremental_source is None:
-    WriteFullOTAPackage(input_zip, output_zip)
-  else:
-    print "unzipping source target-files..."
-    OPTIONS.source_tmp = common.UnzipTemp(OPTIONS.incremental_source)
-    source_zip = zipfile.ZipFile(OPTIONS.incremental_source, "r")
-    OPTIONS.target_info_dict = OPTIONS.info_dict
-    OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
-    if OPTIONS.verbose:
-      print "--- source info ---"
-      common.DumpInfoDict(OPTIONS.source_info_dict)
-    WriteIncrementalOTAPackage(input_zip, source_zip, output_zip)
+  WriteFullOTAPackage(input_zip, output_zip)
 
   output_zip.close()
-  if OPTIONS.package_key:
-    SignOutput(temp_zip_file.name, args[1])
-    temp_zip_file.close()
 
   common.Cleanup()
 
