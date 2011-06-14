@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 # we compile hijack if we have hijacked executables
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),shadow)
 ifeq ($(BOARD_HIJACK_ENABLE),true)
 
 include $(CLEAR_VARS)
@@ -16,7 +16,7 @@ LOCAL_STATIC_LIBRARIES := \
 	libc
 LOCAL_CFLAGS += \
 	-DUPDATE_BINARY=\"/preinstall/recovery/update-binary\" \
-	-DBOOT_UPDATE_ZIP=\"/system/etc/droid2-boot.zip\" \
+	-DBOOT_UPDATE_ZIP=\"/system/etc/shadow-boot.zip\" \
 	-DRECOVERY_UPDATE_ZIP=\"/preinstall/recovery/recovery.zip\"
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 
@@ -44,5 +44,13 @@ LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 endif
 
+include $(CLEAR_VARS)
+LOCAL_MODULE := reboot_recovery_prepare
+LOCAL_MODULE_TAGS := eng
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_OUT_EXECUTABLES)
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
 endif # BOARD_HIJACK_ENABLE=true
-endif # TARGET_BOOTLAODER_BOARD_NAME=droid2
+endif # TARGET_BOOTLAODER_BOARD_NAME=shadow

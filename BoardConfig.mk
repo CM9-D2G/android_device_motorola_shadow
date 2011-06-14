@@ -34,15 +34,15 @@ BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_USE_FROYO_LIBCAMERA := true
 
 TARGET_BOARD_PLATFORM := omap3
+
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
 
-#left in to start debuging for droid2
-# this is so that we build the DROID2-specific hardware shit
-BOARD_GLOBAL_CFLAGS += -DDROID2_HARDWARE
+# this is so that we build the Shadow-specific hardware shit
+BOARD_GLOBAL_CFLAGS += -DROID2_HARDWARE
 DROID2_HARDWARE := true
 
 TARGET_NO_BOOTLOADER := false
@@ -79,7 +79,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_HAS_SMALL_RECOVERY := true
 
-#TARGET_RECOVERY_UI_LIB := librecovery_ui_DROID2 librecovery_ui_generic
+#TARGET_RECOVERY_UI_LIB := librecovery_ui_droid2 librecovery_ui_generic
 
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
 
@@ -98,4 +98,7 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2/releasetools
 
 BOARD_HIJACK_ENABLE := true
 #BOARD_HIJACK_LOG_ENABLE := true
+
+TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /data/.recovery_mode; sync;"
+TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 endif
