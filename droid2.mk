@@ -120,8 +120,7 @@ PRODUCT_PACKAGES += \
     sensors.droid2 \
     lights.droid2 \
     libaudiopolicy \
-    Usb \
-    libaudio
+    Usb
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
