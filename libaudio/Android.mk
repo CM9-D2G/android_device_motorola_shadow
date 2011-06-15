@@ -1,3 +1,4 @@
+
 ifneq ($(BUILD_TINY_ANDROID),true)
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
 

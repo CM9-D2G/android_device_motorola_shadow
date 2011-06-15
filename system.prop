@@ -1,5 +1,5 @@
 #
-# system.prop for CDMA d2
+# system.prop for CDMA Droid 2
 #
 # rild.libpath=/system/lib/libril-moto-umts-1.so
 rild.libpath=/system/lib/libmoto_ril.so
@@ -131,7 +131,7 @@ mot.proximity.distance=60
 ro.HorizontalVVM=true
 
 # BEGIN Motorola, a22976, 21-May-2010, IKDROID2-5385
-# For DROID2 only, NOT applied to Droid2 as requirement different
+# For Shadow only, NOT applied to Droid2 as requirement different
 ro.mot.buttonlight.timeout=1
 # END Motorola IKDROID2-5385
 

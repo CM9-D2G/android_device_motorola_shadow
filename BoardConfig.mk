@@ -41,8 +41,8 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
 
-# this is so that we build the Shadow-specific hardware shit
-BOARD_GLOBAL_CFLAGS += -DROID2_HARDWARE
+# this is so that we build the Shadow/Droid2-specific hardware shit
+BOARD_GLOBAL_CFLAGS += -DDROID2_HARDWARE
 DROID2_HARDWARE := true
 
 TARGET_NO_BOOTLOADER := false
