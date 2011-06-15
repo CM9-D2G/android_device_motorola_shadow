@@ -231,6 +231,7 @@ adb pull /system/lib/libgps_rds.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libsmiledetect.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libarcsoft.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/keychars/cdma_droid2-keypad.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/usr/keychars/cdma_droid2-keypad.kl ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/qwerty.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/qwerty2.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 
@@ -481,6 +482,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libsmiledetect.so:/system/lib/libsmiledetect.so \\
     vendor/motorola/__DEVICE__/proprietary/libarcsoft.so:/system/lib/libarcsoft.so \\
     vendor/motorola/__DEVICE__/proprietary/cdma_droid2-keypad.kcm.bin:/system/usr/keychars/cdma_droid2-keypad.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/cdma_droid2-keypad.kl:/system/usr/keychars/cdma_droid2-keypad.kl \\
     vendor/motorola/__DEVICE__/proprietary/qwerty.kcm.bin:/system/usr/keychars/qwerty.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/qwerty2.kcm.bin:/system/usr/keychars/qwerty2.kcm.bin
 
