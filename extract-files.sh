@@ -234,6 +234,7 @@ adb pull /system/usr/keychars/cdma_droid2-keypad.kcm.bin ../../../vendor/motorol
 adb pull /system/usr/keychars/cdma_droid2-keypad.kl ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/qwerty.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/qwerty2.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/hw/gps.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -484,7 +485,8 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/cdma_droid2-keypad.kcm.bin:/system/usr/keychars/cdma_droid2-keypad.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/cdma_droid2-keypad.kl:/system/usr/keychars/cdma_droid2-keypad.kl \\
     vendor/motorola/__DEVICE__/proprietary/qwerty.kcm.bin:/system/usr/keychars/qwerty.kcm.bin \\
-    vendor/motorola/__DEVICE__/proprietary/qwerty2.kcm.bin:/system/usr/keychars/qwerty2.kcm.bin
+    vendor/motorola/__DEVICE__/proprietary/qwerty2.kcm.bin:/system/usr/keychars/qwerty2.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/gps.droid2.so:/system/lib/hw/gps.droid2.so \\
 
 EOF
 
