@@ -61,7 +61,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
     ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
     ro.com.motorola.smartsensor=true \
-    ro.media.capture.maxres=8m \
+    ro.media.capture.maxres=5m \
     ro.media.capture.fast.fps=4 \
     ro.media.capture.slow.fps=60 \
     ro.media.capture.flash=led \
@@ -74,8 +74,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.camera.calresolution=3264,2448 \
     ro.mot.hw.uaprof=http://uaprof.motorola.com/phoneconfig/MotoMB200/profile/MotoMB200.rdf \
     ro.build.version.full=Blur_Version.2.3.340.MB810.Verizon.en.US \
-    ro.build.config.version=GAS_NA_GCXSHAD00VZW_P022 \
-    ro.build.config.date=Sun_Nov_07_23:40:30_-0600_2010
+    ro.build.config.version=GAS_NA_DROID2VZW_P011 \
+    ro.build.config.date=Fri_Sep_17_21:53:21_-0500_2010
 #############################################################
 #    debug.mot.extwmlog=1 \
 #    debug.mot.extamlog=1 \
