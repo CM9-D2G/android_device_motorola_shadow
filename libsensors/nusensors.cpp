@@ -32,7 +32,7 @@
 #include "LightSensor.h"
 #include "ProximitySensor.h"
 #include "AkmSensor.h"
-#include "Kxtf9.h"
+#include "lis331dlh.h"
 
 /*****************************************************************************/
 
@@ -50,7 +50,7 @@ private:
         light           = 0,
         proximity       = 1,
         akm             = 2,
-        kxtf9           = 3,
+        lis331dlh       = 3,
         numSensorDrivers,
         numFds,
     };
@@ -64,7 +64,7 @@ private:
     int handleToDriver(int handle) const {
         switch (handle) {
             case ID_A:
-            	return kxtf9;
+            	return lis331dlh;
             case ID_M:
             case ID_O:
             case ID_T:
@@ -97,10 +97,10 @@ sensors_poll_context_t::sensors_poll_context_t()
     mPollFds[akm].events = POLLIN;
     mPollFds[akm].revents = 0;
 
-    mSensors[kxtf9] = new Kxtf9Sensor();
-    mPollFds[kxtf9].fd = mSensors[kxtf9]->getFd();
-    mPollFds[kxtf9].events = POLLIN;
-    mPollFds[kxtf9].revents = 0;
+    mSensors[lis331dlh] = new lis331dlhSensor();
+    mPollFds[lis331dlh].fd = mSensors[lis331dlh]->getFd();
+    mPollFds[lis331dlh].events = POLLIN;
+    mPollFds[lis331dlh].revents = 0;
 
 
     int wakeFds[2];

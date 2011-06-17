@@ -22,16 +22,16 @@
 #include <dirent.h>
 #include <sys/select.h>
 
-#include <linux/kxtf9.h>
+#include <linux/lis331dlh.h>
 
 #include <cutils/log.h>
 
-#include "Kxtf9.h"
+#include "Lis331dlh.h"
 
 /*****************************************************************************/
 
-Kxtf9Sensor::Kxtf9Sensor()
-: SensorBase(KXTF9_DEVICE_NAME, "accelerometer"),
+Lis331dlhSensor::Lis331dlhSensor()
+: SensorBase(LIS331DLH_DEVICE_NAME, "accelerometer"),
       mEnabled(0),
       mInputReader(32)
 {
@@ -46,7 +46,7 @@ Kxtf9Sensor::Kxtf9Sensor()
 
     open_device();
 
-    if (!ioctl(dev_fd, KXTF9_IOCTL_GET_ENABLE, &flags)) {
+    if (!ioctl(dev_fd, LIS331DLH_IOCTL_GET_ENABLE, &flags)) {
         if(flags) {
             mEnabled = 1;
             if (!ioctl(data_fd, EVIOCGABS(EVENT_TYPE_ACCEL_X), &absinfo)) {
@@ -69,10 +69,10 @@ Kxtf9Sensor::Kxtf9Sensor()
     }
 }
 
-Kxtf9Sensor::~Kxtf9Sensor() {
+Lis331dlhSensor::~Lis331dlhSensor() {
 }
 
-int Kxtf9Sensor::enable(int32_t handle, int en)
+int Lis331dlhSensor::enable(int32_t handle, int en)
 {
     int newState  = en ? 1 : 0;
     int err = 0;
@@ -83,9 +83,9 @@ int Kxtf9Sensor::enable(int32_t handle, int en)
         }
 
         int flags = newState;
-        err = ioctl(dev_fd, KXTF9_IOCTL_SET_ENABLE, &flags);
+        err = ioctl(dev_fd, LIS331DLH_IOCTL_SET_ENABLE, &flags);
         err = err<0 ? -errno : 0;
-        LOGE_IF(err, "KXTF9_IOCTL_SET_ENABLE failed (%s)", strerror(-err));
+        LOGE_IF(err, "LIS331DLH_IOCTL_SET_ENABLE failed (%s)", strerror(-err));
 
         if (!err) {
             mEnabled = newState;
@@ -99,21 +99,21 @@ int Kxtf9Sensor::enable(int32_t handle, int en)
     return err;
 }
 
-int Kxtf9Sensor::setDelay(int32_t handle, int64_t ns)
+int Lis331dlhSensor::setDelay(int32_t handle, int64_t ns)
 {
     if (mEnabled) {
         if (ns < 0)
             return -EINVAL;
 
         int delay = ns / 1000000;
-        if (ioctl(dev_fd, KXTF9_IOCTL_SET_DELAY, &delay)) {
+        if (ioctl(dev_fd, LIS331DLH_IOCTL_SET_DELAY, &delay)) {
             return -errno;
         }
     }
     return 0;
 }
 
-int Kxtf9Sensor::readEvents(sensors_event_t* data, int count)
+int Lis331dlhSensor::readEvents(sensors_event_t* data, int count)
 {
     if (count < 1)
         return -EINVAL;
@@ -135,7 +135,7 @@ int Kxtf9Sensor::readEvents(sensors_event_t* data, int count)
             count--;
             numEventReceived++;
         } else {
-            LOGE("Kxtf9Sensor: unknown event (type=%d, code=%d)",
+            LOGE("Lis331dlhSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();
@@ -144,7 +144,7 @@ int Kxtf9Sensor::readEvents(sensors_event_t* data, int count)
     return numEventReceived;
 }
 
-void Kxtf9Sensor::processEvent(int code, int value)
+void Lis331dlhSensor::processEvent(int code, int value)
 {
     switch (code) {
         case EVENT_TYPE_ACCEL_X:

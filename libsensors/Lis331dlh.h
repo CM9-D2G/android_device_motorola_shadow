@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_KXTF9_SENSOR_H
-#define ANDROID_KXTF9_SENSOR_H
+#ifndef ANDROID_LIS331DLH_SENSOR_H
+#define ANDROID_LIS331DLH_SENSOR_H
 
 #include <stdint.h>
 #include <errno.h>
@@ -31,10 +31,10 @@
 
 struct input_event;
 
-class Kxtf9Sensor : public SensorBase {
+class Lis331dlhSensor : public SensorBase {
 public:
-            Kxtf9Sensor();
-    virtual ~Kxtf9Sensor();
+            Lis331dlhSensor();
+    virtual ~Lis331dlhSensor();
 
     virtual int setDelay(int32_t handle, int64_t ns);
     virtual int enable(int32_t handle, int enabled);
@@ -49,4 +49,4 @@ private:
 
 /*****************************************************************************/
 
-#endif  // ANDROID_KXTF9_SENSOR_H
+#endif  // ANDROID_LIS331DLH_SENSOR_H

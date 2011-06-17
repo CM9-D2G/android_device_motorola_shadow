@@ -67,6 +67,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.capture.flash=led \
     ro.media.capture.classification=classD \
     ro.media.capture.useDFR=1 \
+    ro.media.capture.torchIntensity=45 \
     ro.media.camera.focal=3564.0,3564.0 \
     ro.media.camera.principal=1632.0,1224.0 \
     ro.media.camera.skew=0.0 \
@@ -75,7 +76,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.mot.hw.uaprof=http://uaprof.motorola.com/phoneconfig/MotoMB200/profile/MotoMB200.rdf \
     ro.build.version.full=Blur_Version.2.3.340.MB810.Verizon.en.US \
     ro.build.config.version=GAS_NA_DROID2VZW_P011 \
-    ro.build.config.date=Fri_Sep_17_21:53:21_-0500_2010
+    ro.build.config.date=Fri_Sep_17_21:53:21_-0500_2010 \
+
 #############################################################
 #    debug.mot.extwmlog=1 \
 #    debug.mot.extamlog=1 \

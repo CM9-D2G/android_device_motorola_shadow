@@ -56,10 +56,10 @@ int init_nusensors(hw_module_t const* module, hw_device_t** device);
 
 /*****************************************************************************/
 
-#define AKM_DEVICE_NAME     "/dev/akm8973_aot"
-#define CM_DEVICE_NAME      "/dev/sfh7743"
-#define LS_DEVICE_NAME      "/dev"
-#define KXTF9_DEVICE_NAME     "/dev/kxtf9"
+#define AKM_DEVICE_NAME             "/dev/akm8973_aot"
+#define CM_DEVICE_NAME              "/dev/sfh7743"
+#define LS_DEVICE_NAME              "/dev"
+#define LIS331DLH_DEVICE_NAME       "/dev/lis331dlh"
 
 #define EVENT_TYPE_ACCEL_X          ABS_X
 #define EVENT_TYPE_ACCEL_Y          ABS_Y
