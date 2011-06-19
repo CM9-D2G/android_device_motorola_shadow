@@ -161,6 +161,5 @@
     -->
     <VideoDecoderCap name="wmv" enabled="true"/>
     <AudioDecoderCap name="wma" enabled="true"/>
-    <AudioDecoderCap name="qcp" enabled="true"/>
-    <AudioDecoderCap name="evrc" enabled="true"/>
+
 </MediaSettings>
