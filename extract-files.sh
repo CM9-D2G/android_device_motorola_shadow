@@ -235,11 +235,11 @@ adb pull /system/usr/keychars/cdma_droid2-keypad.kl ../../../vendor/motorola/$DE
 adb pull /system/usr/keychars/qwerty.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/keychars/qwerty2.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/hw/gps.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
-adb pull /system/lib/libSR_AudioIn.so ../../../vendor/mororola/$DEVICE/proprietary
-adb pull /system/lib/liba2dp.so ../../../vendor/mororola/$DEVICE/proprietary
-adb pull /system/lib/libaudioeffect_jni.so ../../../vendor/mororola/$DEVICE/proprietary
-adb pull /system/lib/libaudioflinger.so ../../../vendor/mororola/$DEVICE/proprietary
-adb pull /system/lib/libaudiopolicy.so ../../../vendor/mororola/$DEVICE/proprietary
+adb pull /system/lib/libSR_AudioIn.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/liba2dp.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libaudioeffect_jni.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libaudioflinger.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libaudiopolicy.so ../../../vendor/motorola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
