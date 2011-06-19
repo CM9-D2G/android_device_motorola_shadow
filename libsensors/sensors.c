@@ -32,7 +32,7 @@
  */
 
 static const struct sensor_t sSensorList[] = {
-        { "LIS331DLH 3-axis Accelerometer",
+        { "KXTF9 3-axis Accelerometer",
                 "Kionix",
                 1, SENSORS_HANDLE_BASE+ID_A,
                 SENSOR_TYPE_ACCELEROMETER, 9.81f*4.0f, 9.81f/1000.0f, 0.25f, 0, { } },

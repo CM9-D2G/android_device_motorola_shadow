@@ -36,7 +36,7 @@ LOCAL_SRC_FILES := 						\
 				LightSensor.cpp			\
 				ProximitySensor.cpp		\
 				AkmSensor.cpp \
-				Lis331dlh.cpp
+				Kxtf9.cpp
 				
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_PRELINK_MODULE := false
