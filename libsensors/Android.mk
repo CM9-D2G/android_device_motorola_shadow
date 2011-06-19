@@ -21,7 +21,7 @@ ifneq ($(TARGET_SIMULATOR),true)
 # hw/<SENSORS_HARDWARE_MODULE_ID>.<ro.product.board>.so
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := sensors.droid2
+LOCAL_MODULE := sensors.shadow
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 
