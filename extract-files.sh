@@ -235,6 +235,11 @@ adb pull /system/usr/keychars/cdma_droid2-keypad.kl ../../../vendor/motorola/$DE
 adb pull /system/usr/qwerty.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/usr/qwerty2.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/hw/gps.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libSR_AudioIn.so ../../../vendor/mororola/$DEVICE/proprietary
+adb pull /system/lib/liba2dp.so ../../../vendor/mororola/$DEVICE/proprietary
+adb pull /system/lib/libaudioeffect_jni.so ../../../vendor/mororola/$DEVICE/proprietary
+adb pull /system/lib/libaudioflinger.so ../../../vendor/mororola/$DEVICE/proprietary
+adb pull /system/lib/libaudiopolicy ../../../vendor/mororola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -487,6 +492,12 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/qwerty.kcm.bin:/system/usr/keychars/qwerty.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/qwerty2.kcm.bin:/system/usr/keychars/qwerty2.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/gps.droid2.so:/system/lib/hw/gps.droid2.so \\
+    vendor/motorola/__DEVICE__/proprietary/libSR_AudioIn.so:/system/lib/libSR_AudioIn.so \
+    vendor/motorola/__DEVICE__/proprietary/liba2dp.so:/system/lib/liba2dp.so \
+    vendor/motorola/__DEVICE__/proprietary/libaudioeffect_jni.so:/system/lib/libaudioeffect_jni.so \
+    vendor/motorola/__DEVICE__/proprietary/libaudioflinger.so:/system/lib/libaudioflinger.so \
+    vendor/motorola/__DEVICE__/proprietary/libaudiopolicy.so:/system/lib/libaudiopolicy.so
+
 
 EOF
 
