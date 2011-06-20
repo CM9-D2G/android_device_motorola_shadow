@@ -240,6 +240,8 @@ adb pull /system/lib/liba2dp.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libaudioeffect_jni.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libaudioflinger.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libaudiopolicy.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/hw/sensors.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/hw/lights.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -479,7 +481,6 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/run_backup:/system/xbin/run_backup \\
     vendor/motorola/__DEVICE__/proprietary/run_restore:/system/xbin/run_restore \\
     vendor/motorola/__DEVICE__/proprietary/ssmgrd:/system/xbin/ssmgrd \\
-    vendor/motorola/__DEVICE__/proprietary/libaudio.so:/system/lib/libaudio.so \\
     vendor/motorola/__DEVICE__/proprietary/libcamera.so:/system/lib/libcamera.so \\
     vendor/motorola/__DEVICE__/proprietary/libnmea.so:/system/lib/libnmea.so \\
     vendor/motorola/__DEVICE__/proprietary/libril_rds.so:/system/lib/libril_rds.so \\
@@ -492,11 +493,13 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/qwerty.kcm.bin:/system/usr/keychars/qwerty.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/qwerty2.kcm.bin:/system/usr/keychars/qwerty2.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/gps.droid2.so:/system/lib/hw/gps.droid2.so \\
-    vendor/motorola/__DEVICE__/proprietary/libSR_AudioIn.so:/system/lib/libSR_AudioIn.so \
-    vendor/motorola/__DEVICE__/proprietary/liba2dp.so:/system/lib/liba2dp.so \
-    vendor/motorola/__DEVICE__/proprietary/libaudioeffect_jni.so:/system/lib/libaudioeffect_jni.so \
-    vendor/motorola/__DEVICE__/proprietary/libaudioflinger.so:/system/lib/libaudioflinger.so \
-    vendor/motorola/__DEVICE__/proprietary/libaudiopolicy.so:/system/lib/libaudiopolicy.so
+    vendor/motorola/__DEVICE__/proprietary/libSR_AudioIn.so:/system/lib/libSR_AudioIn.so \\
+    vendor/motorola/__DEVICE__/proprietary/liba2dp.so:/system/lib/liba2dp.so \\
+    vendor/motorola/__DEVICE__/proprietary/libaudioeffect_jni.so:/system/lib/libaudioeffect_jni.so \\
+    vendor/motorola/__DEVICE__/proprietary/libaudioflinger.so:/system/lib/libaudioflinger.so \\
+    vendor/motorola/__DEVICE__/proprietary/libaudiopolicy.so:/system/lib/libaudiopolicy.so \\
+    vendor/motorola/__DEVICE__/proprietary/sensors.droid2.so:/system/lib/hw/sensors.droid2.so \\
+    vendor/motorola/__DEVICE__/proprietary/lights.droid2.so:/system/lib/hw/lights.droid2.so \\
 
 
 EOF
