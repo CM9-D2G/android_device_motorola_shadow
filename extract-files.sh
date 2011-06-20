@@ -242,6 +242,7 @@ adb pull /system/lib/libaudioflinger.so ../../../vendor/motorola/$DEVICE/proprie
 adb pull /system/lib/libaudiopolicy.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/hw/lights.droid2.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/usr/keylayout/qwerty.kl ../../../vendor/motorola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -500,7 +501,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libaudiopolicy.so:/system/lib/libaudiopolicy.so \\
     vendor/motorola/__DEVICE__/proprietary/sensors.droid2.so:/system/lib/hw/sensors.droid2.so \\
     vendor/motorola/__DEVICE__/proprietary/lights.droid2.so:/system/lib/hw/lights.droid2.so \\
-
+    vendor/motorola/__DEVICE__/proprietary/qwerty.kl:/system/usr/keylayout/qwerty.kl
 
 EOF
 
