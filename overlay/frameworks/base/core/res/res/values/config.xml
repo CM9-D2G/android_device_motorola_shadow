@@ -333,7 +333,10 @@
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">ppp0</string>
-
+ 
+    <!-- Import from sholes to get crt working -->   
+    <bool name="config_animateScreenLights">false</bool>
+ 
     <!-- The default reduced-datarate notification mask -->
     <!-- 2 means give warning -->
     <integer name="config_datause_notification_type">2</integer>
