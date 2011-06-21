@@ -340,7 +340,4 @@
     <!-- Allows the light sensor to be ignored when flashlight is on -->
     <bool name="config_flashlight_affects_lightsensor">true</bool>
 
-    <!-- If this is true, the screen will fade off. -->
-    <bool name="config_animateScreenLights">false</bool>
-
 </resources>
