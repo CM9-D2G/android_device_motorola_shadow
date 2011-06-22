@@ -32,13 +32,13 @@
     <bool name="config_sf_slowBlur">true</bool>
     
     <!-- The duration (in milliseconds) of a short animation. -->
-    <integer name="config_shortAnimTime">150</integer>
+    <integer name="config_shortAnimTime">75</integer>
     
     <!-- The duration (in milliseconds) of a medium-length animation. -->
-    <integer name="config_mediumAnimTime">300</integer>
+    <integer name="config_mediumAnimTime">150</integer>
     
     <!-- The duration (in milliseconds) of a long animation. -->
-    <integer name="config_longAnimTime">400</integer>
+    <integer name="config_longAnimTime">300</integer>
 
     <!-- The duration (in milliseconds) that the radio will scan for a signal
          when there's no network connection. If the scan doesn't timeout, use zero -->
@@ -167,7 +167,7 @@
          the physical keyboard.  0 means it doesn't, 1 means it is accessible
          when the lid is open, 2 means it is accessible when the lid is
          closed.  The default is 0. -->
-    <integer name="config_lidNavigationAccessibility">0</integer>
+    <integer name="config_lidNavigationAccessibility">1</integer>
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">false</bool>
@@ -268,7 +268,7 @@
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>255</item>
-        <item>0</item>
+        <item>255</item>
         <item>0</item>
         <item>0</item>
     </integer-array>
