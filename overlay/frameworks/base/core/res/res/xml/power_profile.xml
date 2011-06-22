@@ -43,8 +43,7 @@
     <value>600000</value>
     <value>300000</value>
   </array>
-  <!-- Power consumption in suspend -->
-  <item name="cpu.idle">4</item>
+
   <!-- Power consumption at different speeds -->
   <array name="cpu.active">
       <value>280</value>

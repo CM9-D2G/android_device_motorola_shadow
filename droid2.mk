@@ -119,12 +119,12 @@ PRODUCT_PACKAGES += \
     libOMX.TI.Video.encoder \
     libVendor_ti_omx \
     gps.droid2 \
-    Usb
+    Usb \
+    libaudiopolicy
 
 #We don't need these packages these we are -for now- in the prop files
 #    sensors.droid2 \
 #    lights.droid2
-#    libaudiopolicy \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

@@ -501,7 +501,8 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libaudiopolicy.so:/system/lib/libaudiopolicy.so \\
     vendor/motorola/__DEVICE__/proprietary/sensors.droid2.so:/system/lib/hw/sensors.droid2.so \\
     vendor/motorola/__DEVICE__/proprietary/lights.droid2.so:/system/lib/hw/lights.droid2.so \\
-    vendor/motorola/__DEVICE__/proprietary/qwerty.kl:/system/usr/keylayout/qwerty.kl
+    vendor/motorola/__DEVICE__/proprietary/qwerty.kl:/system/usr/keylayout/qwerty.kl \\
+    vendor/motorola/__DEVICE__/proprietary/libaudio.so:/system/lib/libaudio.so
 
 EOF
 
