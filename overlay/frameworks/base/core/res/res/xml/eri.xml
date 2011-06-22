@@ -61,84 +61,84 @@
                   AlertId="0"/>
 
          <EriInfo RoamingIndicator="65"
-                  IconIndex="3"
+                  IconIndex="65"
                   IconMode="0"
                   EriText="Network Extender"
                   CallPromptId="0"
-                  AlertId="1"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="66"
                   IconIndex="1"
                   IconMode="0"
                   EriText="Extended Network"
                   CallPromptId="0"
-                  AlertId="4"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="67"
-                  IconIndex="0"
+                  IconIndex="67"
                   IconMode="0"
                   EriText="Extended Network"
                   CallPromptId="0"
-                  AlertId="4"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="68"
-                  IconIndex="0"
+                  IconIndex="68"
                   IconMode="0"
                   EriText="Roaming"
                   CallPromptId="0"
-                  AlertId="5"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="69"
                   IconIndex="2"
-                  IconMode="0"
+                  IconMode="1"
                   EriText="Extended Network"
                   CallPromptId="0"
-                  AlertId="4"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="70"
                   IconIndex="2"
-                  IconMode="0"
+                  IconMode="1"
                   EriText="Roaming"
                   CallPromptId="0"
-                  AlertId="5"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="71"
                   IconIndex="1"
                   IconMode="0"
                   EriText="Extended Network"
                   CallPromptId="0"
-                  AlertId="4"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="72"
-                  IconIndex="0"
+                  IconIndex="72"
                   IconMode="0"
                   EriText="Extended Network"
                   CallPromptId="0"
-                  AlertId="4"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="73"
-                  IconIndex="0"
+                  IconIndex="73"
                   IconMode="0"
                   EriText="Roaming"
                   CallPromptId="0"
-                  AlertId="5"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="74"
                   IconIndex="2"
-                  IconMode="0"
+                  IconMode="1"
                   EriText="Extended Network"
                   CallPromptId="0"
-                  AlertId="4"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="75"
                   IconIndex="2"
-                  IconMode="0"
+                  IconMode="1"
                   EriText="Roaming"
                   CallPromptId="0"
-                  AlertId="5"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="76"
-                  IconIndex="0"
+                  IconIndex="76"
                   IconMode="0"
                   EriText="Verizon Wireless"
                   CallPromptId="0"
@@ -146,7 +146,7 @@
 
          <EriInfo RoamingIndicator="77"
                   IconIndex="2"
-                  IconMode="0"
+                  IconMode="1"
                   EriText="Verizon Wireless"
                   CallPromptId="0"
                   AlertId="0"/>
@@ -156,13 +156,13 @@
                   IconMode="0"
                   EriText="Network Extender"
                   CallPromptId="0"
-                  AlertId="1"/>
+                  AlertId="0"/>
 
          <EriInfo RoamingIndicator="79"
-                  IconIndex="3"
+                  IconIndex="2"
                   IconMode="1"
                   EriText="Network Extender"
                   CallPromptId="0"
-                  AlertId="1"/>
+                  AlertId="2"/>
 
 </EriFile>

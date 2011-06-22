@@ -34,10 +34,10 @@ $(call inherit-product-if-exists, vendor/motorola/droid2/droid2-vendor.mk)
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.ril=yes \
-    persist.ril.mux.noofchannels=7 \
+    persist.ril.mux.noofchannels=8 \
     persist.ril.mux.ttydevice=/dev/ttyS0 \
-    persist.ril.modem.ttydevice=/dev/ttyUSB0 \
-    persist.ril.features=0x07 \
+    persist.ril.modem.ttydevice=/dev/ttyUSB4 \
+    persist.ril.features=0x0E \
     persist.ril.mux.retries=500 \
     persist.ril.mux.sleep=2 \
     ro.default_usb_mode=0 \
@@ -48,7 +48,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.gmsversion=2.2_r7 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.call_ring.delay=1000 \
-    ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=A855 \
+    ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=A965 \
     ro.setupwizard.enable_bypass=1 \
     ro.com.google.clientid=android-motorola \
     ro.com.google.clientidbase=android-verizon \
@@ -65,7 +65,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.capture.fast.fps=4 \
     ro.media.capture.slow.fps=60 \
     ro.media.capture.flash=led \
-    ro.media.capture.classification=classE \
+    ro.media.capture.classification=classF \
     ro.media.capture.useDFR=1 \
     ro.media.capture.torchIntensity=45 \
     ro.media.camera.focal=3564.0,3564.0 \
@@ -77,10 +77,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.version.full=Blur_Version.2.3.340.MB810.Verizon.en.US \
     ro.build.config.version=GAS_NA_DROID2VZW_P011 \
     ro.build.config.date=Fri_Sep_17_21:53:21_-0500_2010 \
+    ro.mot.phonemode.vzwglobalphone=1 \
+    persist.radio.vzw.cdma.mdn= \
+    ro.telephony.gsm-routes-us-smsc = 1 \
+    ro.cdma.home.operator.isnan=1 \
+    ro.mot.FTR.33857=true \
+    persist.radio.ap.phonetype=2 \
+    keyguard.no_require_sim = true \
+    cdma.nbpcd.supported=false \
+    ro.mot.fid.33531.keylock_ecm=true \
+    persist.radio.cdma.min = 0 \
+
 
 #############################################################
 #    debug.mot.extwmlog=1 \
 #    debug.mot.extamlog=1 \
+
+DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2/overlay
 
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
