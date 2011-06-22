@@ -169,6 +169,10 @@ $(call inherit-product-if-exists, vendor/motorola/droid2/droid2-vendor.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
+# Hacked in Usb.apk so we don't have to push everytime
+# not sure why it won't just use the Usb package
+PRODUCT_COPY_FILES += \
+    device/motorola/droid2/prebuilt/Usb.apk:system/app/Usb.apk
 
 PRODUCT_NAME := generic_droid2
 PRODUCT_DEVICE := droid2
