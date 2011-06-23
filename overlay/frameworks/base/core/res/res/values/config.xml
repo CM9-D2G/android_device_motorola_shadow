@@ -53,16 +53,14 @@
     <!-- An Array of "[Connection name],[ConnectivityManager connection type],
          [associated radio-type],[priority]  -->
     <string-array translatable="false" name="networkAttributes">
-        <item>"wifi,1,1,1"</item>
-        <item>"mobile,0,0,0"</item>
-        <item>"mobile_mms,2,0,2"</item>
-        <item>"mobile_dun,4,0,4"</item>
-        <item>"mobile_hipri,5,0,3"</item>
-        <item>"mobile_agps,7,0,2"</item>
-        <item>"mobile_fota,8,0,2"</item>
-        <item>"mobile_oem1,9,0,2"</item>
-        <item>"mobile_oem2,10,0,2"</item>
-        <item>"mobile_oem3,11,0,2"</item>
+        <item>wifi,1,1,1</item>
+        <item>mobile,0,0,0</item>
+        <item>mobile_mms,2,0,2</item>
+        <item>mobile_supl,3,0,2</item>
+        <item>mobile_dun,4,0,2</item>
+        <item>mobile_hipri,5,0,3</item>
+        <item>mobile_agps,30,0,2</item>
+        <item>mobile_fota,31,0,2</item>
     </string-array>
 
     <!-- This string array should be overridden by the device to present a list of radio
