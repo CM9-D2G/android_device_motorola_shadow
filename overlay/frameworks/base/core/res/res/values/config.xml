@@ -32,17 +32,17 @@
     <bool name="config_sf_slowBlur">true</bool>
     
     <!-- The duration (in milliseconds) of a short animation. -->
-    <integer name="config_shortAnimTime">75</integer>
+    <integer name="config_shortAnimTime">150</integer>
     
     <!-- The duration (in milliseconds) of a medium-length animation. -->
-    <integer name="config_mediumAnimTime">150</integer>
+    <integer name="config_mediumAnimTime">300</integer>
     
     <!-- The duration (in milliseconds) of a long animation. -->
-    <integer name="config_longAnimTime">300</integer>
+    <integer name="config_longAnimTime">400</integer>
 
     <!-- The duration (in milliseconds) that the radio will scan for a signal
          when there's no network connection. If the scan doesn't timeout, use zero -->
-    <integer name="config_radioScanningTimeout">900000</integer>
+    <integer name="config_radioScanningTimeout">0</integer>
 
     <!-- XXXXX NOTE THE FOLLOWING RESOURCES USE THE WRONG NAMING CONVENTION.
          Please don't copy them, copy anything else. -->
@@ -303,12 +303,12 @@
          and should not be enabled for any others.  Hopefully in the future
          it will be removed when the lower-level touch driver generates better
          data. -->
-    <bool name="config_filterTouchEvents">false</bool>
+    <bool name="config_filterTouchEvents">true</bool>
 
     <!-- Enables special filtering code in the framework for raw touch events
          from the touch driver. This code exists for one particular device,
          and should not be enabled for any others. -->
-    <bool name="config_filterJumpyTouchEvents">false</bool>
+    <bool name="config_filterJumpyTouchEvents">true</bool>
     
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not 
          specified -->
