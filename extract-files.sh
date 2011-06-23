@@ -513,8 +513,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libVendor_ti_omx_config_parser.so:/system/lib/libVendor_ti_omx_config_parser.so \\
     vendor/motorola/__DEVICE__/proprietary/libstagefright.so:/system/lib/libstagefright.so \\
     vendor/motorola/__DEVICE__/proprietary/01_Vendor_ti_omx.cfg:/system/etc/01_Vendor_ti_omx.cfg \\
-    vendor/motorola/__DEVICE__/proprietary/cameraCalFileDef.bin:/system/etc/cameraCalFileDef.bin \\
-    vendor/motorola/__DEVICE__/proprietary/media_profiles.xml:/system/lib/media_profiles.xml
+    vendor/motorola/__DEVICE__/proprietary/cameraCalFileDef.bin:/system/etc/cameraCalFileDef.bin
 
 EOF
 
