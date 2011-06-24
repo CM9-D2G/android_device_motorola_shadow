@@ -140,6 +140,11 @@ class EdifyGenerator(object):
                          (what))
       self.mounts.add(mount_point)
 
+  def RunFinalReleaseUtils(self):
+    self.script.append('package_extract_file("system/etc/finalize_release", "/tmp/finalize_release");')
+    self.script.append('set_perm(0, 0, 0777, "/tmp/finalize_release");')
+    self.script.append('run_program("/tmp/finalize_release");')
+
   def ShowProgress(self, frac, dur):
     """Update the progress bar, advancing it over 'frac' over the next
     'dur' seconds.  'dur' may be zero to advance it via SetProgress
