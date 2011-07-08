@@ -169,3 +169,5 @@ $(call inherit-product, build/target/product/full_base.mk)
 
 PRODUCT_NAME := generic_droid2we
 PRODUCT_DEVICE := droid2we
+PRODUCT_MODEL := DROID2 GLOBAL
+
