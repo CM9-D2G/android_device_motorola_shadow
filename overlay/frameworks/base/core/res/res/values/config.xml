@@ -203,7 +203,13 @@
         <item>0</item>
         <item>30</item>
         <item>60</item>
-        <item>60</item>
+        <item>30</item>
+    </integer-array>
+  
+    <!-- Vibrator pattern for feedback about on a key release -->
+    <integer-array name="config_virtualKeyUpPattern">
+        <item>5</item>
+        <item>18</item>
     </integer-array>
 
     <bool name="config_use_strict_phone_number_comparation">false</bool>

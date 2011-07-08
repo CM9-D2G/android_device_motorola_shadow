@@ -15,50 +15,51 @@
  */
 
 #include <hardware/sensors.h>
-#include <sys/limits.h>
 
 #include "nusensors.h"
 
 /*****************************************************************************/
-
-/*
- * The SENSORS Module
- */
-
-/*
- * the AK8973 has a 8-bit ADC but the firmware seems to average 16 samples,
- * or at least makes its calibration on 12-bits values. This increases the
- * resolution by 4 bits.
- */
+/* The SENSORS Module */
+/*****************************************************************************/
 
 static const struct sensor_t sSensorList[] = {
-        { "KXTF9 3-axis Accelerometer",
-                "Kionix",
-                1, SENSORS_HANDLE_BASE+ID_A,
-                SENSOR_TYPE_ACCELEROMETER, 9.81f*4.0f, 9.81f/1000.0f, 0.25f, 0, { } },
-        { "AK8973 3-axis Magnetic field sensor",
-                "Asahi Kasei",
-                1, SENSORS_HANDLE_BASE+ID_M,
-                SENSOR_TYPE_MAGNETIC_FIELD, 2000.0f, 1.0f/16.0f, 6.8f, 0, { } },
-        { "AK8973 Orientation sensor",
-                "Asahi Kasei",
-                1, SENSORS_HANDLE_BASE+ID_O,
-                SENSOR_TYPE_ORIENTATION, 360.0f, 1.0f/64.0f, 7.05f, 0, { } },
-        { "SFH7743 Proximity sensor",
-                "OSRAM Opto Semiconductors",
-                1, SENSORS_HANDLE_BASE+ID_P,
-                SENSOR_TYPE_PROXIMITY,
-                INT_MAX, INT_MAX,
-                0.045f, 0, { } },
-        { "LM3530 Light sensor",
-                "National Semiconductor",
-                1, SENSORS_HANDLE_BASE+ID_L,
-                SENSOR_TYPE_LIGHT, 27000.0f, 1.0f, 0.0f, 0, { } },
-        { "AK8973 Temperature sensor",
-                "Asahi Kasei",
-                1, SENSORS_HANDLE_BASE+ID_T,
-                SENSOR_TYPE_TEMPERATURE, 115.0f, 1.6f, 3.0f, 0, { } },
+    { "KXTF9 3-axis Accelerometer",
+        "Kionix",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_ACCELEROMETER, SENSOR_TYPE_ACCELEROMETER,
+        8.0f*9.81f, KXTF9_CONVERT_A, 0.57f, 0, { } },
+/*
+    { "AK8973 Accelerometer sensor",
+        "Asahi Kasei",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_ACCELEROMETER, SENSOR_TYPE_ACCELEROMETER,
+        5.76f*9.81f, AK8973_CONVERT_A, 0.2f, 0, { } },
+*/
+    { "AK8973 3-axis Magnetic Field Sensor",
+        "Asahi Kasei",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_MAGNETIC_FIELD, SENSOR_TYPE_MAGNETIC_FIELD,
+        2000.0f, AK8973_CONVERT_M, 6.8f, 0, { } },
+
+    { "AK8973 Orientation Sensor",
+        "Asahi Kasei",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_ORIENTATION, SENSOR_TYPE_ORIENTATION,
+        360.0f, AK8973_CONVERT_O, 7.0f, 0, { } },
+
+    { "AK8973 Temperature Sensor",
+        "Asahi Kasei",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_TEMPERATURE, SENSOR_TYPE_TEMPERATURE,
+        85.0f, 1.0f, 0.2f, 0, { } },
+
+    { "ISL29030 Proximity Sensor",
+        "Intersil Corporation",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_PROXIMITY, SENSOR_TYPE_PROXIMITY,
+        100.0f, 1.0f, 0.5f, 0, { } },
+
+    { "ISL29030 Light Sensor",
+        "Intersil Corporation",
+        1, SENSORS_HANDLE_BASE + SENSOR_TYPE_LIGHT, SENSOR_TYPE_LIGHT,
+        16384.0f, 1.0f, 0.5f, 0, { } },
 };
+
+/*****************************************************************************/
 
 static int open_sensors(const struct hw_module_t* module, const char* name,
         struct hw_device_t** device);
@@ -80,8 +81,8 @@ const struct sensors_module_t HAL_MODULE_INFO_SYM = {
         .version_major = 1,
         .version_minor = 0,
         .id = SENSORS_HARDWARE_MODULE_ID,
-        .name = "Motorola Shadow Sensors Module",
-        .author = "Austen Dicken",
+        .name = "Motorola Defy Sensors Module",
+        .author = "Sorin P. <sorin@hypermagik.com>",
         .methods = &sensors_module_methods,
     },
     .get_sensors_list = sensors__get_sensors_list
@@ -94,3 +95,5 @@ static int open_sensors(const struct hw_module_t* module, const char* name,
 {
     return init_nusensors(module, device);
 }
+
+/*****************************************************************************/

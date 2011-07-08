@@ -36,7 +36,8 @@ SensorBase::SensorBase(
     : dev_name(dev_name), data_name(data_name),
       dev_fd(-1), data_fd(-1)
 {
-    data_fd = openInput(data_name);
+    if (data_name != NULL)
+        data_fd = openInput(data_name);
 }
 
 SensorBase::~SensorBase() {

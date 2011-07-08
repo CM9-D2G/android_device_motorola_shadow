@@ -50,10 +50,10 @@ Kxtf9Sensor::Kxtf9Sensor()
         if(flags) {
             mEnabled = 1;
             if (!ioctl(data_fd, EVIOCGABS(EVENT_TYPE_ACCEL_X), &absinfo)) {
-                mPendingEvent.acceleration.x = absinfo.value * CONVERT_A_X;
+                mPendingEvent.acceleration.y = absinfo.value * CONVERT_A_X;
             }
             if (!ioctl(data_fd, EVIOCGABS(EVENT_TYPE_ACCEL_Y), &absinfo)) {
-                mPendingEvent.acceleration.y = absinfo.value * CONVERT_A_Y;
+                mPendingEvent.acceleration.x = absinfo.value * CONVERT_A_Y;
             }
             if (!ioctl(data_fd, EVIOCGABS(EVENT_TYPE_ACCEL_Z), &absinfo)) {
                 mPendingEvent.acceleration.z = absinfo.value * CONVERT_A_Z;
@@ -148,10 +148,10 @@ void Kxtf9Sensor::processEvent(int code, int value)
 {
     switch (code) {
         case EVENT_TYPE_ACCEL_X:
-            mPendingEvent.acceleration.x = value * CONVERT_A_X;
+            mPendingEvent.acceleration.y = value * CONVERT_A_X;
             break;
         case EVENT_TYPE_ACCEL_Y:
-            mPendingEvent.acceleration.y = value * CONVERT_A_Y;
+            mPendingEvent.acceleration.x = value * CONVERT_A_Y;
             break;
         case EVENT_TYPE_ACCEL_Z:
             mPendingEvent.acceleration.z = value * CONVERT_A_Z;

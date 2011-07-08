@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_NDEBUG 0
+
 #include <hardware/sensors.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -29,28 +29,31 @@
 #include <cutils/log.h>
 
 #include "nusensors.h"
-#include "LightSensor.h"
-#include "ProximitySensor.h"
-#include "AkmSensor.h"
-#include "Kxtf9.h"
+
+#include "SensorKXTF9.h"
+#include "SensorAK8973.h"
+#include "SensorISL29030.h"
 
 /*****************************************************************************/
 
-struct sensors_poll_context_t {
+struct sensors_poll_context_t
+{
     struct sensors_poll_device_t device; // must be first
 
-        sensors_poll_context_t();
-        ~sensors_poll_context_t();
+    sensors_poll_context_t();
+    ~sensors_poll_context_t();
+
     int activate(int handle, int enabled);
     int setDelay(int handle, int64_t ns);
     int pollEvents(sensors_event_t* data, int count);
 
 private:
-    enum {
-        light           = 0,
-        proximity       = 1,
-        akm             = 2,
-        kxtf9           = 3,
+    enum
+    {
+        KXTF9     = 0,
+        AK8973    = 1,
+        ISL29030P = 2,
+        ISL29030L = 3,
         numSensorDrivers,
         numFds,
     };
@@ -61,18 +64,21 @@ private:
     int mWritePipeFd;
     SensorBase* mSensors[numSensorDrivers];
 
-    int handleToDriver(int handle) const {
-        switch (handle) {
-            case ID_A:
-            	return kxtf9;
-            case ID_M:
-            case ID_O:
-            case ID_T:
-                return akm;
-            case ID_P:
-                return proximity;
-            case ID_L:
-                return light;
+    int handleToDriver(int handle) const
+    {
+        switch (handle)
+        {
+            case SENSOR_TYPE_ACCELEROMETER:
+                return KXTF9;
+            //case SENSOR_TYPE_ACCELEROMETER:
+            case SENSOR_TYPE_MAGNETIC_FIELD:
+            case SENSOR_TYPE_ORIENTATION:
+            case SENSOR_TYPE_TEMPERATURE:
+                return AK8973;
+            case SENSOR_TYPE_PROXIMITY:
+                return ISL29030P;
+            case SENSOR_TYPE_LIGHT:
+                return ISL29030L;
         }
         return -EINVAL;
     }
@@ -82,32 +88,34 @@ private:
 
 sensors_poll_context_t::sensors_poll_context_t()
 {
-    mSensors[light] = new LightSensor();
-    mPollFds[light].fd = mSensors[light]->getFd();
-    mPollFds[light].events = POLLIN;
-    mPollFds[light].revents = 0;
+    mSensors[KXTF9] = new SensorKXTF9();
+    mPollFds[KXTF9].fd = mSensors[KXTF9]->getFd();
+    mPollFds[KXTF9].events = POLLIN;
+    mPollFds[KXTF9].revents = 0;
 
-    mSensors[proximity] = new ProximitySensor();
-    mPollFds[proximity].fd = mSensors[proximity]->getFd();
-    mPollFds[proximity].events = POLLIN;
-    mPollFds[proximity].revents = 0;
+    mSensors[AK8973] = new SensorAK8973();
+    mPollFds[AK8973].fd = mSensors[AK8973]->getFd();
+    mPollFds[AK8973].events = POLLIN;
+    mPollFds[AK8973].revents = 0;
 
-    mSensors[akm] = new AkmSensor();
-    mPollFds[akm].fd = mSensors[akm]->getFd();
-    mPollFds[akm].events = POLLIN;
-    mPollFds[akm].revents = 0;
+    mSensors[ISL29030P] = new SensorISL29030P();
+    mPollFds[ISL29030P].fd = mSensors[ISL29030P]->getFd();
+    mPollFds[ISL29030P].events = POLLIN;
+    mPollFds[ISL29030P].revents = 0;
 
-    mSensors[kxtf9] = new Kxtf9Sensor();
-    mPollFds[kxtf9].fd = mSensors[kxtf9]->getFd();
-    mPollFds[kxtf9].events = POLLIN;
-    mPollFds[kxtf9].revents = 0;
-
+    mSensors[ISL29030L] = new SensorISL29030L();
+    mPollFds[ISL29030L].fd = mSensors[ISL29030L]->getFd();
+    mPollFds[ISL29030L].events = POLLIN;
+    mPollFds[ISL29030L].revents = 0;
 
     int wakeFds[2];
     int result = pipe(wakeFds);
-    LOGE_IF(result<0, "error creating wake pipe (%s)", strerror(errno));
+
+    LOGE_IF(result < 0, "error creating wake pipe (%s)", strerror(errno));
+
     fcntl(wakeFds[0], F_SETFL, O_NONBLOCK);
     fcntl(wakeFds[1], F_SETFL, O_NONBLOCK);
+
     mWritePipeFd = wakeFds[1];
 
     mPollFds[wake].fd = wakeFds[0];
@@ -115,30 +123,39 @@ sensors_poll_context_t::sensors_poll_context_t()
     mPollFds[wake].revents = 0;
 }
 
-sensors_poll_context_t::~sensors_poll_context_t() {
-    for (int i=0 ; i<numSensorDrivers ; i++) {
+sensors_poll_context_t::~sensors_poll_context_t()
+{
+    for (int i = 0; i < numSensorDrivers; i++)
         delete mSensors[i];
-    }
+
     close(mPollFds[wake].fd);
     close(mWritePipeFd);
 }
 
-int sensors_poll_context_t::activate(int handle, int enabled) {
+int sensors_poll_context_t::activate(int handle, int enabled)
+{
     int index = handleToDriver(handle);
-    if (index < 0) return index;
-    int err =  mSensors[index]->enable(handle, enabled);
-    if (enabled && !err) {
+    if (index < 0)
+        return index;
+
+    int err = mSensors[index]->enable(handle, enabled);
+
+    if (enabled && !err)
+    {
         const char wakeMessage(WAKE_MESSAGE);
         int result = write(mWritePipeFd, &wakeMessage, 1);
         LOGE_IF(result<0, "error sending wake message (%s)", strerror(errno));
     }
+
     return err;
 }
 
-int sensors_poll_context_t::setDelay(int handle, int64_t ns) {
-
+int sensors_poll_context_t::setDelay(int handle, int64_t ns)
+{
     int index = handleToDriver(handle);
-    if (index < 0) return index;
+    if (index < 0)
+        return index;
+
     return mSensors[index]->setDelay(handle, ns);
 }
 
@@ -149,11 +166,14 @@ int sensors_poll_context_t::pollEvents(sensors_event_t* data, int count)
 
     do {
         // see if we have some leftover from the last poll()
-        for (int i=0 ; count && i<numSensorDrivers ; i++) {
+        for (int i = 0 ; count && i < numSensorDrivers; i++)
+        {
             SensorBase* const sensor(mSensors[i]);
-            if ((mPollFds[i].revents & POLLIN) || (sensor->hasPendingEvents())) {
+            if ((mPollFds[i].revents & POLLIN) || (sensor->hasPendingEvents()))
+            {
                 int nb = sensor->readEvents(data, count);
-                if (nb < count) {
+                if (nb < count)
+                {
                     // no more data for this sensor
                     mPollFds[i].revents = 0;
                 }
@@ -163,16 +183,20 @@ int sensors_poll_context_t::pollEvents(sensors_event_t* data, int count)
             }
         }
 
-        if (count) {
+        if (count)
+        {
             // we still have some room, so try to see if we can get
             // some events immediately or just wait if we don't have
             // anything to return
             n = poll(mPollFds, numFds, nbEvents ? 0 : -1);
-            if (n<0) {
+            if (n < 0)
+            {
                 LOGE("poll() failed (%s)", strerror(errno));
                 return -errno;
             }
-            if (mPollFds[wake].revents & POLLIN) {
+
+            if (mPollFds[wake].revents & POLLIN)
+            {
                 char msg;
                 int result = read(mPollFds[wake].fd, &msg, 1);
                 LOGE_IF(result<0, "error reading from wake pipe (%s)", strerror(errno));
@@ -191,26 +215,26 @@ int sensors_poll_context_t::pollEvents(sensors_event_t* data, int count)
 static int poll__close(struct hw_device_t *dev)
 {
     sensors_poll_context_t *ctx = (sensors_poll_context_t *)dev;
-    if (ctx) {
+    if (ctx)
         delete ctx;
-    }
+
     return 0;
 }
 
-static int poll__activate(struct sensors_poll_device_t *dev,
-        int handle, int enabled) {
+static int poll__activate(struct sensors_poll_device_t *dev, int handle, int enabled)
+{
     sensors_poll_context_t *ctx = (sensors_poll_context_t *)dev;
     return ctx->activate(handle, enabled);
 }
 
-static int poll__setDelay(struct sensors_poll_device_t *dev,
-        int handle, int64_t ns) {
+static int poll__setDelay(struct sensors_poll_device_t *dev, int handle, int64_t ns)
+{
     sensors_poll_context_t *ctx = (sensors_poll_context_t *)dev;
     return ctx->setDelay(handle, ns);
 }
 
-static int poll__poll(struct sensors_poll_device_t *dev,
-        sensors_event_t* data, int count) {
+static int poll__poll(struct sensors_poll_device_t *dev, sensors_event_t* data, int count)
+{
     sensors_poll_context_t *ctx = (sensors_poll_context_t *)dev;
     return ctx->pollEvents(data, count);
 }
@@ -234,5 +258,8 @@ int init_nusensors(hw_module_t const* module, hw_device_t** device)
 
     *device = &dev->device.common;
     status = 0;
+
     return status;
 }
+
+/*****************************************************************************/

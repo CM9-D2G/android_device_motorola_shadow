@@ -20,9 +20,9 @@
 
 <resources>
     <!-- key_height + key_bottom_gap = popup_key_height -->
-    <dimen name="key_height">0.54in</dimen>
+    <dimen name="key_height">54dip</dimen>
     <dimen name="key_bottom_gap">0.035in</dimen>
-    <dimen name="popup_key_height">0.425in</dimen>
+    <dimen name="popup_key_height">0.43in</dimen>
     <dimen name="keyboard_bottom_padding">0.06in</dimen>
     <dimen name="bubble_pointer_offset">22dip</dimen>
     <dimen name="candidate_strip_height">42dip</dimen>
@@ -30,9 +30,9 @@
     <dimen name="spacebar_vertical_correction">4dip</dimen>
     <!-- If the screen height in landscape is larger than the below value, then the keyboard
          will not go into extract (fullscreen) mode. -->
-    <dimen name="max_height_for_fullscreen">2.5in</dimen>
-    <dimen name="key_text_size">0.13in</dimen>
-    <dimen name="key_label_text_size">0.083in</dimen>
+    <dimen name="max_height_for_fullscreen">3.5in</dimen>
+    <dimen name="key_text_size">0.22in</dimen>
+    <dimen name="key_label_text_size">0.16in</dimen>
     <dimen name="key_preview_text_size_large">40sp</dimen>
     <dimen name="key_preview_offset">0.000in</dimen>
     <!-- key_preview_text_size_large x 2 -->

@@ -68,7 +68,7 @@
 <!ATTLIST VideoDecoderCap name (wmv) #REQUIRED>
 <!ATTLIST VideoDecoderCap enabled (true|false) #REQUIRED>
 <!ELEMENT AudioDecoderCap EMPTY>
-<!ATTLIST AudioDecoderCap name (wma|qcp|evrc) #REQUIRED>
+<!ATTLIST AudioDecoderCap name (wma) #REQUIRED>
 <!ATTLIST AudioDecoderCap enabled (true|false) #REQUIRED>
 ]>
 <!--
@@ -79,20 +79,20 @@
     <!-- Each camcorder profile defines a set of predefined configuration parameters -->
     <CamcorderProfiles>
 
-        <EncoderProfile quality="high" fileFormat="3gp" duration="30">
-            <Video codec="h264"
-                   bitRate="6000000"
-                   width="720"
-                   height="480"
-                   frameRate="30" />
+        <EncoderProfile quality="high" fileFormat="mp4" duration="60">
+            <Video codec="m4v"
+                   bitRate="8000000"
+                   width="1280"
+                   height="720"
+                   frameRate="24" />
 
             <Audio codec="aac"
                    bitRate="96000"
                    sampleRate="44100"
-                   channels="2" />
+                   channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="low" fileFormat="3gp" duration="30">
+        <EncoderProfile quality="low" fileFormat="mp4" duration="30">
             <Video codec="m4v"
                    bitRate="200000"
                    width="320"
@@ -106,7 +106,7 @@
 
         </EncoderProfile>
 
-        <ImageEncoding quality="90" />
+        <ImageEncoding quality="93" />
         <ImageEncoding quality="80" />
         <ImageEncoding quality="70" />
         <ImageDecoding memCap="20000000" />
@@ -138,17 +138,17 @@
 
     <VideoEncoderCap name="m4v" enabled="true"
         minBitRate="64000" maxBitRate="8000000"
-        minFrameWidth="176" maxFrameWidth="720"
-        minFrameHeight="144" maxFrameHeight="480"
+        minFrameWidth="176" maxFrameWidth="1280"
+        minFrameHeight="144" maxFrameHeight="720"
         minFrameRate="1" maxFrameRate="30" />
 
     <AudioEncoderCap name="aac" enabled="true"
         minBitRate="8192" maxBitRate="96000"
         minSampleRate="16000" maxSampleRate="44100"
-        minChannels="1" maxChannels="2" />
+        minChannels="1" maxChannels="1" />
 
     <AudioEncoderCap name="amrnb" enabled="true"
-        minBitRate="4750" maxBitRate="12200"
+        minBitRate="5525" maxBitRate="12200"
         minSampleRate="8000" maxSampleRate="8000"
         minChannels="1" maxChannels="1" />
 

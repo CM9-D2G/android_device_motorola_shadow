@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 # we compile hijack if we have hijacked executables
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2we)
 ifeq ($(BOARD_HIJACK_ENABLE),true)
 
 include $(CLEAR_VARS)
@@ -16,7 +16,7 @@ LOCAL_STATIC_LIBRARIES := \
 	libc
 LOCAL_CFLAGS += \
 	-DUPDATE_BINARY=\"/preinstall/recovery/update-binary\" \
-	-DBOOT_UPDATE_ZIP=\"/system/etc/droid2-boot.zip\" \
+	-DBOOT_UPDATE_ZIP=\"/system/etc/droid2we-boot.zip\" \
 	-DRECOVERY_UPDATE_ZIP=\"/preinstall/recovery/recovery.zip\"
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 
@@ -45,4 +45,4 @@ include $(BUILD_PREBUILT)
 endif
 
 endif # BOARD_HIJACK_ENABLE=true
-endif # TARGET_BOOTLAODER_BOARD_NAME=droid2
+endif # TARGET_BOOTLAODER_BOARD_NAME=droid2we
