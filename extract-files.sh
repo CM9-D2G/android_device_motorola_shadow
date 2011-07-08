@@ -214,7 +214,9 @@ adb pull /system/lib/libril_rds.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/librds_util.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libgps_rds.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libsmiledetect.so ../../../vendor/motorola/$DEVICE/proprietary
-adb pull /system/lib/libarcsoft.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libsmiledetect.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libLCML.so ../../../vendor/motorola/$DEVICE/proprietary
+adb pull /system/lib/libbridge.so ../../../vendor/motorola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -447,7 +449,9 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/librds_util.so:/system/lib/librds_util.so \\
     vendor/motorola/__DEVICE__/proprietary/libgps_rds.so:/system/lib/libgps_rds.so \\
     vendor/motorola/__DEVICE__/proprietary/libsmiledetect.so:/system/lib/libsmiledetect.so \\
-    vendor/motorola/__DEVICE__/proprietary/libarcsoft.so:/system/lib/libarcsoft.so
+    vendor/motorola/__DEVICE__/proprietary/libsmiledetect.so:/system/lib/libsmiledetect.so \\
+    vendor/motorola/__DEVICE__/proprietary/libbridge.so:/system/lib/libbridge.so \\
+    vendor/motorola/__DEVICE__/proprietary/libLCML.so:/system/lib/libLCML.so
 
 EOF
 
