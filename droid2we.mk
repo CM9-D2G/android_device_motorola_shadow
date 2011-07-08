@@ -167,7 +167,7 @@ $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
 # use droid2we overlay
-DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2/overlay
+DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
 
 PRODUCT_NAME := generic_droid2we
 PRODUCT_DEVICE := droid2we
