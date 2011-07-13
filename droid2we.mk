@@ -40,7 +40,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.ril.features=0x0E \
     persist.ril.mux.retries=500 \
     persist.ril.mux.sleep=2 \
-    ro.default_usb_mode=0 \
+    ro.default_usb_mode=4 \
     ro.product.multi_touch_enabled=true \
     ro.product.max_num_touch=2 \
     ro.telephony.sms_segment_size=160 \
@@ -168,8 +168,10 @@ $(call inherit-product, build/target/product/full_base.mk)
 
 # use droid2we overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
-
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_MODEL=DROID2 GLOBAL
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_FINGERPRINT=verizon/droid2we_vzw/cdma_droid2we/droid2we:2.2/S273/2.4.330:user/ota-rel-keys,release-keys
+BUILD_FINGERPRINT := verizon/droid2we_vzw/cdma_droid2we/droid2we:2.2/S273/2.4.330:user/ota-rel-keys,release-keys
 PRODUCT_NAME := generic_droid2we
-PRODUCT_DEVICE := droid2we
 PRODUCT_MODEL := DROID2 GLOBAL
+PRODUCT_DEVICE := droid2we
 

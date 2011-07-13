@@ -49,7 +49,7 @@ int init_nusensors(hw_module_t const* module, hw_device_t** device);
 #define KXTF9_CONVERT_A_Z                  (-KXTF9_CONVERT_A)
 
 
-#define AK8973_DEVICE_NAME                 "/dev/akm8973_aot"
+#define AK8973_DEVICE_NAME                 "/dev/akm8975_aot"
 #define AK8973_DEFAULT_DELAY               (200 * 1000000)
 
 #define AK8973_LSG                         (1000.0f)
