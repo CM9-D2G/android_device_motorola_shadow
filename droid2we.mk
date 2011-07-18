@@ -15,7 +15,7 @@
 #
 
 #
-# This is the product configuration for a generic GSM passion,
+# This is the product configuration for a generic droid2we,
 # not specialized for any geography.
 #
 

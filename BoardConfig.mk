@@ -41,9 +41,9 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
 
-# this is so that we build the Shadow-specific hardware shit
-BOARD_GLOBAL_CFLAGS += -DSHADOW_HARDWARE
-SHADOW_HARDWARE := true
+# this is so that we build the droid2we-specific hardware shit
+BOARD_GLOBAL_CFLAGS += -DDROID2WE_HARDWARE
+DROID2WE_HARDWARE := true
 
 TARGET_NO_BOOTLOADER := false
 TARGET_BOOTLOADER_BOARD_NAME := droid2we
@@ -89,7 +89,7 @@ TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/droid2we/kernel
 HARDWARE_OMX := true
 OMX_TI_OMAP_TIER_LEVEL := 10
 
-ifndef SHADOW_DEV_PHONE
+ifndef DROID2WE_DEV_PHONE
 TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_img_from_target_files
