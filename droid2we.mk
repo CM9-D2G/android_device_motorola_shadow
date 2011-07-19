@@ -120,7 +120,7 @@ PRODUCT_PACKAGES += \
     libVendor_ti_omx \
     libaudiopolicy \
     sensors.droid2we \
-    MotoUsb-D2
+    MotoUsb-D2G
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
