@@ -135,7 +135,7 @@ mot.proximity.distance=60
 # BEGIN Motorola, pkd348, 26-Apr-2010,	ISHADOW-4035
 # true	Horizontal VVM is preloaded, not allow to install standalone version of VVM from Android Market
 # false Horizontal VVM is not preloaded
-ro.HorizontalVVM=true
+ro.HorizontalVVM=false
 
 # BEGIN Motorola, a22976, 21-May-2010, IKSHADOW-5385
 # For Shadow only, NOT applied to Droid2 as requirement different
