@@ -66,5 +66,6 @@ struct akm8973_platform_data {
 #define ECS_IOCTL_APP_SET_MVFLAG	_IOW(AKMIO, 0x19, short) /* Set raw magnetic vector flag */
 #define ECS_IOCTL_APP_GET_MVFLAG	_IOR(AKMIO, 0x1A, short) /* Get raw magnetic vector flag */
 
+#define ECS_IOCTL_SET_STEP_CNT          _IOW(AKMIO, 0x20, short)
 #endif
 
