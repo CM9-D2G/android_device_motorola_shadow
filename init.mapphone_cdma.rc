@@ -18,9 +18,11 @@ on post-fs
     mount tmpfs tmpfs /tmp size=2m
 
 # Configure kernel options
-
     # Disable automatic power control for OHCI USB IPC Temporarily
     write /sys/devices/platform/ohci.0/usb1/1-3/power/level auto
+    write /sys/devices/platform/ohci.0/usb1/power/autosuspend 0
+    write /sys/devices/platform/ohci.0/usb1/1-3/power/level auto
+    write /sys/devices/platform/ohci.0/usb1/1-3/power/autosuspend 0
 
     # Reset system time
     write /sys/class/rtc/rtc0/unsecured_rtc on
@@ -31,6 +33,7 @@ on post-fs
 
     # Set core pattern
     write /proc/sys/kernel/core_pattern "|/system/bin/coredump %e %p %t"
+    write /proc/sys/fs/suid_dumpable 2
 
     # Power Management
     write /sys/power/sleep_while_idle 1
@@ -60,6 +63,7 @@ on post-fs
     mount ext3 /dev/block/mmcblk1p7 /pds nosuid nodev noatime nodiratime
     chown system system /pds
     chmod 0775 /pds
+    mkdir /pds/comm_drv 0770 radio radio
     mkdir /pds/public 0775 system shell
     chown system shell /pds/public
     chmod 0775 /pds/public
@@ -83,11 +87,23 @@ on post-fs
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
     mkdir /pds/wifi 0771 wifi wifi
+    mkdir /data/comm_drv 0770 radio radio
+    mkdir /data/gki 0770 radio radio
+    mkdir /tmp/commdrv 0770 radio radio
 
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
+
+    # following two dirs are for storing BP Flex and PDS files. NVM Daemon is using these folders
+    mkdir /data/bp_nvm
+    chown radio radio /data/bp_nvm
+    chmod 0770 /data/bp_nvm
+
+    mkdir /pds/bp_nvm
+    chown radio radio /pds/bp_nvm
+    chmod 0770 /pds/bp_nvm
 
     # create logger folder
     mkdir /data/logger 0770 radio log
@@ -107,11 +123,14 @@ on post-fs
     #Create location directory
     mkdir /data/location 0771 radio radio
 
+    #Create opprof directory
+    mkdir /data/opprof 0770 radio shell 
+
     # Create anr directory and change permission to 777 to save trace.txt
     mkdir /data/anr
     chmod 0777 /data/anr
 
-    # create the necessary dirs for tpapi with proper permission
+# create the necessary dirs for tpapi with proper permission
     mkdir /pds/security
     mkdir /data/tpapi
     mkdir /data/tpapi/etc
@@ -141,16 +160,24 @@ on post-fs
     mount rootfs rootfs / ro remount
 
 # Install kernel modules
+
+# Install BP related kernel modules
+    #Start the engine modules for netmux first for other daemons depends on it
+    insmod /system/lib/modules/netmux.ko
+    insmod /system/lib/modules/netmux_linkdriver.ko
+    insmod /system/lib/modules/modem_pm_driver.ko
+
     insmod /system/lib/modules/sec.ko
 
-# Install product specific kernel modules
-    exec /system/bin/load_modules.sh
+# Install GAN virtual interface kernel module
+    insmod /system/lib/modules/kineto_gan.ko
 
 # chown/chmod for FOTA
     chown system system /cache/fota
     chmod 0770 /cache/fota
 
 on early-boot
+
 # Adjust the out of memory thresholds to account for the larget
 # space on sholes. These numbers are in pages (4k). Must be kept
 # in sync with init.rc. This must be done before the regular init.rc
@@ -170,6 +197,7 @@ on early-boot
     class_start media_early_init
 
 on boot
+
 # Overwrite what init.rc selected for the memory killer params to match above.
     write /sys/module/lowmemorykiller/parameters/minfree 2464,3712,7392,8608,9856,9856
 
@@ -183,44 +211,48 @@ on boot
     setprop ro.sys.atvc_allow_efem 0
     setprop ro.sys.atvc_allow_bp_log 0
     setprop ro.sys.atvc_allow_ap_mot_log 0
+    setprop ro.sys.atvc_allow_gki_log 0
 
 # Change the ownership of led files.
-    chown system system /sys/class/leds/lcd-backlight/als
-    chown system system /sys/class/leds/lcd-backlight/pwm_mode
-    chown system system /sys/class/leds/lcd-backlight/brightness
-    chmod 0660 /sys/class/leds/lcd-backlight/brightness
-    chown system system /sys/class/leds/keyboard-backlight/brightness
-    chmod 0660 /sys/class/leds/keyboard-backlight/brightness
-    chown system system /sys/class/leds/keyboard1-backlight/brightness
-    chmod 0660 /sys/class/leds/keyboard1-backlight/brightness
-    chown system system /sys/class/leds/keyboard2-backlight/brightness
-    chmod 0660 /sys/class/leds/keyboard2-backlight/brightness
-    chown system system /sys/class/leds/button-backlight/brightness
-    chmod 0660 /sys/class/leds/button-backlight/brightness
-    chown system system /sys/class/leds/red/blink
-    chmod 0660 /sys/class/leds/red/blink
-    chown system system /sys/class/leds/red/brightness
-    chmod 0660 /sys/class/leds/red/brightness
-    chown system system /sys/class/leds/green/brightness
-    chmod 0660 /sys/class/leds/green/brightness
-    chown system system /sys/class/leds/blue/brightness
-    chmod 0660 /sys/class/leds/blue/brightness
-    chmod 0666 /sys/class/leds/torch-flash/camera_strobe
-    chmod 0666 /sys/class/leds/torch-flash/flash_light
-    chown system system /sys/class/leds/torch-flash/camera_strobe
-    chown system system /sys/class/leds/torch-flash/flash_light
-    chown system system /sys/class/leds/spotlight/brightness
-    chmod 0660 /sys/class/backlight/adp8870_bl/brightness
-    chown system system /sys/class/backlight/adp8870_bl/brightness
-    chmod 0660 /sys/class/leds/adp8870-led7/brightness
-    chown system system /sys/class/leds/adp8870-led7/brightness
-    chmod 0660 /sys/class/backlight/lm3532_bl/brightness
-    chown system system /sys/class/backlight/lm3532_bl/brightness
+   chown system system /sys/class/leds/lcd-backlight/als
+   chown system system /sys/class/leds/lcd-backlight/pwm_mode
+   chown system system /sys/class/leds/lcd-backlight/brightness
+   chmod 0660 /sys/class/leds/lcd-backlight/brightness
+   chown system system /sys/class/leds/keyboard-backlight/brightness
+   chmod 0660 /sys/class/leds/keyboard-backlight/brightness
+   chown system system /sys/class/leds/keyboard1-backlight/brightness
+   chmod 0660 /sys/class/leds/keyboard1-backlight/brightness
+   chown system system /sys/class/leds/keyboard2-backlight/brightness
+   chmod 0660 /sys/class/leds/keyboard2-backlight/brightness
+   chown system system /sys/class/leds/button-backlight/brightness
+   chmod 0660 /sys/class/leds/button-backlight/brightness
+   chown system system /sys/class/leds/red/blink
+   chmod 0660 /sys/class/leds/red/blink
+   chown system system /sys/class/leds/red/brightness
+   chmod 0660 /sys/class/leds/red/brightness
+   chown system system /sys/class/leds/green/brightness
+   chmod 0660 /sys/class/leds/green/brightness
+   chown system system /sys/class/leds/blue/brightness
+   chmod 0660 /sys/class/leds/blue/brightness
+   chmod 0660 /sys/class/leds/torch-flash/camera_strobe
+   chmod 0660 /sys/class/leds/torch-flash/flash_light
+   chown system system /sys/class/leds/torch-flash/camera_strobe
+   chown system system /sys/class/leds/torch-flash/flash_light
+   chown system system /sys/class/leds/spotlight/brightness
+   chmod 0660 /sys/class/backlight/adp8870_bl/brightness
+   chown system system /sys/class/backlight/adp8870_bl/brightness
+   chmod 0660 /sys/class/leds/adp8870-led7/brightness
+   chown system system /sys/class/leds/adp8870-led7/brightness
 
-#fix for torch
-    chmod 0666 /sys/class/leds/spotlight/brightness
-    chmod 0666 /sys/class/leds/torch-flash/brightness
-    chmod 0666 /sys/class/leds/torch-flash/flash_light
+# Define TCP buffer sizes for various networks
+#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    setprop net.tcp.buffersize.umts 64000,128000,256000,4096,16384,110208
+    setprop net.tcp.buffersize.edge 16384,35040,65536,4096,16384,35040 
+
+
+# Camera related
+   chmod 0660 /dev/hplens-omap
+   chown media camera /dev/hplens-omap
 
 # Enable panic on softlockup
     write /proc/sys/kernel/softlockup_panic 1
@@ -241,18 +273,22 @@ on boot
     setrlimit 4 2147483648 2147483648
 
 # The properties introduced by moto
+
 on property:sys.chargeonly.mode=1
     start battd
     start console
     write /data/chargeonlymode charging
     exec /system/bin/charge_only_mode
 
+
 # Moto safe power down
 on property:sys.reboot=1
+    stop ssmgrd
     exec /system/bin/sleep 10
     exec /system/bin/reboot
 
 on property:sys.shutdown=1
+    stop ssmgrd
     exec /system/bin/sleep 10
     exec /system/bin/reboot -p
 
@@ -260,6 +296,7 @@ on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
 # The following services are added by moto
+
 # Set property strings for ATVC logging
 # This conditionally sets :
 # ro.sys.atvc_allow_bp_log
@@ -295,12 +332,16 @@ service battd /system/bin/battd
 service catcommands /system/bin/catcommands
     group radio
 
+service modemlog /system/bin/modemlog
+   oneshot
 service hciattach /system/bin/hciattach \
         -n -t 10 /dev/ttyS1 texasalt 3000000 flow
     user bluetooth
     group bluetooth net_bt_admin
     disabled
 
+service bt_init /system/bin/bt_init
+    oneshot
 service hciattach_rfmd /system/bin/hciattach \
         -n -t 10 /dev/ttyS1 texasalt_rfmd 3000000 flow
     user bluetooth
@@ -331,6 +372,12 @@ service del_panu /system/bin/sdptool remove PANU
     disabled
     oneshot
 
+service map /system/bin/sdptool add --channel=20 --network=2 MAP
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
 service napics /system/bin/sh /system/bin/napics.sh
     user root
     disabled
@@ -338,12 +385,6 @@ service napics /system/bin/sh /system/bin/napics.sh
 
 service btdhcpd /system/bin/dnsmasq -C /etc/btpan.conf
     user root
-    disabled
-    oneshot
-
-service map /system/bin/sdptool add --channel=20 --network=2 MAP
-    user bluetooth
-    group bluetooth net_bt_admin
     disabled
     oneshot
 
@@ -357,6 +398,45 @@ service tcmdhelp /system/bin/tcmdhelp
     socket tcmdhelp stream 0600 system system
     oneshot
     disabled
+
+# turn on wifi for tcmd step one
+on property:tcmd.load_wlan=1
+    insmod /system/lib/modules/tiwlan_drv.ko
+
+# turn on wifi for tcmd step two
+on property:tcmd.load_wlan=2
+    start wlan_loader
+
+# turn on wifi for tcmd step three
+on property:tcmd.load_wlan=3
+    exec /system/bin/ifconfig tiwlan0 up
+
+# turn off wifi for tcmd step one
+on property:tcmd.unload_wlan=1
+    exec /system/bin/ifconfig tiwlan0 down
+
+# turn off wifi for tcmd step two
+on property:tcmd.unload_wlan=2
+    exec /system/bin/rmmod tiwlan_drv
+    setprop wlan.driver.status unloaded
+
+# turn on bluetooth for tcmd
+on property:tcmd.bt_mod=1
+    insmod /system/lib/modules/wl127x_test.ko
+
+#turn off bluetooth for tcmd
+on property:tcmd.bt_mod=0
+    exec /system/bin/rmmod wl127x_test
+
+#execute tcmdhelp
+on property:tcmd.start_tcmdhelp=1
+    start tcmdhelp
+
+service panic_daemon /system/usr/bin/panic_daemon
+    user radio
+    group log radio system graphics sdcard_rw
+    socket panic_daemon stream 660 radio radio
+    onrestart exec /system/bin/reboot
 
 # Ecompass daemon
 service akmd2 /system/bin/akmd2
@@ -419,14 +499,12 @@ service bugtogo /system/bin/bugtogo.sh
     oneshot
     keycodes 0 1
 
-service pppd-ril /system/bin/pppd-ril /dev/ttyUSB0 \
-        call pppd-ril.options plugin /system/lib/libpppd_plugin-ril.so
+service pppd-ril /system/bin/pppd-ril /dev/ttyUSB0 call pppd-ril.options plugin /system/lib/libpppd_plugin-ril.so
     user root
     disabled
     oneshot
 
-service pppd /system/bin/pppd silent ipparam dun plugin \
-        /system/lib/libpppd_plugin.so
+service pppd /system/bin/pppd silent ipparam dun plugin /system/lib/libpppd_plugin.so
     user root
     disabled
     oneshot
@@ -471,12 +549,52 @@ service dund_dialup /system/bin/dund --listen --channel=6 --nodetach --dialup
     disabled
     oneshot
 
+service smcdaemon /system/bin/startup_smc.sh
+    disabled
+    oneshot
+
+# ecckeyd daemon has dependency on SMC
+# It needs to be root because it needs to be able to read client's /proc/<pid>/status.
+# user/group as mot_tpapi/mot_tpapi does not give it enough permission
+service ecckeydaemon /system/bin/ecckeyd
+    socket ecckey_socket stream 660 mot_tpapi mot_tpapi
+    group mot_tpapi
+    disabled
+    oneshot
+
 on property:dev.bootcomplete=1
     start savebpver
 #    start loadpreinstalls
 
 service mdm_panicd /system/bin/mdm_panicd
     oneshot
+
+on property:ro.service.start.smc=1
+    start smcdaemon
+    start ecckeydaemon
+
+service secclkd /system/bin/secclkd
+    class post-zygote_services
+    socket secclk_socket stream 660 mot_secclkd mot_secclkd
+    user mot_tpapi
+    group mot_tpapi mot_sec_rtc mot_secclkd
+    oneshot
+
+service dla /system/bin/dla
+    class post-zygote_services
+    oneshot
+
+on property:tcmd.ctrl_adb=1
+    setprop persist.service.adb.enable 1
+    setprop persist.factory.allow_adb  1
+    stop usbd
+    start usbd
+
+on property:tcmd.ctrl_adb=0
+    setprop persist.service.adb.enable 0
+    setprop persist.factory.allow_adb  0
+    stop usbd
+    start usbd
 
 #get BP version and save to misc
 service savebpver /system/bin/SaveBPVer
