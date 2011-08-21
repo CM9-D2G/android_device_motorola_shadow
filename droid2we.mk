@@ -172,7 +172,7 @@ DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_MODEL=DROID2 GLOBAL
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_FINGERPRINT=verizon/droid2we_vzw/cdma_droid2we/droid2we:2.2/S273/2.4.330:user/ota-rel-keys,release-keys
 BUILD_FINGERPRINT := verizon/droid2we_vzw/cdma_droid2we/droid2we:2.2/S273/2.4.330:user/ota-rel-keys,release-keys
-PRODUCT_NAME := aosp_droid2we
+PRODUCT_NAME := generic_droid2we
 PRODUCT_MODEL := DROID2 GLOBAL
 PRODUCT_DEVICE := droid2we
 
