@@ -165,7 +165,7 @@ $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
 # stuff common to all HTC phones
 #$(call inherit-product, device/htc/common/common.mk)
 
-$(call inherit-product, build/target/product/full.mk)
+$(call inherit-product, build/target/product/full_base.mk)
 
 # use droid2we overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
