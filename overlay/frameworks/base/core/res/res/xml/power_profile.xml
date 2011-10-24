@@ -45,7 +45,7 @@
   </array>
 
   <!-- Power consumption in suspend -->	
-  <item name="cpu.idle">2</item>
+  <item name="cpu.idle">4</item>
 
   <!-- Power consumption at different speeds -->
   <array name="cpu.active">

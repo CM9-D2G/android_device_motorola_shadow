@@ -62,6 +62,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
     ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
     ro.com.motorola.smartsensor=true \
+    ro.media.sensor.orient=90 \
     ro.media.capture.maxres=5m \
     ro.media.capture.fast.fps=4 \
     ro.media.capture.slow.fps=60 \
@@ -76,7 +77,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.mot.hw.uaprof=http://uaprof.motorola.com/phoneconfig/MotoMB200/profile/MotoMB200.rdf \
     ro.build.version.full=Blur_Version.2.3.340.MB810.Verizon.en.US \
     ro.build.config.version=GAS_NA_GCXSHAD00VZW_P022 \
-    ro.build.config.date=Sun_Nov_07_23:40:30_-0600_2010
+    ro.build.config.date=Sun_Nov_07_23:40:30_-0600_2010 \
+    ro.kernel.android.checkjni=0
+
 #############################################################
 #    debug.mot.extwmlog=1 \
 #    debug.mot.extamlog=1 \
@@ -119,8 +122,7 @@ PRODUCT_PACKAGES += \
     libOMX.TI.Video.encoder \
     libVendor_ti_omx \
     libaudiopolicy \
-    sensors.droid2we \
-    MotoUsb-D2G
+    Usb
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -162,17 +164,12 @@ $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
 # media profiles and capabilities spec
 # $(call inherit-product, device/motorola/shadow/media_a1026.mk)
 
-# stuff common to all HTC phones
-#$(call inherit-product, device/htc/common/common.mk)
+# stuff common to all Motorola phones
+$(call inherit-product, device/motorola/common/common_hijack.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
 # use droid2we overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_MODEL=DROID2 GLOBAL
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_FINGERPRINT=verizon/droid2we_vzw/cdma_droid2we/droid2we:2.2/S273/2.4.330:user/ota-rel-keys,release-keys
-BUILD_FINGERPRINT := verizon/droid2we_vzw/cdma_droid2we/droid2we:2.2/S273/2.4.330:user/ota-rel-keys,release-keys
 PRODUCT_NAME := generic_droid2we
-PRODUCT_MODEL := DROID2 GLOBAL
 PRODUCT_DEVICE := droid2we
-

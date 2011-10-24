@@ -31,7 +31,6 @@ USE_CAMERA_STUB := false
 
 # use pre-kernel.35 vold usb mounting
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-BOARD_USE_FROYO_LIBCAMERA := true
 
 TARGET_BOARD_PLATFORM := omap3
 
@@ -94,8 +93,20 @@ TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_img_from_target_files
 
-BOARD_HIJACK_ENABLE := true
 #BOARD_HIJACK_LOG_ENABLE := true
+
+# Droid2we requires the common boot hijack
+TARGET_NEEDS_MOTOROLA_HIJACK := true
+
+# MOTOROLA
+USE_MOTOROLA_CODE := true
+ifdef USE_MOTOROLA_CODE
+COMMON_GLOBAL_CFLAGS += -DUSE_MOTOROLA_CODE
+endif
+USE_MOTOROLA_USERS := true
+ifdef USE_MOTOROLA_USERS
+COMMON_GLOBAL_CFLAGS += -DUSE_MOTOROLA_USERS
+endif
 
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /data/.recovery_mode; sync;"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true

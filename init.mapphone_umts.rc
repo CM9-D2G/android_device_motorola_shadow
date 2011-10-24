@@ -1,4 +1,4 @@
-on init
+on post-fs
 
 # Backward compatibility
     symlink /dev /dev/netmux
