@@ -206,12 +206,12 @@
         <item>30</item>
     </integer-array>
   
-    <!-- Vibrator pattern for feedback about on a key release -->
+    <!-- Vibrator pattern for feedback about on a key release
     <integer-array name="config_virtualKeyUpPattern">
         <item>5</item>
         <item>18</item>
     </integer-array>
-
+-->
     <bool name="config_use_strict_phone_number_comparation">false</bool>
 
     <!-- Display low battery warning when battery level dips to this value -->
@@ -334,7 +334,7 @@
     <!-- 2 means give warning -->
     <integer name="config_datause_notification_type">2</integer>
 
-    <!-- Allows the light sensor to be ignored when flashlight is on -->
+    <!-- Allows the light sensor to be ignored when flashlight is on
     <bool name="config_flashlight_affects_lightsensor">true</bool>
-
+-->
 </resources>
