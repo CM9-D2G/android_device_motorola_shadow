@@ -121,7 +121,6 @@ PRODUCT_PACKAGES += \
     libOMX.TI.Video.Decoder \
     libOMX.TI.Video.encoder \
     libVendor_ti_omx \
-    libaudiopolicy \
     Usb
 
 # we have enough storage space to hold precise GC data
@@ -171,5 +170,5 @@ $(call inherit-product, build/target/product/full_base.mk)
 
 # use droid2we overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
-PRODUCT_NAME := generic_droid2we
+PRODUCT_NAME := aosp_droid2we
 PRODUCT_DEVICE := droid2we

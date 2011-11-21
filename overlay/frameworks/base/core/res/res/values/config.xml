@@ -89,17 +89,6 @@
     <string-array translatable="false" name="config_tether_dhcp_range">
     </string-array>
 
-    <!-- Regex array of allowable upstream ifaces for tethering - for example if you want
-         tethering on a new interface called "foo2" add <item>"foo\\d"</item> to the array -->
-    <string-array translatable="false" name="config_tether_upstream_regexs">
-    </string-array>
-
-    <!-- Boolean indicating if we require the use of DUN on mobile for tethering.
-         Note that this defaults to false so that if you move to a carrier that
-         hasn't configured anything tethering will still work.  If you'd rather
-         make the device untetherable on unconfigured devices, set to true -->
-    <bool translatable="false" name="config_tether_dun_required">false</bool>
-
     <!-- String containing the apn value for tethering.  May be overriden by secure settings
          TETHER_DUN_APN.  Value is a comma separated series of strings:
          "name,apn,proxy,port,username,password,server,mmsc,mmsproxy,mmsport,mcc,mnc,auth,type"
@@ -289,18 +278,6 @@
     <!-- Enables swipe versus poly-finger touch disambiguation in the KeyboardView -->
     <bool name="config_swipeDisambiguation">true</bool>
 
-    <!-- Enables special filtering code in the framework for raw touch events
-         from the touch driver.  This code exists for one particular device,
-         and should not be enabled for any others.  Hopefully in the future
-         it will be removed when the lower-level touch driver generates better
-         data. -->
-    <bool name="config_filterTouchEvents">true</bool>
-
-    <!-- Enables special filtering code in the framework for raw touch events
-         from the touch driver. This code exists for one particular device,
-         and should not be enabled for any others. -->
-    <bool name="config_filterJumpyTouchEvents">true</bool>
-    
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not 
          specified -->
     <string name="default_wallpaper_component">@null</string>
