@@ -88,7 +88,6 @@ TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/droid2we/kernel
 HARDWARE_OMX := true
 OMX_TI_OMAP_TIER_LEVEL := 10
 
-ifndef DROID2WE_DEV_PHONE
 TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_img_from_target_files
@@ -110,7 +109,8 @@ endif
 
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /data/.recovery_mode; sync;"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
-endif
+
+BIONIC_ICS := true
 
 BOARD_ALWAYS_INSECURE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
