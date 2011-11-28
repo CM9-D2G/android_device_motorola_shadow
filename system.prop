@@ -168,7 +168,7 @@ ro.mot.dpmext = true
 ro.cdma.home.operator.isnan=1
 persist.radio.ap.phonetype=2
 #set system property for camera calibration in phone
-ro.mot.hw.calibratedImager=1
+#ro.mot.hw.calibratedImager=1
 # END IKDROID2-5584
 
 
