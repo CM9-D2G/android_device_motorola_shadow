@@ -93,6 +93,8 @@ PRODUCT_PACKAGES += \
 
 # Sandbox
 PRODUCT_COPY_FILES += \
+    device/motorola/droid2we/prebuilt/bin/hijack:system/bin/hijack \
+    device/motorola/droid2we/prebuilt/bin/hijack.log_dump:system/bin/hijack.log_dump \
     device/motorola/droid2we/prebuilt/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
 
 # we have enough storage space to hold precise GC data

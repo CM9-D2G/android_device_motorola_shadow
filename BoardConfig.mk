@@ -24,6 +24,7 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := false
+BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 # inherit from the proprietary version
 -include vendor/motorola/droid2we/BoardConfigVendor.mk
@@ -41,8 +42,8 @@ TARGET_CPU_SMP := false
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a8
 TARGET_ARCH_VARIANT_FPU := neon
-#TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
-#TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
 
 
 # Kernel
@@ -83,7 +84,13 @@ TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 #BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
 
 # Graphics
-#BOARD_EGL_CFG := device/motorola/droid2we/prebuilt/etc/egl.cfg
+BOARD_EGL_CFG := device/motorola/droid2we/prebuilt/etc/egl.cfg
+# strip GRALLOC_USAGE_HW_COMPOSER from gralloc alloc
+BOARD_EGL_GRALLOC_USAGE_FILTER := 0x00000800
+BOARD_GL_OES_EGL_IMG_EXTERNAL_HACK := true
+ifdef BOARD_GL_OES_EGL_IMG_EXTERNAL_HACK
+COMMON_GLOBAL_CFLAGS += -DBOARD_GL_OES_EGL_IMG_EXTERNAL_HACK
+endif
 
 # OMX
 HARDWARE_OMX := true
@@ -123,6 +130,8 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetoo
 
 # Misc.
 BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_NEEDS_CUTILS_LOG := true
+BOARD_USES_SECURE_SERVICES := true
 
 DROID2WE_HARDWARE := true
 BOARD_GLOBAL_CFLAGS += -DDROID2WE_HARDWARE
