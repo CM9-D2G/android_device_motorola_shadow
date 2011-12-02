@@ -345,14 +345,9 @@ def WriteFullOTAPackage(input_zip, output_zip):
 #  if not OPTIONS.omit_prereq:
 #    ts = GetBuildProp("ro.build.date.utc", input_zip)
 #    script.AssertOlderBuild(ts)
-  
-  script.Print("  ")                                          
-  script.Print(" ___  _        _ ____ ___  _____   _____ ____  ")
-  script.Print("/  _\/ \__/|\ / |  _ Y_  \/  __/  /  __//  __\ ")
-  script.Print("| /  | |\/||_\| | | \|/  /| |  ___| |  _| | // ")
-  script.Print("| \__| |  ||  | | |_/|  /_| |_//\_\ |_//| |_|\ ")
-  script.Print("\___/\_/  \|  \_|____|___/\____\  \____\/____/ ")
-  script.Print(" A RevNumbers Kang")
+
+  script.Print("-=  CM9 Pre-Alpha  =-")
+  script.Print(" Port by: bikedude880")
   script.Print("  ")
 
 # kernel check...

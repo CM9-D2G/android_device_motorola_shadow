@@ -134,5 +134,5 @@ $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_NAME := full_droid2we
+PRODUCT_NAME := cm_droid2we
 PRODUCT_DEVICE := droid2we

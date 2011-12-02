@@ -20,4 +20,5 @@
 # In particular, you can add lunch options with the add_lunch_combo
 # function: add_lunch_combo generic-eng
 
-add_lunch_combo full_droid2we-eng
+add_lunch_combo cm_droid2we-userdebug
+add_lunch_combo cm_droid2we-eng
