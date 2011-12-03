@@ -57,6 +57,7 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/motorola/droid2we/prebuilt/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
     device/motorola/droid2we/prebuilt/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
+    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
     device/motorola/droid2we/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
     device/motorola/droid2we/prebuilt/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
     device/motorola/droid2we/prebuilt/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
@@ -82,6 +83,7 @@ PRODUCT_COPY_FILES += \
 # HW Libs
 PRODUCT_PACKAGES += \
     hwcomposer.default \
+    libFLAC \
 
 # Lights
 #PRODUCT_PACKAGES += \
@@ -128,6 +130,7 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, hardware/ti/omap3/Android.mk)
 
 $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
+$(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 
 # stuff common to all Motorola phones
 #$(call inherit-product, device/motorola/common/common_hijack.mk)

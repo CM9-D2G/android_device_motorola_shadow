@@ -9,6 +9,7 @@ ro.default_usb_mode=4
 ro.usb.use_custom_service=1
 #use charge counter for 1% battery
 #ro.product.use_charge_counter=1
+ro.config.disable_hw_accel=true
 
 #wifi timeout
 ro.product.wifi_timeout=300000
