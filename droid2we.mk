@@ -71,7 +71,7 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/imgtec/libEGL_POWERVR_SGX530_125.so:system/lib/egl/libEGL_POWERVR_SGX530_125.so \
     device/motorola/droid2we/prebuilt/imgtec/libGLESv1_CM_POWERVR_SGX530_125.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so \
     device/motorola/droid2we/prebuilt/imgtec/libGLESv2_POWERVR_SGX530_125.so:system/lib/egl/libGLESv2_POWERVR_SGX530_125.so \
-    device/motorola/droid2we/prebuilt/imgtec/gralloc.omap3.so:system/lib/hw/gralloc.omap3.so \
+#    device/motorola/droid2we/prebuilt/imgtec/gralloc.omap3.so:system/lib/hw/gralloc.omap3.so \
     device/motorola/droid2we/prebuilt/imgtec/libglslcompiler.so:system/lib/libglslcompiler.so \
     device/motorola/droid2we/prebuilt/imgtec/libIMGegl.so:system/lib/libIMGegl.so \
     device/motorola/droid2we/prebuilt/imgtec/libpvr2d.so:system/lib/libpvr2d.so \
