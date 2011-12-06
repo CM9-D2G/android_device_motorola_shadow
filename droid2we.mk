@@ -83,7 +83,6 @@ PRODUCT_COPY_FILES += \
 # HW Libs
 PRODUCT_PACKAGES += \
     hwcomposer.default \
-    libFLAC \
 
 # Lights
 #PRODUCT_PACKAGES += \
@@ -93,11 +92,22 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    sensors.droid2we \
 
+# Wifi
+PRODUCT_PACKAGES += \
+    libCustomWifi \
+    wlan_loader \
+    wlan_cu \
+    dhcpcd.conf \
+    wpa_supplicant.conf \
+
+PRODUCT_PACKAGES += \
+    Camera \
+
 # Sandbox
-PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/prebuilt/bin/hijack:system/bin/hijack \
-    device/motorola/droid2we/prebuilt/bin/hijack.log_dump:system/bin/hijack.log_dump \
-    device/motorola/droid2we/prebuilt/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
+#PRODUCT_COPY_FILES += \
+#    device/motorola/droid2we/prebuilt/bin/hijack:system/bin/hijack \
+#    device/motorola/droid2we/prebuilt/bin/hijack.log_dump:system/bin/hijack.log_dump \
+#    device/motorola/droid2we/prebuilt/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -133,7 +143,7 @@ $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 
 # stuff common to all Motorola phones
-#$(call inherit-product, device/motorola/common/common_hijack.mk)
+$(call inherit-product, device/motorola/common/common_hijack.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
