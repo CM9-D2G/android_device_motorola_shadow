@@ -25,6 +25,7 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 
 PRODUCT_COPY_FILES += \
+    device/motorola/droid2we/init.rc:root/init.rc \
     device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
     device/motorola/droid2we/init.mapphone_umts.rc:root/init.mapphone_umts.rc \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
@@ -55,13 +56,13 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/motorola/droid2we/prebuilt/etc/powervr.ini:system/etc/powervr.ini \
     device/motorola/droid2we/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
-    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
-    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
-    device/motorola/droid2we/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-    device/motorola/droid2we/prebuilt/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
-    device/motorola/droid2we/prebuilt/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
-    device/motorola/droid2we/prebuilt/usr/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
+#    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
+#    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
+#    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
+#    device/motorola/droid2we/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+#    device/motorola/droid2we/prebuilt/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
+#    device/motorola/droid2we/prebuilt/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
+#    device/motorola/droid2we/prebuilt/usr/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
     device/motorola/droid2we/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip \
 
 # Graphics
