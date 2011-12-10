@@ -56,6 +56,8 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/motorola/droid2we/prebuilt/etc/powervr.ini:system/etc/powervr.ini \
     device/motorola/droid2we/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
+    device/motorola/droid2we/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip \
+    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
 #    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
 #    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
 #    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
@@ -63,7 +65,6 @@ PRODUCT_COPY_FILES += \
 #    device/motorola/droid2we/prebuilt/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
 #    device/motorola/droid2we/prebuilt/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
 #    device/motorola/droid2we/prebuilt/usr/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
-    device/motorola/droid2we/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip \
 
 # Graphics
 PRODUCT_COPY_FILES += \
@@ -72,7 +73,6 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/imgtec/libEGL_POWERVR_SGX530_125.so:system/lib/egl/libEGL_POWERVR_SGX530_125.so \
     device/motorola/droid2we/prebuilt/imgtec/libGLESv1_CM_POWERVR_SGX530_125.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so \
     device/motorola/droid2we/prebuilt/imgtec/libGLESv2_POWERVR_SGX530_125.so:system/lib/egl/libGLESv2_POWERVR_SGX530_125.so \
-#    device/motorola/droid2we/prebuilt/imgtec/gralloc.omap3.so:system/lib/hw/gralloc.omap3.so \
     device/motorola/droid2we/prebuilt/imgtec/libglslcompiler.so:system/lib/libglslcompiler.so \
     device/motorola/droid2we/prebuilt/imgtec/libIMGegl.so:system/lib/libIMGegl.so \
     device/motorola/droid2we/prebuilt/imgtec/libpvr2d.so:system/lib/libpvr2d.so \
