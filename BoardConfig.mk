@@ -122,8 +122,8 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetoo
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetools/droid2we_img_from_target_files
 
 # Hijack
-TARGET_NEEDS_MOTOROLA_HIJACK := true
-BOARD_HIJACK_LOG_ENABLE := true
+#TARGET_NEEDS_MOTOROLA_HIJACK := true
+#BOARD_HIJACK_LOG_ENABLE := true
 
 # Misc.
 BOARD_FLASH_BLOCK_SIZE := 131072
