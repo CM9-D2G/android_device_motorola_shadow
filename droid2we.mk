@@ -74,12 +74,16 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/imgtec/libGLESv1_CM_POWERVR_SGX530_125.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so \
     device/motorola/droid2we/prebuilt/imgtec/libGLESv2_POWERVR_SGX530_125.so:system/lib/egl/libGLESv2_POWERVR_SGX530_125.so \
     device/motorola/droid2we/prebuilt/imgtec/libglslcompiler.so:system/lib/libglslcompiler.so \
+    device/motorola/droid2we/prebuilt/imgtec/libHPImgApi.so:system/lib/libHPImgApi.so \
     device/motorola/droid2we/prebuilt/imgtec/libIMGegl.so:system/lib/libIMGegl.so \
     device/motorola/droid2we/prebuilt/imgtec/libpvr2d.so:system/lib/libpvr2d.so \
     device/motorola/droid2we/prebuilt/imgtec/libpvrANDROID_WSEGL.so:system/lib/libpvrANDROID_WSEGL.so \
     device/motorola/droid2we/prebuilt/imgtec/libsrv_init.so:system/lib/libsrv_init.so \
     device/motorola/droid2we/prebuilt/imgtec/libsrv_um.so:system/lib/libsrv_um.so \
     device/motorola/droid2we/prebuilt/imgtec/libusc.so:system/lib/libusc.so \
+    device/motorola/droid2we/prebuilt/imgtec/libeglinfo.so:system/lib/egl/libeglinfo.so \
+    device/motorola/droid2we/prebuilt/imgtec/libgles1_texture_stream.so:system/lib/egl/libgles1_texture_stream.so \
+    device/motorola/droid2we/prebuilt/imgtec/libgles2_texture_stream.so:system/lib/egl/libgles2_texture_stream.so \
 
 # HW Libs
 PRODUCT_PACKAGES += \
