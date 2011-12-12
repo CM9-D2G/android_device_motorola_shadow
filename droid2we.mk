@@ -84,6 +84,7 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/prebuilt/imgtec/libeglinfo.so:system/lib/egl/libeglinfo.so \
     device/motorola/droid2we/prebuilt/imgtec/libgles1_texture_stream.so:system/lib/egl/libgles1_texture_stream.so \
     device/motorola/droid2we/prebuilt/imgtec/libgles2_texture_stream.so:system/lib/egl/libgles2_texture_stream.so \
+    device/motorola/droid2we/prebuilt/imgtec/gralloc.omap3.so:system/lib/hw/gralloc.omap3.so \
 
 # HW Libs
 PRODUCT_PACKAGES += \
