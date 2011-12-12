@@ -51,12 +51,15 @@ TARGET_PREBUILT_KERNEL := device/motorola/droid2we/kernel
 BOARD_KERNEL_CMDLINE := console=ttyS2,115200n8 rw mem=498M@0x80C00000 init=/init ip=off brdrev=P3A androidboot.bootloader=0x0000 mmcparts=mmcblk1:p7(pds),p15(boot),p16(recovery),p17(cdrom),p18(misc),p19(cid),p20(kpanic),p21(system),p22(cache),p23(preinstall),p24(userdata) androidboot.mode=reboot androidboot.bootloader=D011 androidboot.serialno=0A3A94CF0602D02
 BOARD_KERNEL_BASE := 0x10000000
 
+# Sensors
+ENABLE_SENSORS_COMPAT := true
+
 # Connectivity - Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := libCustomWifi
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
 BOARD_WLAN_DEVICE           := wl1271
-#BOARD_WLAN_TI_STA_DK_ROOT   := system/wlan/ti/wilink_6_1
+BOARD_WLAN_TI_STA_DK_ROOT   := hardware/ti/wlan/wl1271
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/tiwlan_drv.ko"
 WIFI_DRIVER_MODULE_NAME     := "tiwlan_drv"
 WIFI_DRIVER_MODULE_ARG      := ""
@@ -88,6 +91,9 @@ TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 # Graphics
 BOARD_EGL_CFG := device/motorola/droid2we/prebuilt/etc/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
+BOARD_NO_RGBX_8888 := true
+DEFAULT_FB_NUM := 0
+BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 
 # OMX
 HARDWARE_OMX := true
@@ -97,7 +103,7 @@ OMX_VENDOR_WRAPPER := TI_OMX_Wrapper
 BOARD_OPENCORE_LIBRARIES := libOMX_Core
 BOARD_OPENCORE_FLAGS := -DHARDWARE_OMX=1
 endif
-#OMX_TI_OMAP_TIER_LEVEL := 10
+OMX_TI_OMAP_TIER_LEVEL := 10
 
 # OMAP
 OMAP_ENHANCEMENT := true
@@ -129,6 +135,8 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetoo
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_NEEDS_CUTILS_LOG := true
 BOARD_USES_SECURE_SERVICES := true
+BOARD_USE_BATTERY_CHARGE_COUNTER := true
+BOARD_ALWAYS_INSECURE := true
 
 DROID2WE_HARDWARE := true
 BOARD_GLOBAL_CFLAGS += -DDROID2WE_HARDWARE
