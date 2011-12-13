@@ -27,13 +27,14 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 PRODUCT_COPY_FILES += \
     device/motorola/droid2we/init.rc:root/init.rc \
     device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
+    device/motorola/droid2we/init.mapphone_cdma.usb.rc:root/init.mapphone_cdma.usb.rc \
     device/motorola/droid2we/init.mapphone_umts.rc:root/init.mapphone_umts.rc \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
 # Device overlay
-#DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
+DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
 
 # Permissions files
 PRODUCT_COPY_FILES += \
@@ -50,41 +51,46 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilts
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/prebuilt/bin/mount_ext3.sh:system/bin/mount_ext3.sh \
-    device/motorola/droid2we/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
-    device/motorola/droid2we/prebuilt/etc/gps.conf:system/etc/gps.conf \
-    device/motorola/droid2we/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    device/motorola/droid2we/prebuilt/etc/powervr.ini:system/etc/powervr.ini \
-    device/motorola/droid2we/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-    device/motorola/droid2we/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip \
-    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
-#    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
-#    device/motorola/droid2we/prebuilt/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
-#    device/motorola/droid2we/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
-#    device/motorola/droid2we/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-#    device/motorola/droid2we/prebuilt/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
-#    device/motorola/droid2we/prebuilt/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
-#    device/motorola/droid2we/prebuilt/usr/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
+    $(DEVICE_PREBUILT)/bin/mount_ext3.sh:system/bin/mount_ext3.sh \
+    $(DEVICE_PREBUILT)/etc/apns-conf.xml:system/etc/apns-conf.xml \
+    $(DEVICE_PREBUILT)/etc/gps.conf:system/etc/gps.conf \
+    $(DEVICE_PREBUILT)/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    $(DEVICE_PREBUILT)/etc/powervr.ini:system/etc/powervr.ini \
+    $(DEVICE_PREBUILT)/etc/vold.fstab:system/etc/vold.fstab \
+    $(DEVICE_PREBUILT)/media/bootanimation.zip:system/media/bootanimation.zip \
+#    $(DEVICE_PREBUILT)/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
+#    $(DEVICE_PREBUILT)/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
+#    $(DEVICE_PREBUILT)/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
+#    $(DEVICE_PREBUILT)/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+#    $(DEVICE_PREBUILT)/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
+#    $(DEVICE_PREBUILT)/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
+#    $(DEVICE_PREBUILT)/usr/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
+
+# Key Layouts
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PREBUILT)/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
+    $(DEVICE_PREBUILT)/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/sholes-keypad.kl \
+    $(DEVICE_PREBUILT)/usr/keylayout/cdma_droid2we-keypad.kl:system/usr/keylayout/cdma_droid2we-keypad.kl \
 
 # Graphics
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/prebuilt/etc/egl.cfg:system/etc/egl.cfg \
-    device/motorola/droid2we/prebuilt/imgtec/pvrsrvinit:system/bin/pvrsrvinit \
-    device/motorola/droid2we/prebuilt/imgtec/libEGL_POWERVR_SGX530_125.so:system/lib/egl/libEGL_POWERVR_SGX530_125.so \
-    device/motorola/droid2we/prebuilt/imgtec/libGLESv1_CM_POWERVR_SGX530_125.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so \
-    device/motorola/droid2we/prebuilt/imgtec/libGLESv2_POWERVR_SGX530_125.so:system/lib/egl/libGLESv2_POWERVR_SGX530_125.so \
-    device/motorola/droid2we/prebuilt/imgtec/libglslcompiler.so:system/lib/libglslcompiler.so \
-    device/motorola/droid2we/prebuilt/imgtec/libHPImgApi.so:system/lib/libHPImgApi.so \
-    device/motorola/droid2we/prebuilt/imgtec/libIMGegl.so:system/lib/libIMGegl.so \
-    device/motorola/droid2we/prebuilt/imgtec/libpvr2d.so:system/lib/libpvr2d.so \
-    device/motorola/droid2we/prebuilt/imgtec/libpvrANDROID_WSEGL.so:system/lib/libpvrANDROID_WSEGL.so \
-    device/motorola/droid2we/prebuilt/imgtec/libsrv_init.so:system/lib/libsrv_init.so \
-    device/motorola/droid2we/prebuilt/imgtec/libsrv_um.so:system/lib/libsrv_um.so \
-    device/motorola/droid2we/prebuilt/imgtec/libusc.so:system/lib/libusc.so \
-    device/motorola/droid2we/prebuilt/imgtec/libeglinfo.so:system/lib/egl/libeglinfo.so \
-    device/motorola/droid2we/prebuilt/imgtec/libgles1_texture_stream.so:system/lib/egl/libgles1_texture_stream.so \
-    device/motorola/droid2we/prebuilt/imgtec/libgles2_texture_stream.so:system/lib/egl/libgles2_texture_stream.so \
-    device/motorola/droid2we/prebuilt/imgtec/gralloc.omap3.so:system/lib/hw/gralloc.omap3.so \
+    $(DEVICE_PREBUILT)/etc/egl.cfg:system/etc/egl.cfg \
+    $(DEVICE_PREBUILT)/imgtec/pvrsrvinit:system/bin/pvrsrvinit \
+    $(DEVICE_PREBUILT)/imgtec/libEGL_POWERVR_SGX530_125.so:system/lib/egl/libEGL_POWERVR_SGX530_125.so \
+    $(DEVICE_PREBUILT)/imgtec/libGLESv1_CM_POWERVR_SGX530_125.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so \
+    $(DEVICE_PREBUILT)/imgtec/libGLESv2_POWERVR_SGX530_125.so:system/lib/egl/libGLESv2_POWERVR_SGX530_125.so \
+    $(DEVICE_PREBUILT)/imgtec/libglslcompiler.so:system/lib/libglslcompiler.so \
+    $(DEVICE_PREBUILT)/imgtec/libHPImgApi.so:system/lib/libHPImgApi.so \
+    $(DEVICE_PREBUILT)/imgtec/libIMGegl.so:system/lib/libIMGegl.so \
+    $(DEVICE_PREBUILT)/imgtec/libpvr2d.so:system/lib/libpvr2d.so \
+    $(DEVICE_PREBUILT)/imgtec/libpvrANDROID_WSEGL.so:system/lib/libpvrANDROID_WSEGL.so \
+    $(DEVICE_PREBUILT)/imgtec/libsrv_init.so:system/lib/libsrv_init.so \
+    $(DEVICE_PREBUILT)/imgtec/libsrv_um.so:system/lib/libsrv_um.so \
+    $(DEVICE_PREBUILT)/imgtec/libusc.so:system/lib/libusc.so \
+    $(DEVICE_PREBUILT)/imgtec/libeglinfo.so:system/lib/egl/libeglinfo.so \
+    $(DEVICE_PREBUILT)/imgtec/libgles1_texture_stream.so:system/lib/egl/libgles1_texture_stream.so \
+    $(DEVICE_PREBUILT)/imgtec/libgles2_texture_stream.so:system/lib/egl/libgles2_texture_stream.so \
+    $(DEVICE_PREBUILT)/imgtec/gralloc.omap3.so:system/lib/hw/gralloc.omap3.so \
 
 # HW Libs
 PRODUCT_PACKAGES += \
@@ -108,12 +114,13 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     Camera \
+    Usb \
 
 # Sandbox
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/prebuilt/bin/hijack:system/bin/hijack \
-    device/motorola/droid2we/prebuilt/bin/hijack.log_dump:system/bin/hijack.log_dump \
-    device/motorola/droid2we/prebuilt/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
+    $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
+    $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
+    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

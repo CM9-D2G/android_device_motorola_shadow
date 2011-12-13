@@ -10,6 +10,7 @@ ro.usb.use_custom_service=1
 #use charge counter for 1% battery
 #ro.product.use_charge_counter=1
 ro.config.disable_hw_accel=true
+persist.sys.usb.config=mass_storage,adb
 
 #wifi timeout
 ro.product.wifi_timeout=300000

@@ -1,3 +1,5 @@
+import init.mapphone_cdma.usb.rc
+
 on init 
     mount ext3 /dev/block/mmcblk1p21 /system noatime nodiratime
     mount ext3 /dev/block/mmcblk1p21 /system ro remount
@@ -81,7 +83,7 @@ on post-fs
     # create moto specific dirs for wifi
     mkdir /data/system 0771 system system
     # wifi dirs
-    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/hostapd.sockets 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
@@ -130,6 +132,9 @@ on post-fs
     chown system system /data/tpapi/etc
     chown system system /data/tpapi/etc/tpa
     chown system system /data/tpapi/etc/tpa/persistent
+
+    # copy hostapd configuration
+    copy /system/etc/wifi/softap/hostapd.conf /data/misc/wifi/hostapd.conf
 
     # directory for encryption management tool, enc_mgt_tool
     mkdir /data/emt
@@ -291,11 +296,11 @@ service telnet /system/bin/telnetd
 #    user root
 #    group system
 
-#service battd /system/bin/battd
-#    socket battdsock stream 0660 mot_accy mot_accy
-#    user root
-#    group mot_accy mot_pwric
-#    oneshot
+service battd /system/bin/battd
+    socket battdsock stream 0660 mot_accy mot_pwric
+    user root
+    group mot_accy mot_pwric
+    oneshot
 
 #service catcommands /system/bin/catcommands
 #    group radio
@@ -363,27 +368,6 @@ service map /system/bin/sdptool add --channel=20 --network=2 MAP
 #    oneshot
 #    disabled
 
-# turn on wifi for tcmd step one
-on property:tcmd.load_wlan=1
-    insmod /system/lib/modules/tiwlan_drv.ko
-
-# turn on wifi for tcmd step two
-on property:tcmd.load_wlan=2
-    start wlan_loader
-
-# turn on wifi for tcmd step three
-on property:tcmd.load_wlan=3
-    exec /system/bin/ifconfig tiwlan0 up
-
-# turn off wifi for tcmd step one
-on property:tcmd.unload_wlan=1
-    exec /system/bin/ifconfig tiwlan0 down
-
-# turn off wifi for tcmd step two
-on property:tcmd.unload_wlan=2
-    exec /system/bin/rmmod tiwlan_drv
-    setprop wlan.driver.status unloaded
-
 # turn on bluetooth for tcmd
 on property:tcmd.bt_mod=1
     insmod /system/lib/modules/wl127x_test.ko
@@ -408,43 +392,40 @@ service akmd2 /system/bin/akmd2
     user compass
     group compass misc input
 
-#service wlan_loader /system/bin/wlan_loader \
-#        -f /system/etc/wifi/fw_wlan1271.bin -i /system/etc/wifi/tiwlan.ini \
-#        -e /pds/wifi/nvs_map.bin
-#    disabled
-#    oneshot
+# Wifi services
+service wlan_loader /system/bin/wlan_loader -f /system/etc/wifi/fw_wlan1271.bin -i /system/etc/wifi/tiwlan.ini -e /pds/wifi/nvs_map.bin
+    class main
+    disabled
+    oneshot
+service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+    class main
+    socket wpa_tiwlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+service wlan_ap_loader /system/bin/logwrapper /system/bin/tiap_loader -f /system/etc/wifi/fw_tiwlan_ap.bin -i /system/etc/wifi/tiwlan_ap.ini -e /pds/wifi/nvs_map.bin
+    disabled
+    oneshot
+service hostapd /system/bin/logwrapper /system/bin/hostap -d /data/misc/wifi/hostapd.conf
+    class main
+    disabled
+    oneshot
+service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+service iprenew_tiwlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
 
-#service wlan_loader_rfmd /system/bin/wlan_loader \
-#        -f /system/etc/wifi/fw_wlan1271_rfmd.bin -i /system/etc/wifi/tiwlan_rfmd.ini \
-#        -e /pds/wifi/nvs_map.bin
-#    disabled
-#    oneshot
+# Bluetooth services
+service btdhcpcd /system/bin/dhcpcd -ABKL bnep0
+    disabled
+    oneshot
 
-#service wpa_supplicant /system/bin/wpa_supplicant \
-#        -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
-# we will start as root and wpa_supplicant will switch to user wifi
-# after setting up the capabilities required for WEXT
-# user wifi
-# group wifi inet keystore
-#    socket wpa_tiwlan0 dgram 660 wifi wifi
-#    disabled
-#    oneshot
-
-#service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL tiwlan0
-#    disabled
-#    oneshot
-
-#service autoip /system/bin/dhcpcd -BK tiwlan0
-#    disabled
-#    oneshot
-
-#service btdhcpcd /system/bin/dhcpcd -ABKL bnep0
-#    disabled
-#    oneshot
-
-#service btautoip /system/bin/dhcpcd -BK bnep0
-#    disabled
-#    oneshot
+service btautoip /system/bin/dhcpcd -BK bnep0
+    disabled
+    oneshot
 
 #service baseimage /system/bin/dspexec -v -T /system/lib/dsp/baseimage.dof
 #    class media_early_init
@@ -536,4 +517,3 @@ service vpnclientpm /system/bin/vpnclientpm
 #service loadpreinstalls /system/bin/logwrapper /system/bin/loadpreinstalls.sh
 #    disabled
 #    oneshot
-
