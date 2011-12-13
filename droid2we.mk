@@ -19,6 +19,8 @@
 # not specialized for any geography.
 #
 
+DEVICE_PREBUILT := device/motorola/droid2we/prebuilt
+
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
