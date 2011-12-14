@@ -29,8 +29,8 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 PRODUCT_COPY_FILES += \
     device/motorola/droid2we/init.rc:root/init.rc \
     device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
+    device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_umts.rc \
     device/motorola/droid2we/init.mapphone_cdma.usb.rc:root/init.mapphone_cdma.usb.rc \
-    device/motorola/droid2we/init.mapphone_umts.rc:root/init.mapphone_umts.rc \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
@@ -41,14 +41,14 @@ DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
 # Permissions files
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 # Prebuilts

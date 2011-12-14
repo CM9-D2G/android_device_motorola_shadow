@@ -327,7 +327,7 @@
          the physical keyboard.  0 means it doesn't, 1 means it is accessible
          when the lid is open, 2 means it is accessible when the lid is
          closed.  The default is 0. -->
-    <integer name="config_lidNavigationAccessibility">0</integer>
+    <integer name="config_lidNavigationAccessibility">1</integer>
 
     <!-- Control the behavior when the user long presses the power button.
             0 - Nothing
