@@ -69,6 +69,10 @@ WIFI_DRIVER_FW_AP_PATH      := "/system/etc/wifi/fw_tiwlan_ap.bin"
 
 # Audio
 BOARD_USES_GENERIC_AUDIO := false
+BOARD_USES_AUDIO_LEGACY := true
+ifdef BOARD_USES_AUDIO_LEGACY
+    COMMON_GLOBAL_CFLAGS += -DBOARD_USES_AUDIO_LEGACY
+endif
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true

@@ -98,6 +98,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hwcomposer.default \
 
+# Audio
+PRODUCT_PACKAGES += \
+    audio.primary.droid2we \
+    audio_policy.droid2we \
+
 # Lights
 #PRODUCT_PACKAGES += \
 #    lights.droid2we \
