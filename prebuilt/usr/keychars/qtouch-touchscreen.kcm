@@ -1,4 +1,4 @@
-# Copyright (C) 2011 The Android Open Source Project
+# Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,8 @@
 # limitations under the License.
 
 #
-# Droid2 Global QTouch Input Device Configuration
+# Droid2 Global QTouch Character Map
 #
 # Initial revision by bikedude880
 
-touch.deviceType = touchScreen
-touch.orientationAware = 1
-
-keyboard.layout = qtouch-touchscreen
-keyboard.characterMap = qtouch-touchscreen
+type SPECIAL_FUNCTION
