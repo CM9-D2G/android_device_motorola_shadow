@@ -1,4 +1,4 @@
-key 41    GRAVE
+key 399   GRAVE
 key 2     1                 WAKE_DROPPED
 key 3     2                 WAKE_DROPPED
 key 4     3                 WAKE_DROPPED
@@ -86,6 +86,3 @@ key 155   ENVELOPE          WAKE
 key 12    MINUS             WAKE_DROPPED
 key 13    EQUALS            WAKE_DROPPED
 key 215   AT                WAKE_DROPPED
-
-key 167   VOICE             WAKE_DROPPED
-key 125   ALT_LOCK          WAKE_DROPPED
