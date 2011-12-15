@@ -55,6 +55,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PREBUILT)/bin/mount_ext3.sh:system/bin/mount_ext3.sh \
     $(DEVICE_PREBUILT)/etc/apns-conf.xml:system/etc/apns-conf.xml \
+    $(DEVICE_PREBUILT)/etc/egl.cfg:system/etc/egl.cfg \
     $(DEVICE_PREBUILT)/etc/gps.conf:system/etc/gps.conf \
     $(DEVICE_PREBUILT)/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(DEVICE_PREBUILT)/etc/powervr.ini:system/etc/powervr.ini \
@@ -79,7 +80,6 @@ PRODUCT_COPY_FILES += \
 
 # Graphics
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PREBUILT)/imgtec/egl.cfg:system/lib/egl/egl.cfg \
     $(DEVICE_PREBUILT)/imgtec/pvrsrvinit:system/bin/pvrsrvinit \
     $(DEVICE_PREBUILT)/imgtec/libEGL_POWERVR_SGX530_125.so:system/lib/egl/libEGL_POWERVR_SGX530_125.so \
     $(DEVICE_PREBUILT)/imgtec/libGLESv1_CM_POWERVR_SGX530_125.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so \
