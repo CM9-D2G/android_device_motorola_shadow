@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2011 Motorola Mobility
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+   Edited by Hashcode [2011-12-12]
+-->
+<manifest android:sharedUserId="android.uid.phone" xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.motorola.globalnwswitch">
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="14" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <application android:label="@string/app_name" android:icon="@drawable/icon" android:process="com.android.phone">
+        <receiver android:name=".GlobalNwSwitchReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="com.motorola.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".GlobalNwSwitchService">
+            <intent-filter>
+                <action android:name="com.motorola.globalnwswitch.START_SERVICE" />
+                <category android:name="com.motorola.intent.category.LAUNCHER" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

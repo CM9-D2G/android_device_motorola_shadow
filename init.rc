@@ -1,7 +1,4 @@
 on early-init
-    # Set init and its forked children's oom_adj.
-    write /proc/1/oom_adj -16
-
     start ueventd
 
 # create mountpoints
@@ -37,9 +34,9 @@ loglevel 8
     symlink /system/vendor /vendor
 
 # Create cgroup mount point for cpu accounting
-#    mkdir /acct
-#    mount cgroup none /acct cpuacct
-#    mkdir /acct/uid
+    mkdir /acct
+    mount cgroup none /acct cpuacct
+    mkdir /acct/uid
 
     mkdir /system
     mkdir /data 0771 system system
@@ -73,12 +70,12 @@ loglevel 8
     write /proc/sys/kernel/sched_child_runs_first 0
 
 # Create cgroup mount points for process groups
-#    mkdir /dev/cpuctl
-#    mount cgroup none /dev/cpuctl cpu
-#    chown system system /dev/cpuctl
-#    chown system system /dev/cpuctl/tasks
-#    chmod 0777 /dev/cpuctl/tasks
-#    write /dev/cpuctl/cpu.shares 1024
+    mkdir /dev/cpuctl
+    mount cgroup none /dev/cpuctl cpu
+    chown system system /dev/cpuctl
+    chown system system /dev/cpuctl/tasks
+    chmod 0777 /dev/cpuctl/tasks
+    write /dev/cpuctl/cpu.shares 1024
 
     mkdir /dev/cpuctl/fg_boost
     chown system system /dev/cpuctl/fg_boost/tasks
@@ -93,7 +90,7 @@ loglevel 8
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
-#    chmod 0644 /dev/xt_qtaguid
+    chmod 0644 /dev/xt_qtaguid
 
 on fs
 # mount mtd partitions
@@ -213,6 +210,9 @@ on boot
     chmod 0664 /sys/module/lowmemorykiller/parameters/adj
     chown root system /sys/module/lowmemorykiller/parameters/minfree
     chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
+
+    # Set init and its forked children's oom_adj.
+    write /proc/1/oom_adj -16
 
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 200
