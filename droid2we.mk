@@ -80,7 +80,6 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/init.rc:root/init.rc \
     device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
     device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_umts.rc \
-    device/motorola/droid2we/init.mapphone_cdma.usb.rc:root/init.mapphone_cdma.usb.rc \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 # Hijack files

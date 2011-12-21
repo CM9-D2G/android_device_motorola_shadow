@@ -12,25 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# This file sets variables that control the way modules are built
-# thorughout the system. It should not be used to conditionally
-# disable makefiles (the proper mechanism to control what gets
-# included in a build is to use PRODUCT_PACKAGES in a product
-# definition file).
-#
 
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
+# Camera
 USE_CAMERA_STUB := false
 BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 # inherit from the proprietary version
 -include vendor/motorola/droid2we/BoardConfigVendor.mk
 
-# use pre-kernel.35 vold usb mounting
-#BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 
 # Processor
 TARGET_NO_BOOTLOADER := false
@@ -56,10 +45,11 @@ ENABLE_SENSORS_COMPAT := true
 
 # Connectivity - Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
-BOARD_HOSTAPD_DRIVER        := CUSTOM
+#BOARD_HOSTAPD_DRIVER        := CUSTOM
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := libCustomWifi
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
-HOSTAPD_VERSION             := VER_0_6_X
+#HOSTAPD_VERSION             := VER_0_6_X
+#BOARD_SOFTAP_DEVICE         := wl1271
 BOARD_WLAN_DEVICE           := wl1271
 BOARD_WLAN_TI_STA_DK_ROOT   := hardware/ti/wlan/wl1271
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/tiwlan_drv.ko"
@@ -144,10 +134,10 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d
 #BOARD_HIJACK_LOG_ENABLE := true
 
 # Misc.
+BOARD_USE_BATTERY_CHARGE_COUNTER := true
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_NEEDS_CUTILS_LOG := true
 BOARD_USES_SECURE_SERVICES := true
-BOARD_USE_BATTERY_CHARGE_COUNTER := true
 BOARD_ALWAYS_INSECURE := true
 BOARD_USES_KEYBOARD_HACK := true
 
