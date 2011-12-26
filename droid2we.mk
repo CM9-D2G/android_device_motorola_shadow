@@ -57,6 +57,7 @@ PRODUCT_PACKAGES += \
 
 # HotSpot
 PRODUCT_PACKAGES += \
+    libhostapdcli \
     tiap_loader \
     tiap_cu \
     hostap \
@@ -77,9 +78,9 @@ PRODUCT_PACKAGES += \
 
 # Rootfs files
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/init.rc:root/init.rc \
-    device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
-    device/motorola/droid2we/init.mapphone_cdma.rc:root/init.mapphone_umts.rc \
+    device/motorola/droid2we/root-hijack/init.rc:root/init.rc \
+    device/motorola/droid2we/root-hijack/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
+    device/motorola/droid2we/root-hijack/init.mapphone_cdma.rc:root/init.mapphone_umts.rc \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 # Hijack files
@@ -133,10 +134,13 @@ PRODUCT_COPY_FILES += \
 
 # Key Layouts
 PRODUCT_COPY_FILES += \
+    $(DEVICE_PREBUILT)/usr/idc/cpcap-key.idc:system/usr/idc/cpcap-key.idc \
     $(DEVICE_PREBUILT)/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
     $(DEVICE_PREBUILT)/usr/idc/sholes-keypad.idc:system/usr/idc/sholes-keypad.idc \
+    $(DEVICE_PREBUILT)/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
     $(DEVICE_PREBUILT)/usr/keylayout/qtouch-touchscreen.kl:system/usr/keylayout/qtouch-touchscreen.kl \
     $(DEVICE_PREBUILT)/usr/keylayout/sholes-keypad.kl:system/usr/keylayout/sholes-keypad.kl \
+    $(DEVICE_PREBUILT)/usr/keychars/cpcap-key.kcm:system/usr/keychars/cpcap-key.kcm \
     $(DEVICE_PREBUILT)/usr/keychars/qtouch-touchscreen.kcm:system/usr/keychars/qtouch-touchscreen.kcm \
     $(DEVICE_PREBUILT)/usr/keychars/sholes-keypad.kcm:system/usr/keychars/sholes-keypad.kcm \
 

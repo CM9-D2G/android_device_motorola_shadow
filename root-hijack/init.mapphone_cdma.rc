@@ -512,6 +512,31 @@ service tcmdhelp /system/bin/tcmdhelp
     oneshot
     disabled
 
+# turn on wifi for tcmd step one
+on property:tcmd.load_wlan=1
+    insmod /system/lib/modules/tiwlan_drv.ko
+# turn on wifi for tcmd step two
+on property:tcmd.load_wlan=2
+    start wlan_loader
+# turn on wifi for tcmd step three
+on property:tcmd.load_wlan=3
+    exec /system/bin/ifconfig tiwlan0 up
+# turn off wifi for tcmd step one
+on property:tcmd.unload_wlan=1
+    exec /system/bin/ifconfig tiwlan0 down
+# turn off wifi for tcmd step two
+on property:tcmd.unload_wlan=2
+    exec /system/bin/rmmod tiwlan_drv
+    setprop wlan.driver.status unloaded
+
+# turn on bluetooth for tcmd
+on property:tcmd.bt_mod=1
+    insmod /system/lib/modules/wl127x_test.ko
+
+#turn off bluetooth for tcmd
+on property:tcmd.bt_mod=0
+    exec /system/bin/rmmod wl127x_test
+
 #execute tcmdhelp
 on property:tcmd.start_tcmdhelp=1
     start tcmdhelp

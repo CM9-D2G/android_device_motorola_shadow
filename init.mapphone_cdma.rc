@@ -1,5 +1,3 @@
-import init.mapphone_cdma.usb.rc
-
 on init 
     mount ext3 /dev/block/mmcblk1p21 /system noatime nodiratime
     mount ext3 /dev/block/mmcblk1p21 /system ro remount
@@ -109,10 +107,10 @@ on post-fs
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
 # Mount preinstall partition
-    mkdir /preinstall 0771 system system
-    mount ext3 /dev/block/mmcblk1p23 /preinstall nosuid nodev noatime nodiratime
-    chmod 0771 /preinstall
-    chown system system /preinstall
+#    mkdir /preinstall 0771 system system
+#    mount ext3 /dev/block/mmcblk1p23 /preinstall nosuid nodev noatime nodiratime
+#    chmod 0771 /preinstall
+#    chown system system /preinstall
 
 # Create basic filesystem structure
     # create moto specific dirs for mystuff
@@ -276,9 +274,8 @@ on post-fs
 
 # Install kernel modules
     insmod /system/lib/modules/sec.ko
-    insmod /system/lib/modules/xt_owner2.ko
-    insmod /system/lib/modules/xt_qtaguid.ko
-    insmod /system/lib/modules/xt_quota2.ko
+#    insmod /system/lib/modules/xt_owner2.ko
+#    insmod /system/lib/modules/xt_quota2.ko
 
 # Install product specific kernel modules
 #    exec /system/bin/load_modules.sh
@@ -286,6 +283,9 @@ on post-fs
 # chown/chmod for FOTA
     chown system system /cache/fota
     chmod 0770 /cache/fota
+
+# MTU for USB tethering
+    write /sys/class/net/gether0/mtu 1428
 
 on early-boot
 # Adjust the out of memory thresholds to account for the larget
@@ -315,7 +315,7 @@ on boot
     setprop ro.sys.atvc_allow_netmon_ih 0
     setprop ro.sys.atvc_allow_res_core 0
     setprop ro.sys.atvc_allow_res_panic 0
-    setprop ro.sys.atvc_allow_all_adb 0
+    setprop ro.sys.atvc_allow_all_adb 1
     setprop ro.sys.atvc_allow_all_core 0
     setprop ro.sys.atvc_allow_efem 0
     setprop ro.sys.atvc_allow_bp_log 0
@@ -379,10 +379,13 @@ on boot
 
 # The properties introduced by moto
 on property:sys.chargeonly.mode=1
-    start battd
+    class_reset main
+    class_reset late_start
+    class_start charger
     start console
-    write /data/chargeonlymode charging
-    exec /system/bin/charge_only_mode
+    start battd
+    start chargeonly
+    stop zygote
 
 # Power up to normal
 on property:tcmd.suspend=0
@@ -441,7 +444,7 @@ service usbd /system/bin/usbd
 
 service battd /system/bin/battd
     class core
-    socket battdsock stream 0660 mot_accy mot_accy
+    socket battdsock stream 0666 mot_accy mot_accy
     user root
     group mot_accy mot_pwric
     oneshot
@@ -477,7 +480,13 @@ service del_panu /system/bin/sdptool remove PANU
     disabled
     oneshot
 
-service btdhcpd /system/bin/dnsmasq -C /etc/btpan.conf
+service napics /system/bin/sh /system/bin/napics.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
+service btdhcpd /system/bin/dnsmasq -C /system/etc/btpan.conf
     user root
     disabled
     oneshot
@@ -486,12 +495,6 @@ service map /system/bin/sdptool add --channel=20 --network=2 MAP
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service napics /system/bin/sh /system/bin/napics.sh
-    class late_start
-    user root
     disabled
     oneshot
 
@@ -536,34 +539,34 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/mi
 #    oneshot
 
 service hostapd /system/bin/logwrapper /system/bin/hostap -d /data/misc/wifi/hostapd.conf
-    class main
+    class late-start
     disabled
     oneshot
 
 service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service dhcpcd_p2p /system/bin/dhcpcd -aABKL
-    class main
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service iprenew_tiwlan0 /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service iprenew_p2p /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service iprenew_bnep0 /system/bin/dhcpcd -n
     class main
