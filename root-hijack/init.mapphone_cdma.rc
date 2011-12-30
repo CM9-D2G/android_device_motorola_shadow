@@ -1,4 +1,6 @@
 on init 
+    log "== init.mapphone_cdma.rc: on init -----------------------"
+
     mount ext3 /dev/block/mmcblk1p21 /system noatime nodiratime
     mount ext3 /dev/block/mmcblk1p21 /system ro remount
     mount ext3 /dev/block/mmcblk1p22 /cache nosuid nodev noatime nodiratime

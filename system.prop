@@ -171,6 +171,6 @@ ro.usb.use_custom_service=1
 # use charge_counter for 1% battery increments
 ro.product.use_charge_counter=1
 
-persist.sys.usb.config=mass_storage,adb
 
 ro.rommanager.developerid=bikedude880
+persist.sys.usb.config=mass_storage,adb
