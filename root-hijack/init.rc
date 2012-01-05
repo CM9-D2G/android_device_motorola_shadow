@@ -92,12 +92,16 @@ loglevel 8
     write /dev/cpuctl/bg_non_interactive/cpu.shares 52
 
 on fs
+    log "== init.rc: on fs -----------------------"
+
     mount ext3 /dev/block/mmcblk1p21 /system wait noatime nodiratime
     mount yaffs2 mtd@userdata /data nosuid nodev
 #    mount ext3 /dev/block/mmcblk1p24 /data nosuid nodev noatime nodiratime
     mount ext3 /dev/block/mmcblk1p22 /cache nosuid nodev noatime nodiratime
 
 on post-fs
+    log "== init.rc: on post-fs -----------------------"
+
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
 
@@ -123,6 +127,8 @@ on post-fs
     mkdir /cache/lost+found 0770 root root
 
 on post-fs-data
+    log "== init.rc: on post-fs-data -----------------------"
+
     # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
@@ -187,8 +193,7 @@ on post-fs-data
     chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
 
 on boot
-
-    setprop persist.service.adb.enable 1
+    log "== init.rc: on boot -----------------------"
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
@@ -271,36 +276,86 @@ on boot
     class_start main
 
 on nonencrypted
+    log "== init.rc: on nonencrypted -----------------------"
     class_start late_start
 
 on charger
+    log "== init.rc: on charger -----------------------"
     class_start charger
 
 on property:vold.decrypt=trigger_reset_main
+    log "== init.rc: on property:vold.decrypt=trigger_reset_main -----------------------"
     class_reset main
 
 on property:vold.decrypt=trigger_load_persist_props
+    log "== init.rc: on property:vold.decrypt=trigger_load_persist_props -----------------------"
     load_persist_props
 
 on property:vold.decrypt=trigger_post_fs_data
+    log "== init.rc: on property:vold.decrypt=trigger_post_fs_data -----------------------"
     trigger post-fs-data
 
 on property:vold.decrypt=trigger_restart_min_framework
+    log "== init.rc: on property:vold.decrypt=trigger_restart_min_framework -----------------------"
     class_start main
 
 on property:vold.decrypt=trigger_restart_framework
+    log "== init.rc: on property:vold.decrypt=trigger_restart_framework -----------------------"
     class_start main
     class_start late_start
 
 on property:vold.decrypt=trigger_shutdown_framework
+    log "== init.rc: on property:vold.decrypt=trigger_shutdown_framework -----------------------"
     class_reset late_start
     class_reset main
 
-on property:persist.service.adb.enable=1
-    start adbd
-
-on property:persist.service.adb.enable=0
+# Used to disable USB when switching states
+on property:sys.usb.config=none
+    log "== init.rc: on property:sys.usb.config=none -----------------------"
     stop adbd
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    setprop sys.usb.state $sys.usb.config
+
+# adb only USB configuration
+# This should only be used during device bringup
+# and as a fallback if the USB manager fails to set a standard configuration
+on property:sys.usb.config=adb
+    log "== init.rc: on property:sys.usb.config=adb -----------------------"
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idProduct D002
+    write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state $sys.usb.config
+
+# USB accessory configuration
+on property:sys.usb.config=accessory
+    log "== init.rc: on property:sys.usb.config=accessory -----------------------"
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idProduct 2d00
+    write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state $sys.usb.config
+
+# USB accessory configuration, with adb
+on property:sys.usb.config=accessory,adb
+    log "== init.rc: on property:sys.usb.config=accessory,adb -----------------------"
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idProduct 2d01
+    write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state $sys.usb.config
+
+# Used to set USB configuration at boot and to switch the configuration
+# when changing the default configuration
+on property:persist.sys.usb.config=*
+    log "== init.rc: on property:persist.sys.usb.config=* -----------------------"
+    setprop sys.usb.config $persist.sys.usb.config
 
 ## Daemon processes to be run by init.
 ##

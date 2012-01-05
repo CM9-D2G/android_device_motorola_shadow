@@ -78,16 +78,17 @@ PRODUCT_PACKAGES += \
 
 # Rootfs files
 PRODUCT_COPY_FILES += \
+    device/motorola/droid2we/root-hijack/init.droid2we.usb.rc:root/init.droid2we.usb.rc \
     device/motorola/droid2we/root-hijack/init.rc:root/init.rc \
     device/motorola/droid2we/root-hijack/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
     device/motorola/droid2we/root-hijack/init.mapphone_cdma.rc:root/init.mapphone_umts.rc \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 # Hijack files
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
-    $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
-    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
+#PRODUCT_COPY_FILES += \
+#    $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
+#    $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
+#    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
 
 # Permissions files
 PRODUCT_COPY_FILES += \
@@ -178,7 +179,7 @@ $(call inherit-product-if-exists, vendor/motorola/droid2we/droid2we-vendor.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 
 # stuff common to all Motorola phones
-#$(call inherit-product, device/motorola/common/common_hijack.mk)
+$(call inherit-product, device/moto/hijack/common_hijack.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 

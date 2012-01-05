@@ -1,9 +1,6 @@
 ## Specify phone tech before including full_phone
 $(call inherit-product, vendor/cm/config/gsm.mk)
 
-# Release name
-PRODUCT_RELEASE_NAME := D2G
-
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
@@ -39,7 +36,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
    BUILD_UTC_DATE= \
    TARGET_BUILD_TYPE=user \
    BUILD_VERSION_TAGS=release-keys \
-   USER=hashcode \
-#   BUILD_HOST=hashcode-unn \
+   USER=bikedude880 \
+   BUILD_HOST=blackspark-dev \
    PRODUCT_DEFAULT_LANGUAGE=en \
    PRODUCT_DEFAULT_REGION=US \
