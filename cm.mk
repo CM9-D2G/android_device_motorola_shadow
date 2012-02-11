@@ -5,7 +5,7 @@ $(call inherit-product, vendor/cm/config/gsm.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/moto/droid2we/droid2we.mk)
+$(call inherit-product, device/motorola/droid2we/droid2we.mk)
 
 # Inherit our vendor filez, yo.
 $(call inherit-product, vendor/motorola/droid2we/droid2we-vendor.mk)
