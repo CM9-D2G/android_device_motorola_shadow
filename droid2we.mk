@@ -18,7 +18,10 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_PACKAGES := \
     charger \
-    charger_res_images
+    charger_res_images \
+    rild \
+    libril \
+    libreference-ril 
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -40,8 +43,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libaudiomodemgeneric \
     libreference-cdma-sms \
-    rild \
-    radiooptions \
+    radiooptions 
 
 # HW Libs
 PRODUCT_PACKAGES += \
