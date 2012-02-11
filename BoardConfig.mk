@@ -117,8 +117,8 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/droid2we/releasetoo
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d/file"
 
 # Hijack
-TARGET_NEEDS_MOTOROLA_HIJACK := true
-BOARD_HIJACK_LOG_ENABLE := true
+#TARGET_NEEDS_MOTOROLA_HIJACK := true
+#BOARD_HIJACK_LOG_ENABLE := true
 
 # Misc.
 #BOARD_USE_BATTERY_CHARGE_COUNTER := true

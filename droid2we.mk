@@ -85,10 +85,10 @@ PRODUCT_COPY_FILES += \
     device/motorola/droid2we/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 # Hijack files
-#PRODUCT_COPY_FILES += \
-#    $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
-#    $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
-#    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
+    $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
+    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
 
 # Permissions files
 PRODUCT_COPY_FILES += \
