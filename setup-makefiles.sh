@@ -16,9 +16,9 @@
 
 DEVICE=droid2we
 
-mkdir -p ../../../vendor/moto/$DEVICE
+mkdir -p ../../../vendor/motorola/$DEVICE
 
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/moto/$DEVICE/$DEVICE-vendor.mk
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor.mk
 # Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,7 +53,7 @@ DEVICE_PACKAGE_OVERLAYS := vendor/moto/__DEVICE__/overlay
 \$(call inherit-product, vendor/moto/__DEVICE__/__DEVICE__-vendor-blobs.mk)
 EOF
 
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/moto/venus2/BoardConfigVendor.mk
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/droid2we/BoardConfigVendor.mk
 # Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

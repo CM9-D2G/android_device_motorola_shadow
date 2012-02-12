@@ -28,4 +28,4 @@ include $(CLEAR_VARS)
 #	$(transform-prebuilt-to-target)
 
 # include the non-open-source counterpart to this file
--include vendor/moto/droid2we/AndroidBoardVendor.mk
+-include vendor/motorola/droid2we/AndroidBoardVendor.mk
