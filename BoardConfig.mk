@@ -115,7 +115,7 @@ BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/droid2we/UsbController.cpp
 
 # Hijack
 TARGET_NEEDS_MOTOROLA_HIJACK := true
-BOARD_HIJACK_LOG_ENABLE := true
+#BOARD_HIJACK_LOG_ENABLE := true
 
 # Misc.
 #BOARD_USE_BATTERY_CHARGE_COUNTER := true
