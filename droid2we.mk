@@ -53,22 +53,8 @@ PRODUCT_PACKAGES += \
 # Hijack files
 PRODUCT_COPY_FILES += \
     $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
-    $(DEVICE_PREBUILT)/bin/adbd:system/bin/adbd \
     $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
-    $(DEVICE_PREBUILT)/ramdisk/default.prop:root/default.prop \
-    $(DEVICE_PREBUILT)/ramdisk/init.goldfish.rc:root/init.goldfish.rc \
-    $(DEVICE_PREBUILT)/ramdisk/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
-    $(DEVICE_PREBUILT)/ramdisk/init.mapphone_umts.rc:root/init.mapphone_umts.rc \
-    $(DEVICE_PREBUILT)/ramdisk/init.rc:root/init.rc \
-    $(DEVICE_PREBUILT)/ramdisk/ueventd.goldfish.rc:root/ueventd.goldfish.rc \
-    $(DEVICE_PREBUILT)/ramdisk/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc \
-    $(DEVICE_PREBUILT)/ramdisk/ueventd.rc:root/ueventd.rc \
-    $(DEVICE_PREBUILT)/ramdisk/sbin/2nd-init:root/sbin/2nd-init \
-    $(DEVICE_PREBUILT)/ramdisk/sbin/adbd:root/sbin/adbd \
-    $(DEVICE_PREBUILT)/ramdisk/sbin/getprop:root/sbin/getprop \
-    $(DEVICE_PREBUILT)/ramdisk/sbin/hijack:root/sbin/hijack \
-    $(DEVICE_PREBUILT)/ramdisk/sbin/hijack.killall:root/sbin/hijack.killall \
-    $(DEVICE_PREBUILT)/ramdisk/sbin/stop:root/sbin/stop
+    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
 
 # Permissions files
 PRODUCT_COPY_FILES += \
