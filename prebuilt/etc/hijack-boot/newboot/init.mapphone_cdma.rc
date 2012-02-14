@@ -87,9 +87,9 @@ on post-fs
     exec /system/bin/logwrapper postbootmenu
 
     # Enable ADB mode (made in init.d)
-    #write /dev/usb_device_mode charge_adb
-    #write /tmp/usbd_current_state usb_mode_charge_adb
-    #chmod 0666 /tmp/usbd_current_state
+    write /dev/usb_device_mode charge_adb
+    write /tmp/usbd_current_state usb_mode_charge_adb
+    chmod 0666 /tmp/usbd_current_state
     
     # following two dirs are for storing BP Flex and PDS files. NVM Daemon is using these folders
     mkdir /data/bp_nvm
@@ -137,6 +137,9 @@ on post-fs-data
     chmod 0770 /data/bp_nvm
     # create location directory
     mkdir /data/location 0771 radio radio
+
+# usbd permissions
+    mkdir /data/usbd 0777 system system
 
     # Create anr directory and change permission to 777 to save trace.txt
     mkdir /data/anr
@@ -320,8 +323,8 @@ on property:service.adb.tcp.port=-1
     restart adbd
 
 # Adb ICS
-on property:persist.sys.usb.config=*
-    setprop sys.usb.config $persist.sys.usb.config
+#on property:persist.sys.usb.config=*
+#    setprop sys.usb.config $persist.sys.usb.config
 on property:sys.usb.config=mass_storage,adb
     # Made by usbd, but could be usefull later..
     # write /sys/devices/virtual/usb_composite/adb/enable 0
