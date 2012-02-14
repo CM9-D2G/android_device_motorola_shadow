@@ -1,4 +1,4 @@
-# Droid Pro Board Config
+# Droid 2 Global Board Config
 
 # Camera
 USE_CAMERA_STUB := false
