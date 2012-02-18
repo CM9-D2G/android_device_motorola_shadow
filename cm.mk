@@ -19,7 +19,7 @@ PRODUCT_MANUFACTURER := Motorola
 PRODUCT_SFX := vzw
 
 # Release name and versioning
-PRODUCT_RELEASE_NAME := Droid X
+PRODUCT_RELEASE_NAME := DroidX
 
 UTC_DATE := $(shell date +%s)
 DATE := $(shell date +%Y%m%d)
