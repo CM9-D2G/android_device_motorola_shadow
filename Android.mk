@@ -1,3 +1,3 @@
-ifeq ($(TARGET_DEVICE),droid2we)
+ifeq ($(TARGET_DEVICE),shadow)
     include $(all-subdir-makefiles)
 endif

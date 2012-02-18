@@ -7,18 +7,18 @@ LIBAUDIO_INTERMEDIATES_PREREQS := $(PRODUCT_OUT)/obj/lib
 
 # prerequisites for building audio
 file := $(LIBAUDIO_INTERMEDIATES_PREREQS)/libaudio.so
-$(file) : device/motorola/droid2we/audio/libaudio.so
+$(file) : device/motorola/shadow/audio/libaudio.so
 	@echo "Copy libaudio.so -> $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	$(hide) cp -a device/motorola/droid2we/audio/libaudio.so $@
+	$(hide) cp -a device/motorola/shadow/audio/libaudio.so $@
 
 file := $(LIBAUDIO_INTERMEDIATES_PREREQS)/liba2dp.so
-$(file) : device/motorola/droid2we/audio/liba2dp.so
+$(file) : device/motorola/shadow/audio/liba2dp.so
 	@echo "Copy liba2dp.so -> $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	$(hide) cp -a device/motorola/droid2we/audio/liba2dp.so $@
+	$(hide) cp -a device/motorola/shadow/audio/liba2dp.so $@
 
 include $(all-subdir-makefiles)
 

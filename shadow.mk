@@ -1,11 +1,11 @@
-# This is the product configuration for a full droid2we
-DEVICE_PREBUILT := device/motorola/droid2we/prebuilt
+# This is the product configuration for a full shadow
+DEVICE_PREBUILT := device/motorola/shadow/prebuilt
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 # Device overlay
-DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2we/overlay
+DEVICE_PACKAGE_OVERLAYS += device/motorola/shadow/overlay
 
 # high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi
@@ -18,8 +18,8 @@ PRODUCT_PACKAGES := \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/audio/libaudio.so:/system/lib/libaudio.so \
-    device/motorola/droid2we/audio/liba2dp.so:/system/lib/liba2dp.so
+    device/motorola/shadow/audio/libaudio.so:/system/lib/libaudio.so \
+    device/motorola/shadow/audio/liba2dp.so:/system/lib/liba2dp.so
 
 PRODUCT_PACKAGES += \
     audio.primary.omap3 \
@@ -120,14 +120,14 @@ PRODUCT_LOCALES += en_US
 
 # these need to be here for the installer, just put them here for now
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2we/releaseutils/mke2fs:system/bin/mke2fs \
-    device/motorola/droid2we/releaseutils/tune2fs:system/bin/tune2fs \
-    device/motorola/droid2we/releaseutils/check_kernel:system/etc/releaseutils/check_kernel \
-    device/motorola/droid2we/releaseutils/finalize_release:system/etc/finalize_release
+    device/motorola/shadow/releaseutils/mke2fs:system/bin/mke2fs \
+    device/motorola/shadow/releaseutils/tune2fs:system/bin/tune2fs \
+    device/motorola/shadow/releaseutils/check_kernel:system/etc/releaseutils/check_kernel \
+    device/motorola/shadow/releaseutils/finalize_release:system/etc/finalize_release
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
-    find device/motorola/droid2we/modules -name '*.ko' \
+    find device/motorola/shadow/modules -name '*.ko' \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
@@ -172,7 +172,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.camera.calresolution=3264,2448
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/motorola/droid2we/kernel
+LOCAL_KERNEL := device/motorola/shadow/kernel
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -181,9 +181,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 $(call inherit-product, hardware/ti/omap3/Android.mk)
-$(call inherit-product, vendor/motorola/droid2we/droid2we-vendor.mk)
+$(call inherit-product, vendor/motorola/shadow/shadow-vendor.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_NAME := cm_droid2we
-PRODUCT_DEVICE := droid2we
+PRODUCT_NAME := cm_shadow
+PRODUCT_DEVICE := shadow
