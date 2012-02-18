@@ -69,8 +69,8 @@ import tempfile
 import time
 import zipfile
 
-import droid2we_common as common
-import droid2we_edify_generator as edify_generator
+import shadow_common as common
+import shadow_edify_generator as edify_generator
 
 OPTIONS = common.OPTIONS
 OPTIONS.package_key = "build/target/product/security/testkey"
