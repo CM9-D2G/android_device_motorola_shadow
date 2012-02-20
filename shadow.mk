@@ -133,10 +133,10 @@ PRODUCT_COPY_FILES += $(shell \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.ril=yes \
-    persist.ril.mux.noofchannels=8 \
+    persist.ril.mux.noofchannels=7 \
     persist.ril.mux.ttydevice=/dev/ttyS0 \
-    persist.ril.modem.ttydevice=/dev/usb/tty1-3:1.4 \
-    persist.ril.features=0x0E \
+    persist.ril.modem.ttydevice=/dev/usb/tty1-3:1.0 \
+    persist.ril.features=0x07 \
     persist.ril.mux.retries=500 \
     persist.ril.mux.sleep=2 \
     ro.product.multi_touch_enabled=true \
