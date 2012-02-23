@@ -298,11 +298,14 @@ on boot
     setrlimit 4 2147483648 2147483648
 
 # The properties introduced by moto
+# Charge only mode services
+    exec /system/bin/mot_boot_mode
 on property:sys.chargeonly.mode=1
     start battd
     start console
     write /data/simpin lock
     exec /system/bin/charge_only_mode
+    exec /system/bin/stop zygote
 
 # Moto safe power down
 on property:sys.reboot=1

@@ -46,7 +46,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Superuser \
     su \
-    hijack-boot.zip
+    hijack-boot.zip \
+    mot_boot_mode \
+    charge_only_mode 
+
 
 PRODUCT_PACKAGES += \
     librs_jni \
