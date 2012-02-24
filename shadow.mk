@@ -34,9 +34,7 @@ PRODUCT_PACKAGES += \
 
 # HW Libs
 PRODUCT_PACKAGES += \
-    hwcomposer.default \
-    camera.shadow \
-    overlay.omap3 \
+    hwcomposer.default
 
 # Wifi
 PRODUCT_PACKAGES += \
