@@ -294,6 +294,9 @@ on boot
 # Load Authentec VPN kernel module
     insmod /system/lib/modules/vpnclient.ko
 
+# Load our multitouch module
+    insmod /system/lib/modules/D2G.ko touch_num=8
+
 # Set core max size (2G)
     setrlimit 4 2147483648 2147483648
 
