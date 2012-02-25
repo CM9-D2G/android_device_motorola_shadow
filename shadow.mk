@@ -35,8 +35,7 @@ PRODUCT_PACKAGES += \
 # HW Libs
 PRODUCT_PACKAGES += \
     hwcomposer.default \
-    camera.droid2we \
-    overlay.omap3 \
+    camera.shadow \
 
 # Wifi
 PRODUCT_PACKAGES += \
