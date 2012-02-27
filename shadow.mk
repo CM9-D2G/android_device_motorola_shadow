@@ -21,17 +21,14 @@ PRODUCT_COPY_FILES += \
     device/motorola/shadow/audio/libaudio.so:/system/lib/libaudio.so \
     device/motorola/shadow/audio/liba2dp.so:/system/lib/liba2dp.so
 
-# FM
-PRODUCT_COPY_FILES += \
-    hcitools \
-    hciattach \
-    hcidump 
-
 PRODUCT_PACKAGES += \
     audio.primary.omap3 \
     libaudiohw_legacy \
     audio.a2dp.default \
-    libaudioutils
+    libaudioutils \
+    hcitools \
+    hciattach \
+    hcidump 
 
 # Modem
 PRODUCT_PACKAGES += \
