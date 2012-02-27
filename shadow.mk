@@ -21,6 +21,12 @@ PRODUCT_COPY_FILES += \
     device/motorola/shadow/audio/libaudio.so:/system/lib/libaudio.so \
     device/motorola/shadow/audio/liba2dp.so:/system/lib/liba2dp.so
 
+# FM
+PRODUCT_COPY_FILES += \
+    hcitools \
+    hciattach \
+    hcidump \
+
 PRODUCT_PACKAGES += \
     audio.primary.omap3 \
     libaudiohw_legacy \
@@ -188,6 +194,7 @@ $(call inherit-product, hardware/ti/omap3/Android.mk)
 $(call inherit-product, vendor/motorola/shadow/shadow-vendor.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, build/target/product/full_base.mk)
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
 PRODUCT_NAME := cm_shadow
 PRODUCT_DEVICE := shadow
