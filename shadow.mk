@@ -25,7 +25,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     hcitools \
     hciattach \
-    hcidump \
+    hcidump 
 
 PRODUCT_PACKAGES += \
     audio.primary.omap3 \
