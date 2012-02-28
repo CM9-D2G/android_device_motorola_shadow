@@ -216,26 +216,6 @@ on init
     chmod 0666 /dev/ttyGS0
     chmod 0660 /dev/tcmd_driver
 
-    # Install kernel modules
-    insmod /system/lib/modules/netmux.ko
-    insmod /system/lib/modules/netmux_linkdriver.ko
-    insmod /system/lib/modules/modem_pm_driver.ko
-
-    insmod /system/lib/modules/xt_multiport.ko
-    insmod /system/lib/modules/xt_quota2.ko
-    insmod /system/lib/modules/xt_owner2.ko
-
-    insmod /system/lib/modules/tun.ko
-    #insmod /system/lib/modules/symsearch.ko
-    #insmod /system/lib/modules/mmcfix.ko
-    #insmod /system/lib/modules/usbled.ko
-    #insmod /system/lib/modules/gpiofix.ko
-
-    # Cifs module is actually not compiled by us
-    #insmod /system/lib/modules/nls_utf8.ko
-    #insmod /system/lib/modules/slow-work.ko
-    #insmod /system/lib/modules/cifs.ko
-
 on boot
 
     # Enable panic on softlockup
@@ -296,6 +276,26 @@ on boot
 
 # Load our multitouch module
     insmod /system/lib/modules/D2G.ko touch_num=8
+
+# Install kernel modules
+    insmod /system/lib/modules/netmux.ko
+    insmod /system/lib/modules/netmux_linkdriver.ko
+    insmod /system/lib/modules/modem_pm_driver.ko
+
+    insmod /system/lib/modules/xt_multiport.ko
+    insmod /system/lib/modules/xt_quota2.ko
+    insmod /system/lib/modules/xt_owner2.ko
+
+#    insmod /system/lib/modules/tun.ko
+#    insmod /system/lib/modules/symsearch.ko
+#    insmod /system/lib/modules/mmcfix.ko
+#    insmod /system/lib/modules/usbled.ko
+#    insmod /system/lib/modules/gpiofix.ko
+
+# Cifs module is actually not compiled by us
+#    insmod /system/lib/modules/nls_utf8.ko
+#    insmod /system/lib/modules/slow-work.ko
+#    insmod /system/lib/modules/cifs.ko
 
 # Set core max size (2G)
     setrlimit 4 2147483648 2147483648
@@ -360,21 +360,13 @@ service reboot_key /system/bin/reboot
 service usbd /system/bin/usbd
     class main
     user root
-service nvm-daemon /system/bin/nvm_daemon
-    class main
-    user root
-    group radio
+
 service start_commdrv /system/bin/sh /system/etc/motorola/comm_drv/commdrv_fs.sh
     class main
     oneshot
     user radio
     group radio system cache
-service gkisystem /system/bin/gkisystem
-    class main
-    socket location_shim stream 660 radio system
-    socket gpshal_socket stream 660 radio system
-    socket opprofdaemon stream 660 radio system
-    group radio system
+
 service battd /system/bin/battd
     class main
     socket battdsock stream 660 root system
@@ -398,7 +390,7 @@ service tcmd /system/bin/tcmd
     socket local_tcmd stream 0660 system system
     socket batch_socket stream 0600 system system
     oneshot
-    
+
 # turn on wifi for tcmd step one
 on property:tcmd.load_wlan=1
     insmod /system/lib/modules/tiwlan_drv.ko
@@ -457,10 +449,7 @@ service baseimage /system/bin/dspexec -v -T /system/lib/dsp/baseimage.dof
     user media
     group media graphics
     oneshot
-#service locDrv /system/bin/brcm_guci_drv -config /system/etc/gpsconfig.xml
-#    class main
-#    user radio
-#    group radio inet sdcard_rw
+
 service fmradio /system/bin/fmradioserver
     class main
     disabled
