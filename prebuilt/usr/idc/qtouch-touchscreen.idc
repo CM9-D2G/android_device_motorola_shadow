@@ -18,6 +18,8 @@
 # Initial revision by bikedude880
 # Changes merged from Hashcode (12/18/2011)
 
+device.internal = 1
+
 touch.deviceType = touchScreen
 touch.orientationAware = 1
 
