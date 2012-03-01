@@ -71,9 +71,9 @@ on post-fs
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth.bluetooth /sys/class/rfkill/rfkill1/type
-    chown bluetooth.bluetooth /sys/class/rfkill/rfkill1/state
-    chmod 0660 /sys/class/rfkill/rfkill1/state
+#    chown bluetooth.bluetooth /sys/class/rfkill/rfkill1/type
+#    chown bluetooth.bluetooth /sys/class/rfkill/rfkill1/state
+#    chmod 0660 /sys/class/rfkill/rfkill1/state
 
 # Dont delete this line, used as event in bootmenu (cpu settings & postbootmenu)
     exec /system/bin/logwrapper postbootmenu
@@ -290,13 +290,10 @@ on boot
 
 # Charge only mode services
 on property:sys.chargeonly.mode=1
-    start console
-    class_reset main
-    class_reset late_start
-    class_start charger
     start battd
-    start chargeonly
-    stop zygote
+    start console
+    write /data/simpin lock
+    exec /system/bin/charge_only_mode
 
 # Moto safe power down
 on property:sys.reboot=1

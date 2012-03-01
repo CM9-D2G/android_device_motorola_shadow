@@ -346,7 +346,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
 #    ts = GetBuildProp("ro.build.date.utc", input_zip)
 #    script.AssertOlderBuild(ts)
 
-  script.Print("-=  CM9 Pre-Alpha  =-")
+  script.Print("-=     CM9 Beta    =-")
   script.Print("       Port by:      ")
   script.Print("     bikedude880     ")
   script.Print("     x13thangelx     ")
