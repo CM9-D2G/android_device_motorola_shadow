@@ -40,7 +40,19 @@ PRODUCT_PACKAGES += \
     dspexec \
     libbridge \
     libstagefrighthw \
-    libstagefright_omx
+    libstagefright_omx \
+    libOMX_Core \
+    libOMX.TI.AAC.decode \
+    libOMX.TI.AAC.decode \
+    libOMX.TI.AMR.decode \
+    libOMX.TI.AMR.encode \
+    libOMX.TI.JPEG.Encoder \
+    libOMX.TI.MP3.decode \
+    libOMX.TI.Video.Decoder \
+    libOMX.TI.Video.encoder \
+    libOMX.TI.WBAMR.decode \
+    libOMX.TI.WBAMR.encode \
+    libOMX.TI.WMA.decode
 
 # Radio
 PRODUCT_PACKAGES += \
@@ -158,34 +170,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.cdma.home.operator.alpha=Verizon \
     ro.cdma.home.operator.numeric=310004 \
     ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
-    ro.com.google.clientid=android-motorola \
-    ro.com.google.clientidbase.am=android-verizon \
-    ro.com.google.clientidbase=android-verizon \
     ro.com.google.gmsversion=2.2_r7 \
-    ro.com.motorola.smartsensor=true \
-    ro.config.vc_call_vol_steps=10 \
     ro.kernel.android.ril=yes \
-    ro.media.camera.calresolution=3264,2448 \
-    ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
-    ro.media.camera.focal=3564.0,3564.0 \
-    ro.media.camera.principal=1632.0,1224.0 \
-    ro.media.camera.skew=0.0 \
-    ro.media.capture.classification=classF \
-    ro.media.capture.fast.fps=4 \
-    ro.media.capture.flash=led \
-    ro.media.capture.maxres=8m \
-    ro.media.capture.slow.fps=60 \
-    ro.media.capture.torchIntensity=45 \
-    ro.media.capture.useDFR=1 \
     ro.product.max_num_touch=2 \
     ro.product.multi_touch_enabled=true \
     ro.setupwizard.enable_bypass=1 \
     ro.setupwizard.mode=OPTIONAL \
     ro.telephony.call_ring.delay=1000 \
     ro.telephony.call_ring.multiple=false \
-    ro.telephony.sms_segment_size=160 \
-    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html
+    ro.telephony.sms_segment_size=160 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/motorola/shadow/kernel

@@ -1,6 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),shadow)
+ifeq ($(BOARD_OVERLAY_BASED_CAMERA_HAL),true)
 
 include $(CLEAR_VARS)
 
@@ -10,7 +10,7 @@ LOCAL_MODULE         := camera.shadow
 LOCAL_SRC_FILES      := cameraHal.cpp
 LOCAL_PRELINK_MODULE := false
 
-LOCAL_SRC_FILES += v4l2_utils.c overlay.cpp
+LOCAL_C_INCLUDES += $(ANDROID_BUILD_TOP)/frameworks/base/include
 
 LOCAL_SHARED_LIBRARIES += \
     liblog \
@@ -20,10 +20,10 @@ LOCAL_SHARED_LIBRARIES += \
     libmedia \
     libhardware \
     libcamera_client \
+    libdl \
+    libui \
     libcamera \
-
-LOCAL_SHARED_LIBRARIES += libdl
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif #TARGET_DEVICE
+endif # BOARD_OVERLAY_BASED_CAMERA_HAL
