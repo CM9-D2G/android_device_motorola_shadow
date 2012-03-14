@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Global Phone Auto Network Mode Switch</string>
+    <string name="globalPhone_nw_mode_switch_t">Network Mode is switched</string>
+    <string name="globalPhone_nw_mode_switch_to_cdma">SIM card is not detected, switched to CDMA mode.</string>
+    <string name="globalPhone_nw_mode_switch_to_global">SIM card is detected, Switched to Global Mode.</string>
+</resources>
