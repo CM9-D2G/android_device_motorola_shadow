@@ -13,16 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This file includes all definitions that apply only to maguro devices
+# This file includes all definitions that apply only to shadow devices
 #
-# Anything that is generic to all tuna products should go in the tuna directory
+# Anything that is generic to all OMAP34xx/SGX530 products should go in the omap34com directory
 #
 # Everything in this directory will become public
 
-DEVICE_PACKAGE_OVERLAYS := device/motorola/shadow/overlay
+#DEVICE_PACKAGE_OVERLAYS := device/motorola/shadow/overlay
 
 # These are the hardware-specific features
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml 
 
 PRODUCT_PACKAGES := \

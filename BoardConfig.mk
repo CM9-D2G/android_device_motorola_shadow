@@ -1,4 +1,4 @@
-# Copyright (C) 2011 The Android Open Source Project
+#
 # Copyright (C) 2012 bikedude880
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,8 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-# Use the non-open-source part, if present
+# Camera
+BOARD_USE_LEGACY_TOUCHSCREEN := true
+BOARD_USE_GINGERBREAD_BINDER := true
+
+# inherit from the proprietary version
 -include vendor/motorola/shadow/BoardConfigVendor.mk
 
 # Use the part that is common between all tunas
@@ -34,17 +39,22 @@ ifdef BOARD_USES_AUDIO_LEGACY
 endif
 #TARGET_PROVIDES_LIBAUDIO := true
 
-# Camera
-BOARD_OVERLAY_BASED_CAMERA_HAL := true
-BOARD_USE_GINGERBREAD_BINDER := true
-
 # Recovery
 TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/shadow/kernel
 BOARD_MKE2FS := device/motorola/shadow/releaseutils/mke2fs
 
 TARGET_PROVIDES_INIT_RC := true
 
+# OTA Packaging
+TARGET_PROVIDES_RELEASETOOLS := true
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/shadow/releasetools/shadow_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/shadow/releasetools/shadow_img_from_target_files
+
 # UMS
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d/file"
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/shadow/UsbController.cpp
+
+# Hijack
+TARGET_NEEDS_MOTOROLA_HIJACK := true
+#BOARD_HIJACK_LOG_ENABLE := true
