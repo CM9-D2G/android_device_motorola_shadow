@@ -36,7 +36,6 @@ endif
 
 # Camera
 BOARD_OVERLAY_BASED_CAMERA_HAL := true
-BOARD_USE_GINGERBREAD_BINDER := true
 
 # Recovery
 TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/shadow/kernel
