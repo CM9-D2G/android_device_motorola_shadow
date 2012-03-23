@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
   libaudiohw_legacy \
   audio.a2dp.default \
   libaudioutils \
-  hcitools \
+  hcitool \
   hciattach \
   hcidump 
 
