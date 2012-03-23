@@ -32,22 +32,25 @@ PRODUCT_PACKAGES := \
 	Camera
 
 # Audio + Bluetooth
-PRODUCT_PACKAGES += \
-  audio.primary.omap3 \
-  libaudiohw_legacy \
-  audio.a2dp.default \
-  libaudioutils \
-  hcitool \
-  hciattach \
-  hcidump 
-
+PRODUCT_COPY_FILES += \
+	device/motorola/shadow/audio/libaudio.so:/system/lib/libaudio.so \
+	device/motorola/shadow/audio/liba2dp.so:/system/lib/liba2dp.so
 
 PRODUCT_PACKAGES += \
-  hijack-boot.zip
+	audio.primary.omap3 \
+	libaudiohw_legacy \
+	audio.a2dp.default \
+	libaudioutils \
+	hcitool \
+	hciattach \
+	hcidump
+
+PRODUCT_PACKAGES += \
+	hijack-boot.zip
 
 # Hijack files
 PRODUCT_COPY_FILES += \
-   $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip
+	$(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip
 
 #Kernel
 ifeq ($(TARGET_PREBUILT_KERNEL),)
@@ -57,7 +60,7 @@ LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+	$(LOCAL_KERNEL):kernel
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
@@ -66,9 +69,9 @@ PRODUCT_COPY_FILES += $(shell \
   | tr '\n' ' ')
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  persist.ril.features=0x07 \
-  persist.ril.modem.ttydevice=/dev/usb/tty1-3:1.0 \
-  persist.ril.mux.noofchannels=7 
+	persist.ril.features=0x07 \
+	persist.ril.modem.ttydevice=/dev/usb/tty1-3:1.0 \
+	persist.ril.mux.noofchannels=7
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
