@@ -28,9 +28,8 @@ ro.mot.eri.sidalert.delay=1000
 wifi.interface = tiwlan0
 wifi.supplicant_scan_interval = 90
 
-dalvik.vm.heapsize=64m
 ro.sf.lcd_density=240
-windowsmgr.max_events_per_sec=55
+windowsmgr.max_events_per_sec=120
 ro.min_pointer_dur=10
 ro.opengles.version = 131072
 
