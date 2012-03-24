@@ -25,7 +25,7 @@
 DEVICE_PREBUILT := device/motorola/shadow/prebuilt
 
 # Get the long list of APNs
-PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES := $(DEVICE_PREBUILT)/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Camera
 PRODUCT_PACKAGES := \
@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
   libaudiohw_legacy \
   audio.a2dp.default \
   libaudioutils \
-  hcitools \
+  hcitool \
   hciattach \
   hcidump 
 
@@ -76,6 +76,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
+$(call inherit-product, hardware/ti/wpan/ti-wpan-products.mk)
 
 # Inherit from shadow device
 $(call inherit-product, device/motorola/shadow/device.mk)
