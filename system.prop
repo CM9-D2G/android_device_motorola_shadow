@@ -29,7 +29,7 @@ wifi.interface = tiwlan0
 wifi.supplicant_scan_interval = 90
 
 ro.sf.lcd_density=240
-windowsmgr.max_events_per_sec=120
+windowsmgr.max_events_per_sec=150
 ro.min_pointer_dur=10
 ro.opengles.version = 131072
 
