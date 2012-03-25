@@ -80,11 +80,10 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>50</item>
-        <item>500</item>
-        <item>1000</item>
+        <item>100</item>
         <item>3000</item>
-        <item>6000</item>
+        <item>8000</item>
+        <item>8000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -92,9 +91,10 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>48</item>
-        <item>108</item>
-        <item>206</item>
+        <item>42</item>
+        <item>96</item>
+        <item>208</item>
+        <item>246</item>
         <item>246</item>
     </integer-array>
 
@@ -117,11 +117,16 @@
     -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
         <item>255</item>
-        <item>0</item>
+        <item>255</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
     </integer-array>
+
+    <!-- Amount of time it takes for the light sensor to warm up in milliseconds.
+         For this time after the screen turns on, the Power Manager
+         will not debounce light sensor readings -->
+    <integer name="config_lightSensorWarmupTime">2000</integer>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">20</integer>
@@ -250,8 +255,4 @@
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">ppp0</string>
-
-    <!-- IP address of the dns server to use if nobody else suggests one -->
-    <string name="config_default_dns_server">8.8.8.8</string>
-
 </resources>
