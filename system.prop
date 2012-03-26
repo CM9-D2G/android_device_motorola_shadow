@@ -43,7 +43,7 @@ ro.mot.eri.losalert.delay=2000
 ro.mot.eri.sidalert.delay=1000
 
 wifi.interface = tiwlan0
-wifi.supplicant_scan_interval = 90
+wifi.supplicant_scan_interval = 180
 
 ro.sf.lcd_density=240
 windowsmgr.max_events_per_sec=150
