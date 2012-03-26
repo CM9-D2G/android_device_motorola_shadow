@@ -53,7 +53,7 @@ int UsbController::enableRNDIS(bool enable) {
 
 bool UsbController::isRNDISStarted() {
     bool rndisActive = false;
-    FILE *stateFile = fopen("/tmp/usbd_current_state", "r");
+    FILE *stateFile = fopen("/data/usbd/current_state", "r");
 
     if (stateFile != NULL) {
         char buffer[128];
