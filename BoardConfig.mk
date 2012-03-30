@@ -30,9 +30,9 @@ BOARD_KERNEL_CMDLINE := console=ttyS2,115200n8 rw mem=498M@0x80C00000 init=/init
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_AUDIO_LEGACY := true
 ifdef BOARD_USES_AUDIO_LEGACY
-    COMMON_GLOBAL_CFLAGS += -DBOARD_USES_AUDIO_LEGACY
+COMMON_GLOBAL_CFLAGS += -DBOARD_USES_AUDIO_LEGACY
 endif
-#TARGET_PROVIDES_LIBAUDIO := true
+TARGET_PROVIDES_LIBAUDIO := true
 
 # Camera
 BOARD_OVERLAY_BASED_CAMERA_HAL := true
@@ -44,6 +44,8 @@ BOARD_MKE2FS := device/motorola/shadow/releaseutils/mke2fs
 TARGET_PROVIDES_INIT_RC := true
 
 # UMS
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d/file"
+BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/shadow/UsbController.cpp
+BOARD_MTP_DEVICE := "/dev/mtp"
