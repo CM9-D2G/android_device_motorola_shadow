@@ -24,9 +24,6 @@
 # Device overlay and prebuilt directories
 DEVICE_PREBUILT := device/motorola/shadow/prebuilt
 
-# APNs
-PRODUCT_COPY_FILES := $(DEVICE_PREBUILT)/etc/apns-conf.xml:system/etc/apns-conf.xml
-
 # Camera
 PRODUCT_PACKAGES := \
 	Camera
