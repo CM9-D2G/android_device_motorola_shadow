@@ -45,13 +45,12 @@ WIFI_DRIVER_FW_AP_PATH      := "/system/etc/wifi/fw_tiwlan_ap.bin"
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_AUDIO_LEGACY := true
 ifdef BOARD_USES_AUDIO_LEGACY
-    COMMON_GLOBAL_CFLAGS += -DBOARD_USES_AUDIO_LEGACY
+COMMON_GLOBAL_CFLAGS += -DBOARD_USES_AUDIO_LEGACY
 endif
-#TARGET_PROVIDES_LIBAUDIO := true
+TARGET_PROVIDES_LIBAUDIO := true
 
-# Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
+# Camera
+BOARD_OVERLAY_BASED_CAMERA_HAL := true
 
 # Recovery
 BOARD_HAS_LOCKED_BOOTLOADER := true
@@ -111,9 +110,11 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/shadow/releasetools
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/motorola/shadow/releasetools/shadow_img_from_target_files
 
 # UMS
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d/file"
+BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/shadow/UsbController.cpp
+<<<<<<< HEAD
 
 # Hijack
 TARGET_NEEDS_MOTOROLA_HIJACK := true
@@ -130,3 +131,6 @@ BOARD_USES_KEYBOARD_HACK := true
 # TESTING
 TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 DEBUG_BIONIC_LIBC := true
+=======
+BOARD_MTP_DEVICE := "/dev/mtp"
+>>>>>>> 18b79f8b466382552f5952c35c85763ee4aa85f9
