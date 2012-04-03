@@ -24,9 +24,6 @@
 # Device overlay and prebuilt directories
 DEVICE_PREBUILT := device/motorola/shadow/prebuilt
 
-# APNs
-PRODUCT_COPY_FILES := $(DEVICE_PREBUILT)/etc/apns-conf.xml:system/etc/apns-conf.xml
-
 # Camera
 PRODUCT_PACKAGES := \
 	Camera
@@ -80,7 +77,7 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, device/motorola/shadow/device.mk)
 
 # Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := cm_shadow
+PRODUCT_NAME := full_shadow
 PRODUCT_DEVICE := shadow
 PRODUCT_BRAND := verizon
 PRODUCT_MODEL := DROIDX
