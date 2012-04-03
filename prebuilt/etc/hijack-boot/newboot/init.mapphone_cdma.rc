@@ -260,9 +260,6 @@ on boot
 # Load Authentec VPN kernel module
     insmod /system/lib/modules/vpnclient.ko
 
-# Load our multitouch module
-    insmod /system/lib/modules/D2G.ko touch_num=8
-
 # Install kernel modules
     insmod /system/lib/modules/netmux.ko
     insmod /system/lib/modules/netmux_linkdriver.ko

@@ -69,8 +69,8 @@ mot.proximity.delay=450
 mot.proximity.distance=60
 
 
-ro.HorizontalBUA=true
-ro.HorizontalVVM=true
+ro.HorizontalBUA=false
+ro.HorizontalVVM=false
 ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html
 ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html
 
