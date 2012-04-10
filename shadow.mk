@@ -72,7 +72,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-$(call inherit-product, hardware/ti/wpan/ti-wpan-products.mk)
 
 # Inherit from shadow device
 $(call inherit-product, device/motorola/shadow/device.mk)
