@@ -28,10 +28,10 @@
     <integer name="config_notificationsBatteryFullARGB">0x00000000</integer>
 
     <!-- Default LED on time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOn">1000</integer>
+    <integer name="config_defaultNotificationLedOn">500</integer>
 
     <!-- Default LED off time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOff">9000</integer>
+    <integer name="config_defaultNotificationLedOff">2000</integer>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
@@ -83,7 +83,7 @@
         <item>100</item>
         <item>3000</item>
         <item>8000</item>
-        <item>8000</item>
+        <item>7999</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
