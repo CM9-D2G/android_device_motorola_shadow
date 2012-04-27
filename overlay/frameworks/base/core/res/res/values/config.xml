@@ -255,4 +255,7 @@
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">ppp0</string>
+
+    <!-- Default network policy warning threshold, in megabytes. -->
+    <integer name="config_networkPolicyDefaultWarning">-1</integer>
 </resources>
