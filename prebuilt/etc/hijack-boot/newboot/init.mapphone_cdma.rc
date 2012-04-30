@@ -339,6 +339,7 @@ service reboot_key /system/bin/reboot
 service usbd /system/bin/usbd
     class main
     user root
+    socket usbd stream 666 root system
 
 service start_commdrv /system/bin/sh /system/etc/motorola/comm_drv/commdrv_fs.sh
     class main
@@ -356,6 +357,11 @@ service battd /system/bin/battd
     socket battdsock stream 660 root system
     user root
     group system
+    oneshot
+
+service ssmgrd /system/bin/ssmgrd
+    class main
+    group radio input system
     oneshot
 
 # Bluetooth services.
