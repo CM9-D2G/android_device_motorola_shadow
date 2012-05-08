@@ -67,7 +67,7 @@ ro.mot.master_clear.shredsd=false
 
 ro.mot.buttonlight.timeout=1
 persist.mot.proximity.touch=1
-mot.proximity.delay=450
+mot.proximity.delay=90
 mot.proximity.distance=60
 
 
