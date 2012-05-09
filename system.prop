@@ -44,6 +44,8 @@ ro.mot.eri.sidalert.delay=1000
 
 wifi.interface = tiwlan0
 wifi.supplicant_scan_interval = 180
+wifi.hotspot.ti = 1
+wifi.ap.interface = tiap0
 
 ro.sf.lcd_density=240
 windowsmgr.max_events_per_sec=150
@@ -102,3 +104,7 @@ ro.media.panorama.frameres=1280x720
 ro.product.use_charge_counter=1
 ro.max.fling_velocity=4000
 debug.enabletr=false
+
+# force enable or force disable of hw renderer for the listed processes
+hwui.whitelist=com.android.browser
+hwui.blacklist=com.google.android.gallery3d_com.google.android.music:ui
