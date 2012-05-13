@@ -107,4 +107,4 @@ debug.enabletr=false
 
 # force enable or force disable of hw renderer for the listed processes
 hwui.whitelist=com.android.browser
-hwui.blacklist=com.google.android.gallery3d_com.google.android.music:ui
+hwui.blacklist=ui
