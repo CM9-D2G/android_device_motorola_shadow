@@ -107,4 +107,4 @@ debug.enabletr=false
 
 # force enable or force disable of hw renderer for the listed processes
 #hwui.whitelist=com.android.browser
-hwui.blacklist=com.android.systemui:com.cyanogenmod.CMWallpapers:com.cyanogenmod.trebuchet
+#hwui.blacklist=com.android.systemui:com.cyanogenmod.CMWallpapers:com.cyanogenmod.trebuchet
