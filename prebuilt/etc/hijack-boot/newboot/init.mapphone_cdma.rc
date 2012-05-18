@@ -359,7 +359,7 @@ service battd /system/bin/battd
     group system
     oneshot
 
-service ssmgrd /system/bin/ssmgrd
+service ssmgrd /system/xbin/ssmgrd
     class main
     group radio input system
     oneshot
