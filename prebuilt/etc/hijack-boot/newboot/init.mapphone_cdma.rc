@@ -363,11 +363,6 @@ service battd /system/bin/battd
     group system
     oneshot
 
-service ssmgrd /system/xbin/ssmgrd
-    class main
-    group radio input system
-    oneshot
-
 # Bluetooth services.
 service hciattach /system/bin/hciattach -n -t 10 /dev/ttyS1 texasalt 3000000 flow
     class main
