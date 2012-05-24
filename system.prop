@@ -108,4 +108,4 @@ debug.egl.callstack=1
 hwui.render_dirty_regions=false
 
 # Force disable of hw renderer for the listed processes
-hwui.blacklist=com.android.vending:com.tmobile.themechooser:com.bel.android.dspmanager:com.android.mms
+hwui.blacklist=com.android.vending:com.tmobile.themechooser:com.bel.android.dspmanager:com.android.mms:mobi.mgeek.TunnyBrowser:com.android.wallpaper.livepicker
