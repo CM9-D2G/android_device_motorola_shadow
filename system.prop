@@ -107,6 +107,5 @@ debug.enabletr=false
 debug.egl.callstack=1
 hwui.render_dirty_regions=false
 
-# force enable or force disable of hw renderer for the listed processes
-#hwui.whitelist=com.android.browser
+# Force disable of hw renderer for the listed processes
 hwui.blacklist=com.android.vending:com.tmobile.themechooser:com.bel.android.dspmanager:com.android.mms
