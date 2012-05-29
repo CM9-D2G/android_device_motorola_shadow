@@ -275,10 +275,6 @@ on boot
     insmod /system/lib/modules/ip6_tables.ko
     insmod /system/lib/modules/ip6table_filter.ko
 
-# Graphics
-    insmod /system/lib/modules/ionpvr.ko
-    insmod /system/lib/modules/ion.ko
-
 # Cifs module is actually not compiled by us
 #    insmod /system/lib/modules/nls_utf8.ko
 #    insmod /system/lib/modules/slow-work.ko
