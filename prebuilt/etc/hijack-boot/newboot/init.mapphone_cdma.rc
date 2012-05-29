@@ -356,7 +356,7 @@ service battd /system/bin/battd
     class main
     socket battdsock stream 660 root system
     user root
-    group system
+    group system 9001
     oneshot
 
 # Bluetooth services.
