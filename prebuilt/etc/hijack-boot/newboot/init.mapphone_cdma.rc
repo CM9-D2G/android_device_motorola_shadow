@@ -425,7 +425,7 @@ service iprenew_tiwlan0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service baseimage /system/bin/cexec.out -v -T /system/lib/dsp/baseimage.dof
+service baseimage /system/bin/cexec.out -T /system/lib/dsp/baseimage.dof
     class main
     user media
     group media graphics
