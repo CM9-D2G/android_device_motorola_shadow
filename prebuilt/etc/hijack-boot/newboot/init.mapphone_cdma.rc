@@ -248,10 +248,8 @@ on boot
     chmod 0660 /sys/class/leds/torch-flash/flash_light
     chmod 0666 /sys/class/leds/spotlight/brightness
 
-# Kernel symbol hook
+# Kernel modules
     insmod /system/lib/modules/symsearch.ko
-
-# Load traffic shaping modules
     insmod /system/lib/modules/ifb.ko
     insmod /system/lib/modules/act_mirred.ko
     insmod /system/lib/modules/sch_ingress.ko
@@ -259,26 +257,16 @@ on boot
     insmod /system/lib/modules/cls_u32.ko
     insmod /system/lib/modules/sch_htb.ko
     insmod /system/lib/modules/em_u32.ko
-
-# Load Authentec VPN kernel module
     insmod /system/lib/modules/vpnclient.ko
-
-# Load modem modules
     insmod /system/lib/modules/netmux.ko
     insmod /system/lib/modules/netmux_linkdriver.ko
     insmod /system/lib/modules/modem_pm_driver.ko
-
-# Load firewall modules
     insmod /system/lib/modules/xt_multiport.ko
     insmod /system/lib/modules/xt_quota2.ko
     insmod /system/lib/modules/xt_owner2.ko
     insmod /system/lib/modules/ip6_tables.ko
     insmod /system/lib/modules/ip6table_filter.ko
-
-# Cifs module is actually not compiled by us
-#    insmod /system/lib/modules/nls_utf8.ko
-#    insmod /system/lib/modules/slow-work.ko
-#    insmod /system/lib/modules/cifs.ko
+    insmod /system/lib/modules/sio-iosched.ko
 
 # Set core max size (2G)
     setrlimit 4 2147483648 2147483648
@@ -404,22 +392,27 @@ service wlan_loader /system/bin/logwrapper /system/bin/wlan_loader -f /system/et
     class main
     disabled
     oneshot
-service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c /data/misc/wifi/wpa_supplicant.conf
     class main
     socket wpa_tiwlan0 dgram 660 wifi wifi
     disabled
     oneshot
+
 service wlan_ap_loader /system/bin/logwrapper /system/bin/tiap_loader -f /system/etc/wifi/fw_tiwlan_ap.bin -i /system/etc/wifi/tiwlan_ap.ini -e /pds/wifi/nvs_map.bin
     disabled
     oneshot
+
 service hostapd /system/bin/logwrapper /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
     class main
     disabled
     oneshot
+
 service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
+
 service iprenew_tiwlan0 /system/bin/dhcpcd -n
     class main
     disabled
@@ -437,7 +430,6 @@ service fmradio /system/bin/fmradioserver
     user system
     group bluetooth net_bt_admin net_raw net_admin misc
 
-# 3D init
 service pvrsrvinit /system/bin/pvrsrvinit
     class core
     user root
