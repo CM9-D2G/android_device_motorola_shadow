@@ -6,7 +6,7 @@ rild.libpath=/system/lib/libmoto_ril.so
 rild.libargs=-d /dev/ttyS0
 ro.mot.ril.danlist=611,*611,#611
 persist.ril.ecclist=911,*911,#911
-persist.ril.modem.mode =1
+persist.ril.modem.mode=1
 ro.ril.hsxpa=2
 ro.ril.gprsclass=10
 ro.ril.hep=1
@@ -36,27 +36,27 @@ ro.com.android.dataroaming=true
 ro.cdma.otaspnumschema=SELC,1,80,99
 ro.mot.fid.29967.ice=true
 ro.mot.fid.33531.keylock_ecm=true
-ro.mot.dpmext = true
+ro.mot.dpmext=true
 ro.mot.hw.HAC=1
 ro.mot.eri=1
 ro.mot.eri.losalert.delay=2000
 ro.mot.eri.sidalert.delay=1000
 
-wifi.interface = tiwlan0
-wifi.supplicant_scan_interval = 180
-wifi.hotspot.ti = 1
-wifi.ap.interface = tiap0
+wifi.interface=tiwlan0
+wifi.supplicant_scan_interval=180
+wifi.hotspot.ti=1
+wifi.ap.interface=tiap0
 
 ro.sf.lcd_density=240
 windowsmgr.max_events_per_sec=150
 ro.min_pointer_dur=10
-ro.opengles.version = 131072
+ro.opengles.version=131072
 
 ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal
 ro.mot.hw.uaprof=http://uaprof.vtext.com/mot/mb810/mb810.xml
 
 ro.service.start.smc=1
-persist.mot.usb.mediasync = 0
+persist.mot.usb.mediasync=0
 ro.ngp_available=1
 ro.modem_available=0
 persist.usb.android_config=0
