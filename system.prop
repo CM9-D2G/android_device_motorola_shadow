@@ -109,3 +109,6 @@ hwui.render_dirty_regions=false
 
 # Force disable of hw renderer for the listed processes
 hwui.blacklist=com.android.vending:com.tmobile.themechooser:com.bel.android.dspmanager:com.android.mms:mobi.mgeek.TunnyBrowser:com.android.wallpaper.livepicker
+
+# CpuGovernorService (require ondemand cpu governor)
+dev.pm.dyn_samplingrate=1
