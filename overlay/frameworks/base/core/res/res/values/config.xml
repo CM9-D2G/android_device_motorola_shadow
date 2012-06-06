@@ -258,4 +258,6 @@
 
     <!-- Default network policy warning threshold, in megabytes. -->
     <integer name="config_networkPolicyDefaultWarning">-1</integer>
+
+    <integer name="config_screenOnAnimation">0</integer>
 </resources>
