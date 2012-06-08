@@ -30,6 +30,7 @@ PRODUCT_COPY_FILES += \
 	device/motorola/shadow/audio/liba2dp.so:/system/lib/liba2dp.so
 
 PRODUCT_PACKAGES += \
+	sensors.shadow \
 	audio.primary.omap3 \
 	libaudiohw_legacy \
 	audio.a2dp.default \
