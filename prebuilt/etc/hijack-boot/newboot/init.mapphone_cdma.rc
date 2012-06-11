@@ -409,7 +409,7 @@ service wlan_ap_loader /system/bin/logwrapper /system/bin/tiap_loader -f /system
     disabled
     oneshot
 
-service hostapd /system/bin/logwrapper /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
+service hostapd /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
     class main
     disabled
     oneshot
