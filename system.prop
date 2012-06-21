@@ -42,16 +42,6 @@ ro.mot.eri=1
 ro.mot.eri.losalert.delay=2000
 ro.mot.eri.sidalert.delay=1000
 
-wifi.interface=tiwlan0
-wifi.supplicant_scan_interval=180
-wifi.hotspot.ti=1
-wifi.ap.interface=tiap0
-
-ro.sf.lcd_density=240
-windowsmgr.max_events_per_sec=150
-ro.min_pointer_dur=10
-ro.opengles.version=131072
-
 ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal
 ro.mot.hw.uaprof=http://uaprof.vtext.com/mot/mb810/mb810.xml
 
@@ -59,8 +49,6 @@ ro.service.start.smc=1
 persist.mot.usb.mediasync=0
 ro.ngp_available=1
 ro.modem_available=0
-persist.usb.android_config=0
-ro.usb.use_custom_service=1
 persist.sys.usb.config=mass_storage,adb
 ro.default_usb_mode=2
 ro.mot.master_clear.shredsd=false
@@ -100,12 +88,3 @@ ro.media.capture.shuttertone=1
 ro.media.capture.noSensorLSC=1
 ro.media.panorama.defres=2048x1536
 ro.media.panorama.frameres=1280x720
-
-ro.product.use_charge_counter=1
-ro.max.fling_velocity=4000
-debug.enabletr=false
-debug.egl.callstack=1
-hwui.render_dirty_regions=false
-
-# CpuGovernorService (require ondemand cpu governor)
-dev.pm.dyn_samplingrate=1
