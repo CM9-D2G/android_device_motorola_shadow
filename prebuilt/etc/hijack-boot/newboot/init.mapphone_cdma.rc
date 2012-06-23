@@ -115,8 +115,8 @@ on post-fs-data
     chown radio radio /pds/bp_nvm
     chmod 0770 /pds/bp_nvm
     # wifi dirs
-    mkdir /data/misc/wifi/hostapd.sockets 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/hostapd 0770 system wifi
+    mkdir /data/misc/wifi/sockets 0770 system wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     mkdir /data/comm_drv 0770 radio radio
     chown dhcp dhcp /data/misc/dhcp
@@ -160,9 +160,6 @@ on post-fs-data
     chown system system /data/tpapi/etc/tpa/persistent
     chown root system /dev/socket
     chmod 0775 /dev/socket
-
-    # copy hostapd configuration
-#    copy /system/etc/wifi/softap/hostapd.conf /data/misc/wifi/hostapd.conf
 
     setprop vold.post_fs_data_done 1
 
@@ -411,8 +408,10 @@ service wlan_ap_loader /system/bin/logwrapper /system/bin/tiap_loader -f /system
     disabled
     oneshot
 
-service hostapd /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
+service hostap_netd /system/bin/hostap -d /data/misc/wifi/hostapd.conf
     class main
+    group wifi system inet net_admin
+    socket tiap0 dgram 660 wifi wifi
     disabled
     oneshot
 
