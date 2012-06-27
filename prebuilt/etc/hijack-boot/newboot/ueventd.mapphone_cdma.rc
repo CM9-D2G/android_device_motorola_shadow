@@ -80,7 +80,7 @@
 /dev/ts0710mux*           0660   radio      radio
 /dev/ttyHS4/*             0640   radio      radio
 /dev/ppp                  0660   radio      vpn
-/dev/tun                  0640   vpn        vpn
+/dev/tun                  0660   system     vpn
 
 /dev/sim_proxy            0660   root       radio
 /dev/psd_nsapi5           0660   root       radio
