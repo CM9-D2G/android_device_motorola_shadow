@@ -91,9 +91,6 @@ on post-fs
     chown radio radio /pds/bp_nvm
     chmod 0770 /pds/bp_nvm
 
-    # Tweaks
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 2048
-
 #    mount rootfs rootfs / ro remount
 
     # create logger folder
