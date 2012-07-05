@@ -246,6 +246,8 @@ on boot
 
     # Core
     insmod /system/lib/modules/symsearch.ko
+    insmod /system/lib/modules/klogger.ko
+    insmod /system/lib/modules/thumbee.ko
 
     # Net
     insmod /system/lib/modules/ifb.ko
