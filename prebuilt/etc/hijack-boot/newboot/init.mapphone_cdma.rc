@@ -242,6 +242,14 @@ on boot
     insmod /system/lib/modules/klogger.ko
     insmod /system/lib/modules/thumbee.ko
 
+    # Graphics
+    insmod /system/lib/modules/pvr-off.ko
+    write /sys/devices/platform/omapdss/overlay0/enabled 0
+    write /sys/devices/platform/omapfb/graphics/fb0/size 4194304
+    write /sys/devices/platform/omapdss/overlay0/enabled 1
+    insmod /system/lib/modules/pvrsrvkm.ko
+    insmod /system/lib/modules/omaplfb.ko
+
     # Net
     insmod /system/lib/modules/ifb.ko
     insmod /system/lib/modules/act_mirred.ko
