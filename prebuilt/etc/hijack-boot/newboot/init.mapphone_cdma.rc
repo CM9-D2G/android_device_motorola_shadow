@@ -1,6 +1,5 @@
 on fs
-
-# Mount mmc partitions
+    # Mount mmc partitions
     mkdir /pds 0775 system system
     mount ext3 /dev/block/mmcblk1p21 /system noatime nodiratime
     mount ext3 /dev/block/mmcblk1p21 /system ro remount
@@ -8,34 +7,32 @@ on fs
     mount ext3 /dev/block/mmcblk1p24 /data nosuid nodev noatime nodiratime barrier=0
 
 on post-fs
-
-# Backward compatibility
+    # Backward compatibility
     symlink /dev /dev/netmux
     symlink /dev/ttyGS0 /dev/acm0
-
     mount rootfs rootfs / rw remount
 
-# Busybox
+    # Busybox
     export HISTFILE /data/local/tmp/.ash_history
     export HISTFILESIZE 1000
     export ENV /system/etc/profile
 
-# Other global env variables
+    # Other global env variables
     export DSP_PATH /system/lib/dsp
 
-# Mount tmp, we dont have swap, use ramfs which can grow if required
+    # Mount tmp, we dont have swap, use ramfs which can grow if required
     mkdir /tmp
     mount ramfs ramfs /tmp size=512k relatime
     chmod 0777 /tmp
     chown system shell /tmp
 
-# Restore good uid, mount as ramfs reset to root root 755
+    # Restore good uid, mount as ramfs reset to root root 755
     chown root system /mnt/asec
     chmod 0755 /mnt/asec
     chown root system /mnt/obb
     chmod 0755 /mnt/obb
 
-# Configure kernel options
+    # Configure kernel options
     # Disable a system-wide task dump on OOM in default
     write /proc/sys/vm/oom_dump_tasks 0
     write /proc/sys/fs/suid_dumpable 2
@@ -46,14 +43,11 @@ on post-fs
     write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/sampling_rate 37500
     write /sys/power/sr_vdd1_autocomp 1
     write /sys/power/sr_vdd2_autocomp 1
-# Change ownership for vibrators
+    # Change ownership for vibrators
     chown system system /sys/class/timed_output/vibrator/enable
     chmod 0660 /sys/class/timed_output/vibrator/enable
 
-# Mount mtd partitions
-    # mount /pds as r/w
-    # We chown/chmod /pds again so because mount is run as root + defaults
-#    mount yaffs2 mtd@pds /pds nosuid nodev no-checkpoint
+    # Mount mtd partitions
     mount ext3 /dev/block/mmcblk1p7 /pds nosuid nodev noatime nodiratime
     chown system system /pds
     chmod 0775 /pds
@@ -61,13 +55,13 @@ on post-fs
     chown system shell /pds/public
     chmod 0775 /pds/public
 
-# Mount preinstall partition
+    # Mount preinstall partition
     mkdir /preinstall 0771 system system
     mount ext3 /dev/block/mmcblk1p23 /preinstall nosuid nodev noatime nodiratime
     chmod 0771 /preinstall
     chown system system /preinstall
 
-# bluetooth power up/down interface (wl127x Bluetooth and hci0)
+    # bluetooth power up/down interface (wl127x Bluetooth and hci0)
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
@@ -75,7 +69,7 @@ on post-fs
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
 
-# Dont delete this line, used as event in bootmenu (cpu settings & postbootmenu)
+    # Dont delete this line, used as event in bootmenu (cpu settings & postbootmenu)
     exec /system/bin/logwrapper postbootmenu
 
     # following two dirs are for storing BP Flex and PDS files. NVM Daemon is using these folders
@@ -86,8 +80,6 @@ on post-fs
     chown radio radio /pds/bp_nvm
     chmod 0770 /pds/bp_nvm
 
-#    mount rootfs rootfs / ro remount
-
     # create logger folder
     mkdir /data/logger 0770 radio log
     chown radio log /data/logger
@@ -97,7 +89,7 @@ on post-fs
     chmod 0777 /data/panicreports
 
 on post-fs-data
-# Create basic filesystem structure
+    # Create basic filesystem structure
     # we chown/chmod /pds again so because mount is run as root + defaults
     mkdir /pds/lost+found
     chown system shell /pds/public
@@ -122,7 +114,7 @@ on post-fs-data
     # create location directory
     mkdir /data/location 0771 radio radio
 
-# usbd permissions
+    # usbd permissions
     mkdir /data/usbd 0777 system system
 
     # Create anr directory and change permission to 777 to save trace.txt
@@ -207,11 +199,10 @@ on charger
     stop zygote
 
 on boot
-
     # Enable panic on softlockup
     write /proc/sys/kernel/softlockup_panic 1
 
-# Define Motorola DBVC ATVC Property defaults (failsafe properties)
+    # Define Motorola DBVC ATVC Property defaults (failsafe properties)
     setprop ro.sys.atvc_allow_netmon_usb 0
     setprop ro.sys.atvc_allow_netmon_ih 0
     setprop ro.sys.atvc_allow_res_core 0
@@ -304,23 +295,20 @@ on property:init.svc.wpa_supplicant=stopped
 # Adb over Network
 on property:service.adb.tcp.port=5555
     restart adbd
+
 on property:service.adb.tcp.port=-1
     restart adbd
 
 # Adb ICS
-#on property:persist.sys.usb.config=*
-#    setprop sys.usb.config $persist.sys.usb.config
 on property:sys.usb.config=mass_storage,adb
-    # Made by usbd, but could be usefull later..
-    # write /sys/devices/virtual/usb_composite/adb/enable 0
-    # write /dev/usb_device_mode msc_adb
-    # write /tmp/usbd_current_state usb_mode_msc_adb
-    # write /sys/devices/virtual/usb_composite/adb/enable 1
     start adbd
+
 on property:sys.usb.config=mtp,adb
     start adbd
+
 on property:sys.usb.config=ptp,adb
     start adbd
+
 on property:service.adb.root=1
     write /sys/devices/virtual/usb_composite/adb/enable 0
     restart adbd
@@ -449,7 +437,6 @@ service pvrsrvinit /system/bin/pvrsrvinit
 
 on property:dev.bootcomplete=1
     start savebpver
-#    start loadpreinstalls
 
 #get BP version and save to misc
 service savebpver /system/bin/SaveBPVer
