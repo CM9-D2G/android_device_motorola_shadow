@@ -78,11 +78,6 @@ on post-fs
 # Dont delete this line, used as event in bootmenu (cpu settings & postbootmenu)
     exec /system/bin/logwrapper postbootmenu
 
-    # Enable ADB mode (made in init.d)
-    write /dev/usb_device_mode charge_adb
-    write /tmp/usbd_current_state usb_mode_charge_adb
-    chmod 0666 /tmp/usbd_current_state
-
     # following two dirs are for storing BP Flex and PDS files. NVM Daemon is using these folders
     mkdir /data/bp_nvm
     chown radio radio /data/bp_nvm
@@ -204,6 +199,13 @@ on init
     chmod 0666 /dev/ttyGS0
     chmod 0660 /dev/tcmd_driver
 
+on charger
+    start console
+    start battd
+    write /data/simpin lock
+    start charge
+    stop zygote
+
 on boot
 
     # Enable panic on softlockup
@@ -278,17 +280,14 @@ on boot
     insmod /system/lib/modules/ext4.ko
     insmod /system/lib/modules/sio-iosched.ko
 
-# Set core max size (2G)
-    setrlimit 4 2147483648 2147483648
-
-# The properties introduced by moto
+    # Charge only mode services.
+    exec /system/bin/mot_boot_mode
 
 # Charge only mode services
 on property:sys.chargeonly.mode=1
-    start battd
-    start console
-    write /data/simpin lock
-    exec /system/bin/charge_only_mode
+    class_reset main
+    class_reset late_start
+    class_start charger
 
 # Moto safe power down
 on property:sys.reboot=1

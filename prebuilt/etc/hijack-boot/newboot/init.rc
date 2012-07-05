@@ -301,7 +301,6 @@ on boot
 
 # Run sysinit
     exec /system/bin/sysinit
-
     class_start core
     class_start main
 
@@ -427,8 +426,6 @@ service servicemanager /system/bin/servicemanager
     critical
     onrestart restart zygote
     onrestart restart media
-    onrestart restart surfaceflinger
-    onrestart restart drm
 
 service vold /system/bin/vold
     class core
@@ -439,8 +436,6 @@ service netd /system/bin/netd
     class main
     socket netd stream 0660 root system
     socket dnsproxyd stream 0660 root inet
-    socket netlink stream 0660 root system
-    socket quota2 stream 0660 root system
 
 service debuggerd /system/bin/debuggerd
     class main
