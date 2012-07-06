@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project -->
+
+<resources>
+
+    <integer name="OtaShowListeningScreen">1</integer>
+
+    <bool name="send_mic_mute_to_AudioManager">false</bool>
+</resources>
