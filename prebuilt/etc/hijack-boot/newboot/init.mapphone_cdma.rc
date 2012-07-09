@@ -249,6 +249,8 @@ on boot
     write /sys/devices/platform/omapdss/overlay0/enabled 1
     insmod /system/lib/modules/pvrsrvkm.ko
     insmod /system/lib/modules/omaplfb.ko
+    chmod 0666 /dev/pvrsrvkm
+    exec /system/bin/pvrsrvinit
 
     # Net
     insmod /system/lib/modules/ifb.ko
@@ -436,12 +438,6 @@ service fmradio /system/bin/fmradioserver
     disabled
     user system
     group bluetooth net_bt_admin net_raw net_admin misc
-
-service pvrsrvinit /system/bin/pvrsrvinit
-    class core
-    user root
-    group root
-    oneshot
 
 on property:dev.bootcomplete=1
     start savebpver
