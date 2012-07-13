@@ -8,6 +8,5 @@ set_perm_recursive(0, 0, 0755, 0644, "/newboot/dev");
 set_perm_recursive(0, 0, 0755, 0644, "/newboot/proc");
 set_perm_recursive(0, 0, 0755, 0644, "/newboot/sys");
 set_perm_recursive(0, 0, 0755, 0644, "/newboot/system");
-set_perm(0, 0, 0644, "/newboot/ueventd.goldfish.rc");
 set_perm(0, 0, 0644, "/newboot/ueventd.mapphone_cdma.rc");
 set_perm(0, 0, 0644, "/newboot/ueventd.rc");
