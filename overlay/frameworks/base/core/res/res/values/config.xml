@@ -260,4 +260,7 @@
     <integer name="config_networkPolicyDefaultWarning">-1</integer>
 
     <integer name="config_screenOnAnimation">0</integer>
+
+    <!-- True will enable the electron beam screen-off animation. -->
+    <bool name="config_screenOffAnimation">false</bool>
 </resources>
