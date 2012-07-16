@@ -4,6 +4,6 @@
 <resources>
 
     <integer name="OtaShowListeningScreen">1</integer>
-
+    <bool name="has_in_call_noise_suppression">true</bool>
     <bool name="send_mic_mute_to_AudioManager">false</bool>
 </resources>
