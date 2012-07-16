@@ -6,4 +6,5 @@
     <integer name="OtaShowListeningScreen">1</integer>
     <bool name="has_in_call_noise_suppression">true</bool>
     <bool name="send_mic_mute_to_AudioManager">false</bool>
+    <string name="voice_quality_param">motoVoiceQualityConfig</string>
 </resources>
