@@ -41,6 +41,7 @@ ro.mot.hw.HAC=1
 ro.mot.eri=1
 ro.mot.eri.losalert.delay=2000
 ro.mot.eri.sidalert.delay=1000
+ro.sf.lcd_density=240 
 
 ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal
 ro.mot.hw.uaprof=http://uaprof.vtext.com/mot/mb810/mb810.xml
