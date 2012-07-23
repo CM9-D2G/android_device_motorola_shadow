@@ -191,13 +191,6 @@ on init
     chmod 0666 /dev/ttyGS0
     chmod 0660 /dev/tcmd_driver
 
-on charger
-    start console
-    start battd
-    write /data/simpin lock
-    start charge
-    stop zygote
-
 on boot
     # Enable panic on softlockup
     write /proc/sys/kernel/softlockup_panic 1
@@ -287,7 +280,11 @@ on boot
 on property:sys.chargeonly.mode=1
     class_reset main
     class_reset late_start
-    class_start charger
+    start console
+    start battd
+    write /data/simpin lock
+    start charge
+    stop zygote
 
 # Moto safe power down
 on property:sys.reboot=1
@@ -341,7 +338,7 @@ service start_commdrv /system/bin/sh /system/etc/motorola/comm_drv/commdrv_fs.sh
     user radio
     group radio system cache
 
-service charge system/bin/charge_only_mode
+service charge /system/bin/charge_only_mode
     group root
     oneshot
     disabled
